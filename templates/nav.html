@@ -1,0 +1,24 @@
+<script src="Scripts\nav.js"></script>
+
+<img class="logo" src="marvel-logo.png"></img>
+
+<div class="navBar" >
+
+  <ul class="left">
+    <li><div class="fa fa-home" ng-click="changePage('main')"> Strona Główna</div></li><li
+        ><div class="fa fa-television"> Video</div>
+      <ul class="dropdown-list">
+        <li><div class="fa fa-angle-right" ng-click="changePage('base','Base/MCU/filters.JSON','Base/MCU/chronology.JSON','Base/MCU/Base.JSON')"> MCU</div></li>
+        <li><div class="fa fa-angle-right" ng-click="changePage('base','Base/Fox/filters.JSON','Base/Fox/chronology.JSON','Base/Fox/Base.JSON')"> Fox</div></li>
+      </ul>
+    </li><li><div class="fa fa-book"> Komiksy</div>
+      <ul class="dropdown-list">
+        <li><div class="fa fa-angle-right" ng-click="changePage('base','Base/Comics/Waves.JSON','Base/Comics/Chronology.JSON','Base/Comics/Base.JSON')"> Marvel Now</div></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul class="right">
+    <!--<li></li>-->
+  </ul>
+</div>

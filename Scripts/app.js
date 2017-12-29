@@ -1,4 +1,4 @@
-var app = angular.module('aplikacja' , [] );
+var app = angular.module('app' , [] );
 
 app.controller('Main-Ctrl', ['$scope', function($scope){
 
