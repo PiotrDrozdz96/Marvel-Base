@@ -1,0 +1,150 @@
+{
+  "America":{
+    "series": ["Filmy","Agentka Carter"], "cover":"covers/movies/America.png",
+    "title":"Kapitan Ameryka", "subTitle":"Pierwsze Starcie",
+    "publishedDate": "19 July 2011"},
+  "Carter1":{
+    "series": ["Agentka Carter"],"cover":"covers/ABC_Series/Carter.png",
+    "title":"Agentka Carter", "subTitle":"Sezon 1",
+    "publishedDate": "24 February 2015"},
+  "Carter2":{
+    "series": ["Agentka Carter"],"cover":"covers/ABC_Series/Carter2.png",
+    "title":"Agentka Carter", "subTitle":"Sezon 2",
+    "publishedDate": "1 March 2016"},
+  "IronMan":{
+    "series": ["Filmy"], "cover":"covers/movies/IronMan.png",
+    "title":"Iron Man", "subTitle":"",
+    "publishedDate": "14 April 2008"},
+  "Hulk":{
+    "series": ["Filmy"], "cover":"covers/movies/Hulk.png",
+    "title":"Incredible Hulk", "subTitle":"",
+    "publishedDate": "6 June 2008"},
+  "IronMan2":{
+    "series": ["Filmy"], "cover":"covers/movies/IronMan2.png",
+    "title":"Iron Man 2", "subTitle":"",
+    "publishedDate": "16 April 2010"},
+  "Thor":{
+    "series": ["Filmy"], "cover":"covers/movies/Thor.png",
+    "title":"Thor", "subTitle":"",
+    "publishedDate": "17 April 2011"},
+  "Avengers":{
+    "series": ["Filmy","Agenci T.A.R.C.Z.Y."], "cover":"covers/movies/Avengers.png",
+    "title":"Avengers", "subTitle":"",
+    "publishedDate": "11 June 2012"},
+  "IronMan3":{
+    "series": ["Filmy"], "cover":"covers/movies/IronMan3.png",
+    "title":"Iron Man 3", "subTitle":"",
+    "publishedDate": "14 April 2013"},
+  "Shield1_1":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season1.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S01e01-S01e07",
+    "publishedDate": "12 November 2013"},
+  "Thor2":{
+    "series": ["Filmy","Agenci T.A.R.C.Z.Y."], "cover":"covers/movies/Thor2.png",
+    "title":"Thor", "subTitle":"Mroczny Świat",
+    "publishedDate": "22 October 2013"},
+  "Shield1_2":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season1.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S01e08-S01e16",
+    "publishedDate": "1 April 2014"},
+  "America2":{
+    "series": ["Filmy","Agenci T.A.R.C.Z.Y."], "cover":"covers/movies/America2.png",
+    "title":"Kapitan Ameryka", "subTitle":"Zimowy Żołnierz",
+    "publishedDate": "13 March 2014"},
+  "Shield1_3":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season1_2.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S01e07-S01e22",
+    "publishedDate": "13 May 2014"},
+  "Guardians":{
+    "series": ["Filmy"], "cover":"covers/movies/Guardians.png",
+    "title":"Strażnicy Galaktyki", "subTitle":"",
+    "publishedDate": "21 July 2014"},
+  "Guardians2":{
+    "series": ["Filmy"], "cover":"covers/movies/Guardians2.png",
+    "title":"Strażnicy Galaktyki", "subTitle":"Vol.2",
+    "publishedDate": "10 April 2017"},
+  "Daredevil":{
+    "series": ["Netflix"], "cover":"covers/netflix/Daredevil.png",
+    "title":"Daredevil", "subTitle":"Sezon 1",
+    "publishedDate": "10 April 2015"},
+  "Shield2_1":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season2.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S02e01-S02e19",
+    "publishedDate": "28 April 2015"},
+  "Avengers2":{
+    "series": ["Filmy","Agenci T.A.R.C.Z.Y."], "cover":"covers/movies/Avengers2.png",
+    "title":"Avengers", "subTitle":"Czas Ultrona",
+    "publishedDate": "13 April 2015"},
+  "Shield2_2":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season2.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S02e20-S02e22",
+    "publishedDate": "12 May 2015"},
+  "Ant-Man":{
+    "series": ["Filmy"], "cover":"covers/movies/Ant-Man.png",
+    "title":"Ant-Man", "subTitle":"",
+    "publishedDate": "29 June 2015"},
+  "JessicaJones":{
+    "series": ["Netflix"], "cover":"covers/netflix/Jessica.png",
+    "title":"Jessica Jones", "subTitle":"Sezon 1",
+    "publishedDate": "20 November 2015"},
+  "Daredevil2":{
+    "series": ["Netflix"], "cover":"covers/netflix/Daredevil2.png",
+    "title":"Daredevil", "subTitle":"Sezon 2",
+    "publishedDate": "18 March 2016"},
+  "Shield3_1":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season3.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S03e01-S03e19",
+    "publishedDate": "3 May 2016"},
+  "America3":{
+    "series": ["Filmy","Agenci T.A.R.C.Z.Y."], "cover":"covers/movies/America3.png",
+    "title":"Kapitan Ameryka", "subTitle":"Wojna Bohaterów",
+    "publishedDate": "12 April 2016"},
+  "Shield3_2":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season3.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S03e20-S03e22",
+    "publishedDate": "17 May 2016"},
+  "LukeCage":{
+    "series": ["Netflix"], "cover":"covers/netflix/LukeCage.png",
+    "title":"Luke Cage", "subTitle":"Sezon 1",
+    "publishedDate": "30 September 2016"},
+  "Strange":{
+    "series": ["Filmy"], "cover":"covers/movies/Strange.png",
+    "title":"Doktor Strange", "subTitle":"",
+    "publishedDate": "20 October 2016"},
+  "Shield4_1":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season4.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S04: Ghost Rider",
+    "publishedDate": "6 December 2016"},
+  "Shield4_2":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season4_2.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S04: LMD",
+    "publishedDate": "21 February 2017"},
+  "Shield4_3":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"covers/ABC_Series/Season4_3.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"S04: Agents of HYDRA",
+    "publishedDate": "16 May 2017"},
+  "IronFist":{
+    "series": ["Netflix"], "cover":"covers/netflix/IronFist.png",
+    "title":"Iron Fist", "subTitle":"Sezon 1",
+    "publishedDate": "17 March 2017"},
+  "Spider-Man":{
+    "series": ["Filmy"], "cover":"covers/movies/SpiderMan.png",
+    "title":"Spider-Man", "subTitle":"Homecoming",
+    "publishedDate": "28 June 2017"},
+  "Defenders":{
+    "series": ["Netflix"], "cover":"covers/netflix/Defenders.png",
+    "title":"Defenders", "subTitle":"Sezon 1",
+    "publishedDate": "18 August 2017"},
+  "Thor3":{
+    "series": ["Filmy"], "cover":"covers/movies/Thor3.png",
+    "title":"Thor", "subTitle":"Ragnarok",
+    "publishedDate": "10 October 2017"},
+  "Inhumans":{
+    "series": ["Inhumans"], "cover":"covers/ABC_Series/Inhumans.png",
+    "title":"Inhumans", "subTitle":"Sezon 1",
+    "publishedDate": "10 November 2017"},
+  "Punisher":{
+    "series": ["Netflix"], "cover":"covers/netflix/Punisher.png",
+    "title":"Punisher", "subTitle":"Sezon 1",
+    "publishedDate": "17 November 2017"}
+}

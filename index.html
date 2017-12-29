@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Marvel Universe Base</title>
+      <link rel="stylesheet" href="css\style.css" type="text/css">
+      <link rel="stylesheet" href="css\font-awesome-4.7.0\css\font-awesome.css">
+      <script src="Scripts\jquery-3.2.1.js"></script>
+      <script src="Scripts\angular.min.js"></script>
+      <script src="Scripts\mainScript.js"></script>
+
+  </head>
+  <body class="black" ng-app="aplikacja" ng-controller="Main-Ctrl">
+  <header>
+    <img class="logo" src="Marvel-logo.png"></img>
+  </header>
+
+    <div class="navBar" >
+
+      <ul class="left">
+        <li><div class="fa fa-home" ng-click="changePage('main')"> Strona Główna</div></li><li
+            ><div class="fa fa-television"> Video</div>
+          <ul class="dropdown-list">
+            <li><div class="fa fa-angle-right" ng-click="changePage('base','Base/MCU/filters.JSON','Base/MCU/chronology.JSON','Base/MCU/Base.JSON')"> MCU</div></li>
+            <li><div class="fa fa-angle-right" ng-click="changePage('base','Base/Fox/filters.JSON','Base/Fox/chronology.JSON','Base/Fox/Base.JSON')"> Fox</div></li>
+          </ul>
+        </li><li><div class="fa fa-book"> Komiksy</div>
+          <ul class="dropdown-list">
+            <li><div class="fa fa-angle-right" ng-click="changePage('base','Base/Comics/Waves.JSON','Base/Comics/chronology.JSON','Base/Comics/Base.JSON')"> Marvel Now</div></li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="right">
+        <li onclick="changeStyle()"><div class="fa fa-cog"> Zmień Styl</div></li>
+      </ul>
+    </div>
+
+    <div class='wallpaper' ng-if="page=='main'"><img src="wallpaper/MCU-movies/Thor3.png"></div>
+
+    <div ng-if="page!='main'" class="after-navBar"></div>
+
+    <div ng-if="page=='base'">
+      <div class="filters" >
+        <div ng-repeat='filter in filters' class={{filter.category}} >
+          <input type='checkbox' ng-click="filterFunction($event)" id={{filter.id}} ng-checked={{filter.checked}}
+          ng-model="filters[filter.id]['checked']">
+          {{filter.title}} <span ng-if="filter.children.length>1"
+            class="fa fa-arrow-down" ng-click="dropdown_filter($event,filter)"></span>
+        </div>
+      </div>
+      <div class="base" >
+        <div ng-repeat="element in chronologyBase | filter:filterByCategory(filters)"
+             class='element'categories={{element.categories}}
+             ng-click="biggerOn(element)">
+          <div class='cover'><img src={{element.cover}}></div>
+          <div class='description'>
+            <div class='title'><b><i>{{element.title}}</div></i></b>
+            <div class='subTitle'><i>{{element.subTitle}}</div></i>
+            <div class='publishedDate'>{{element.publishedDate}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="base hightGround">
+      <span class="fa fa-close" ng-click="biggerOff()"></span>
+      <div class="main element">
+        <div class="cover"><img src={{hightGroundVolume.cover}}></div>
+        <div class="description">
+          <div class="title"><b><i>{{hightGroundVolume.title}}</b></i></div>
+          <div class='subTitle'><i>{{hightGroundVolume.subTitle}}</i></div>
+          <div class='publishedDate'>{{hightGroundVolume.publishedDate}}</div>
+        </div>
+      </div>
+        <div class="element" ng-repeat="element in hightGroundChildren">
+          <div class='cover'><img src={{element.cover}}></div>
+          <div class='description'>
+            <div class='title'><b><i>{{element.title}} </div></i></b>
+            <div class="number"><b><i>Vol {{element.volume}} #{{element.number}}</div></i></b>
+            <div class='subTitle'><i>{{element.subTitle}}</i></div>
+            <div class='publishedDate'>{{element.publishedDate}}</div>
+          </div>
+        </div>
+      </div>
+
+    </body>
+</html>
