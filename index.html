@@ -7,10 +7,11 @@
       <link rel="stylesheet" href="css\font-awesome-4.7.0\css\font-awesome.css">
       <script src="Scripts\jquery-3.2.1.js"></script>
       <script src="Scripts\angular.min.js"></script>
+	    <script src="Scripts\menu.js"></script>
       <script src="Scripts\mainScript.js"></script>
 
   </head>
-  <body class="black" ng-app="aplikacja" ng-controller="Main-Ctrl">
+  <body ng-app="aplikacja" ng-controller="Main-Ctrl">
   <header>
     <img class="logo" src="marvel-logo.png"></img>
   </header>
@@ -32,7 +33,7 @@
       </ul>
 
       <ul class="right">
-        <li onclick="changeStyle()"><div class="fa fa-cog"> Zmień Styl</div></li>
+        <!--<li></li>-->
       </ul>
     </div>
 
@@ -56,6 +57,9 @@
           <div class='cover'><img src={{element.cover}}></div>
           <div class='description'>
             <div class='title'><b><i>{{element.title}}</div></i></b>
+            <div class="number" ng-if="element.number && !element.children">
+              Vol {{element.volume}} #{{element.number}}
+            </div>
             <div class='subTitle'><i>{{element.subTitle}}</div></i>
             <div class='publishedDate'>{{element.publishedDate}}</div>
           </div>
@@ -69,6 +73,9 @@
         <div class="cover"><img src={{hightGroundVolume.cover}}></div>
         <div class="description">
           <div class="title"><b><i>{{hightGroundVolume.title}}</b></i></div>
+          <div class="number" ng-if="hightGroundVolume.number && !hightGroundVolume.children">
+            Vol {{hightGroundVolume.volume}} #{{hightGroundVolume.number}}
+          </div>
           <div class='subTitle'><i>{{hightGroundVolume.subTitle}}</i></div>
           <div class='publishedDate'>{{hightGroundVolume.publishedDate}}</div>
         </div>
