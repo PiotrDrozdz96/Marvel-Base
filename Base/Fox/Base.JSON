@@ -12,7 +12,7 @@
     "title":"X-men", "subTitle":"Ostatni Bastion",
     "publishedDate": "22 May 2006"},
   "OriginWolverine":{
-    "series": ["Wolverine"], "cover":"covers/Fox/Wolverine_origin.png",
+    "series": ["Wolverine"], "cover":"covers/Fox/Wolverine_Origin.png",
     "title":"X-men Geneza", "subTitle":"Wolverine",
     "publishedDate": "8 April 2009"},
   "FirstClass":{
@@ -28,7 +28,7 @@
     "title":"X-men", "subTitle":"Przeszłość, która nadejdzie",
     "publishedDate": "20 May 2014"},
   "Deadpool":{
-    "series": ["Deadpool"], "cover":"covers/Fox/deadpool.png",
+    "series": ["Deadpool"], "cover":"covers/Fox/Deadpool.png",
     "title":"Deadpool", "subTitle":"",
     "publishedDate": "21 January 2016"},
   "Apocalypse":{
@@ -36,7 +36,7 @@
     "title":"X-men", "subTitle":"Apocalypse",
     "publishedDate": "9 May 2016"},
   "Logan":{
-    "series": ["Wolverine"], "cover":"covers/Fox/logan.png",
+    "series": ["Wolverine"], "cover":"covers/Fox/Logan.png",
     "title":"Logan", "subTitle":"Wolverine",
     "publishedDate": "17 February 2017"},
   "Legion":{
