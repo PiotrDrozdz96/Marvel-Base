@@ -11,7 +11,8 @@
   </div>
   <div class="base">
     <div ng-repeat="element in chronologyBase | filter:filterByCategory(filters)"
-         class='element'categories={{element.categories}}>
+         class='element'categories={{element.categories}}
+         ng-click="biggerOn(element)">
       <div class='cover'><img src={{element.cover}}></div>
       <div class='description'>
         <div class='title'><b><i>{{element.title}}</div></i></b>
@@ -25,7 +26,7 @@
   </div>
 </div>
 
-<!--<div class="base hightGround">
+<div class="base hightGround">
   <span class="fa fa-close" ng-click="biggerOff()"></span>
   <div class="main element">
     <div class="cover"><img src={{hightGroundVolume.cover}}></div>
@@ -47,4 +48,4 @@
         <div class='publishedDate'>{{element.publishedDate}}</div>
       </div>
     </div>
-  </div>-->
+  </div>

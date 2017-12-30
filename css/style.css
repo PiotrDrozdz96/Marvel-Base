@@ -205,7 +205,7 @@ a{
   height: calc(100vh - 120px);
   top:119px;
   left: 155px;
-  background-color: inherit;
+  background-color: black;
   visibility: hidden;
 }
 

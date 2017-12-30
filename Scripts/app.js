@@ -170,21 +170,18 @@ function($scope,filters,chronology,base){
     })
 
     $(e.target).removeClass(states[state]).addClass(states[~~!state])
-
   }
 
-}])
+  //upack Volume
 
-  /*$scope.biggerOn = function (e){
-    $.getJSON('Base/Comics/Base.JSON',function(base){
-      $scope.$apply(function(){
-        $scope.hightGroundVolume = e
-        $scope.hightGroundChildren = e.children ? e.children.map( (id) => base[id] ) :[]
-      })
-      $(".hightGround").addClass("on")
-    })
+  $scope.biggerOn = function (e){
+    $scope.hightGroundVolume = e
+    $scope.hightGroundChildren = e.children ? e.children.map( (id) => base[id] ) :[]
+    $(".hightGround").addClass("on")
   }
 
   $scope.biggerOff = function(){
     $(".hightGround").removeClass("on")
-  }*/
+  }
+
+}])
