@@ -1,0 +1,50 @@
+<div class="after-navBar"></div>
+
+<div>
+  <div class="filters" >
+    <div ng-repeat='filter in filters' class={{filter.category}} >
+      <input type='checkbox' ng-click="filterFunction($event)" id={{filter.id}} ng-checked={{filter.checked}}
+      ng-model="filters[filter.id]['checked']">
+      {{filter.title}} <span ng-if="filter.children.length>1"
+        class="fa fa-arrow-down" ng-click="dropdown_filter($event,filter)"></span>
+    </div>
+  </div>
+  <div class="base">
+    <div ng-repeat="element in chronologyBase | filter:filterByCategory(filters)"
+         class='element'categories={{element.categories}}>
+      <div class='cover'><img src={{element.cover}}></div>
+      <div class='description'>
+        <div class='title'><b><i>{{element.title}}</div></i></b>
+        <div class="number" ng-if="element.number && !element.children">
+          Vol {{element.volume}} #{{element.number}}
+        </div>
+        <div class='subTitle'><i>{{element.subTitle}}</div></i>
+        <div class='publishedDate'>{{element.publishedDate}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="base hightGround">
+  <span class="fa fa-close" ng-click="biggerOff()"></span>
+  <div class="main element">
+    <div class="cover"><img src={{hightGroundVolume.cover}}></div>
+    <div class="description">
+      <div class="title"><b><i>{{hightGroundVolume.title}}</b></i></div>
+      <div class="number" ng-if="hightGroundVolume.number && !hightGroundVolume.children">
+        Vol {{hightGroundVolume.volume}} #{{hightGroundVolume.number}}
+      </div>
+      <div class='subTitle'><i>{{hightGroundVolume.subTitle}}</i></div>
+      <div class='publishedDate'>{{hightGroundVolume.publishedDate}}</div>
+    </div>
+  </div>
+    <div class="element" ng-repeat="element in hightGroundChildren">
+      <div class='cover'><img src={{element.cover}}></div>
+      <div class='description'>
+        <div class='title'><b><i>{{element.title}} </div></i></b>
+        <div class="number"><b><i>Vol {{element.volume}} #{{element.number}}</div></i></b>
+        <div class='subTitle'><i>{{element.subTitle}}</i></div>
+        <div class='publishedDate'>{{element.publishedDate}}</div>
+      </div>
+    </div>
+  </div>-->
