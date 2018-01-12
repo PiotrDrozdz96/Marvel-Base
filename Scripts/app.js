@@ -1,5 +1,14 @@
 var app = angular.module('app' , ["ngRoute"] );
 
+app.factory('Base',['$http', function($http){
+  return {
+    get: function(link){
+      return $http.get(link).then(function(response){
+        return response.data })
+    }
+  }
+}])
+
 app.config(['$routeProvider',function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -9,54 +18,27 @@ app.config(['$routeProvider',function($routeProvider) {
       templateUrl: "templates/base.html",
       controller: "mainCtrl",
       resolve: {
-        filters: ['$http', function($http){
-          return $http.get('Base/MCU/filters.JSON').then(function(response){
-            return response.data })
-        }],
-        chronology: ['$http', function($http){
-          return $http.get('Base/MCU/chronology.JSON').then(function(response){
-            return response.data })
-        }],
-        base: ['$http', function($http){
-          return $http.get('Base/MCU/base.JSON').then(function(response){
-            return response.data })
-        }]
+        filters: function(Base){return Base.get('Base/MCU/filters.JSON')},
+        chronology: function(Base){return Base.get('Base/MCU/chronology.JSON')},
+        base: function(Base){return Base.get('Base/MCU/base.JSON')}
       }
     })
     .when("/Fox",{
       templateUrl: "templates/base.html",
       controller: "mainCtrl",
       resolve: {
-        filters: ['$http', function($http){
-          return $http.get('Base/Fox/filters.JSON').then(function(response){
-            return response.data })
-        }],
-        chronology: ['$http', function($http){
-          return $http.get('Base/Fox/chronology.JSON').then(function(response){
-            return response.data })
-        }],
-        base: ['$http', function($http){
-          return $http.get('Base/Fox/base.JSON').then(function(response){
-            return response.data })
-        }]
+        filters: function(Base){return Base.get('Base/Fox/filters.JSON')},
+        chronology: function(Base){return Base.get('Base/Fox/chronology.JSON')},
+        base: function(Base){return Base.get('Base/Fox/base.JSON')}
       }
     })
     .when("/Comics",{
       templateUrl: "templates/base.html",
       controller: "mainCtrl",
       resolve: {
-        filters: ['$http', function($http){
-          return $http.get('Base/Comics/filters.JSON').then(function(response){
-            return response.data })
-        }],
-        chronology: ['$http', function($http){
-          return $http.get('Base/Comics/chronology.JSON').then(function(response){
-            return response.data })
-        }],
-        base: ['$http', function($http){
-          return $http.get('Base/Comics/base.JSON').then(function(response){
-            return response.data })
-        }]
+        filters: function(Base){return Base.get('Base/Comics/filters.JSON')},
+        chronology: function(Base){return Base.get('Base/Comics/chronology.JSON')},
+        base: function(Base){return Base.get('Base/Comics/base.JSON')}
       }
     })
 }]);
