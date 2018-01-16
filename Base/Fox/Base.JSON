@@ -40,8 +40,12 @@
     "title":"Logan", "subTitle":"Wolverine",
     "publishedDate": "17 February 2017"},
   "Legion":{
-    "series": ["Legion"], "cover":"covers/Fox/Legion.png",
+    "series": ["Seriale"], "cover":"covers/Fox/Legion.png",
     "title":"Legion", "subTitle":"Sezon 1",
-    "publishedDate": "29 March 2017"}
+    "publishedDate": "29 March 2017"},
+  "Gifted":{
+    "series": ["Seriale"], "cover":"covers/Fox/Gifted.png",
+    "title":"Gifted: Naznaczeni", "subTitle":"Sezon 1",
+    "publishedDate": "15 January 2018"}
 
 }

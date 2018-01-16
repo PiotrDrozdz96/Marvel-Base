@@ -146,5 +146,9 @@
   "Punisher":{
     "series": ["Netflix"], "cover":"covers/netflix/Punisher.png",
     "title":"Punisher", "subTitle":"Sezon 1",
-    "publishedDate": "17 November 2017"}
+    "publishedDate": "17 November 2017"},
+  "Runaways":{
+    "series": ["Runaways"], "cover":"covers/MCU_Series/Runaways.jpg",
+    "title":"Runaways", "subTitle":"Sezon 1",
+    "publishedDate": "9 January 2018"}
 }

@@ -1,4 +1,4 @@
-var app = angular.module('app' , ["ngRoute"] );
+var app = angular.module('app' , ["ngRoute"] )
 
 app.factory('Base',['$http', function($http){
   return {
@@ -43,8 +43,7 @@ app.config(['$routeProvider',function($routeProvider) {
     })
 }]);
 
-app.controller('mainCtrl', ['$scope','filters','chronology','base',
-function($scope,filters,chronology,base){
+app.controller('mainCtrl', function($scope,filters,chronology,base){
 
   //Filters
 
@@ -166,4 +165,4 @@ function($scope,filters,chronology,base){
     $(".hightGround").removeClass("on")
   }
 
-}])
+})
