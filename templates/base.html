@@ -13,7 +13,7 @@
 <div class="base">
   <div ng-repeat="id in chronology | filter:filterByCategory(filters)"
        class='element'categories={{base[id].categories}}
-       ng-click="biggerOn(element)">
+       ng-click="biggerOn(base[id])">
     <div class='cover'><img src={{base[id].cover}}></div>
     <div class='description'>
       <div class='title'><b><i>{{base[id].title}}</div></i></b>

@@ -1,6 +1,6 @@
 angular
   .module('app')
-  .controller('mainCtrl', function($scope,filters,chronology,base){
+  .controller('baseCtrl', function($scope,filters,chronology,base){
 
     $scope.filters = filters;
     $scope.chronology = chronology;
@@ -80,7 +80,6 @@ angular
     }
 
     //upack Volume
-
     $scope.biggerOn = function (e){
       $scope.hightGroundVolume = e
       $scope.hightGroundChildren = e.children ? e.children.map( (id) => base[id] ) :[]

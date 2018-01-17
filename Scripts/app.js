@@ -7,7 +7,7 @@ angular
     })
     .when("/MCU",{
       templateUrl: "templates/base.html",
-      controller: "mainCtrl",
+      controller: "baseCtrl",
       resolve: {
         filters: function(Base){return Base.getFilters('Base/MCU/filters.JSON')},
         chronology: function(Base){return Base.get('Base/MCU/chronology.JSON')},
@@ -16,7 +16,7 @@ angular
     })
     .when("/Fox",{
       templateUrl: "templates/base.html",
-      controller: "mainCtrl",
+      controller: "baseCtrl",
       resolve: {
         filters: function(Base){return Base.getFilters('Base/Fox/filters.JSON')},
         chronology: function(Base){return Base.get('Base/Fox/chronology.JSON')},
@@ -25,7 +25,7 @@ angular
     })
     .when("/Comics",{
       templateUrl: "templates/base.html",
-      controller: "mainCtrl",
+      controller: "baseCtrl",
       resolve: {
         filters: function(Base){return Base.getFilters('Base/Comics/filters.JSON')},
         chronology: function(Base){return Base.get('Base/Comics/chronology.JSON')},
