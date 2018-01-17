@@ -9,8 +9,8 @@ angular
       templateUrl: "templates/base.html",
       controller: "mainCtrl",
       resolve: {
-        filters: function(Base){return Base.getFilters('Base/MCU')},
-        chronologyBase: function(Base){return Base.getChronologyBase('Base/MCU')},
+        filters: function(Base){return Base.getFilters('Base/MCU/filters.JSON')},
+        chronology: function(Base){return Base.get('Base/MCU/chronology.JSON')},
         base: function(Base){return Base.get('Base/MCU/base.JSON')}
       }
     })
@@ -18,8 +18,8 @@ angular
       templateUrl: "templates/base.html",
       controller: "mainCtrl",
       resolve: {
-        filters: function(Base){return Base.getFilters('Base/Fox')},
-        chronologyBase: function(Base){return Base.getChronologyBase('Base/Fox')},
+        filters: function(Base){return Base.getFilters('Base/Fox/filters.JSON')},
+        chronology: function(Base){return Base.get('Base/Fox/chronology.JSON')},
         base: function(Base){return Base.get('Base/Fox/base.JSON')}
       }
     })
@@ -27,8 +27,8 @@ angular
       templateUrl: "templates/base.html",
       controller: "mainCtrl",
       resolve: {
-        filters: function(Base){return Base.getFilters('Base/Comics')},
-        chronologyBase: function(Base){return Base.getChronologyBase('Base/Comics')},
+        filters: function(Base){return Base.getFilters('Base/Comics/filters.JSON')},
+        chronology: function(Base){return Base.get('Base/Comics/chronology.JSON')},
         base: function(Base){return Base.get('Base/Comics/base.JSON')}
       }
     })

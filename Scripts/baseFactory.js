@@ -1,17 +1,12 @@
 angular
   .module('app')
   .factory('Base',['$http', function($http){
-    var test = function(link){
-      return $http.get(link).then(function(response){
-        return response.data })
-    }
-
     return {
       get: function(link){
         return $http.get(link).then(function(response){
           return response.data })
       },
-      getFilters: function(path){
+      getFilters: function(link){
 
         class Filter{
           constructor(title,id,checked,series,parent){
@@ -24,7 +19,7 @@ angular
           }
         }
 
-        return $http.get(path+"/filters.JSON").then(function(filters){
+        return $http.get(link).then(function(filters){
           result = {}
           Object.keys(filters.data).map( (id)=>filters.data[id]).forEach( function(filter,i){
             if(i==0){
@@ -41,18 +36,7 @@ angular
           })
           return result
         })
-      },
-      getChronologyBase: function(path){
-        return $http.get(path+"/chronology.JSON").then(function(chronology){
-          return $http.get(path+"/base.JSON").then(function(base){
-            var chronologyBase = [];
-            $.each(chronology.data,function(index,id){
-              chronologyBase[index]=base.data[id]
-            })
-            return chronologyBase
-          })
-        })
       }
-      
+
     }
   }])

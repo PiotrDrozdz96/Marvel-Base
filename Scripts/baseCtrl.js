@@ -1,13 +1,14 @@
 angular
   .module('app')
-  .controller('mainCtrl', function($scope,filters,chronologyBase,base){
+  .controller('mainCtrl', function($scope,filters,chronology,base){
 
     $scope.filters = filters;
-    $scope.chronologyBase = chronologyBase;
+    $scope.chronology = chronology;
+    $scope.base = base;
 
     $scope.filterByCategory = function (filters) {
-      return function(element){
-        return element.series.some( (category) => filters[category].checked)
+      return function(id){
+        return base[id].series.some( (category) => filters[category].checked)
       }
     };
 
