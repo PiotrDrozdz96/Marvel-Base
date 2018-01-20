@@ -5,31 +5,16 @@ angular
     .when("/", {
         templateUrl: "templates/home.html"
     })
-    .when("/MCU",{
+    .when("/Base/:base",{
       templateUrl: "templates/base.html",
       controller: "baseCtrl",
       resolve: {
-        filters: function(Base){return Base.getFilters('Base/MCU/filters.JSON')},
-        chronology: function(Base){return Base.get('Base/MCU/chronology.JSON')},
-        base: function(Base){return Base.get('Base/MCU/base.JSON')}
-      }
-    })
-    .when("/Fox",{
-      templateUrl: "templates/base.html",
-      controller: "baseCtrl",
-      resolve: {
-        filters: function(Base){return Base.getFilters('Base/Fox/filters.JSON')},
-        chronology: function(Base){return Base.get('Base/Fox/chronology.JSON')},
-        base: function(Base){return Base.get('Base/Fox/base.JSON')}
-      }
-    })
-    .when("/Comics",{
-      templateUrl: "templates/base.html",
-      controller: "baseCtrl",
-      resolve: {
-        filters: function(Base){return Base.getFilters('Base/Comics/filters.JSON')},
-        chronology: function(Base){return Base.get('Base/Comics/chronology.JSON')},
-        base: function(Base){return Base.get('Base/Comics/base.JSON')}
+        filters: function($route,Base){
+          return Base.getFilters('Base/'+$route.current.params.base+'/filters.JSON')},
+        chronology: function($route,Base){
+          return Base.get('Base/'+$route.current.params.base+'/chronology.JSON')},
+        base: function($route,Base){
+          return Base.get('Base/'+$route.current.params.base+'/base.JSON')}
       }
     })
 }]);
