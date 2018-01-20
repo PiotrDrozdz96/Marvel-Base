@@ -1,10 +1,13 @@
 angular
   .module('app')
-  .factory('Base',['$http', function($http){
+  .factory('Base',['$http','$location', function($http,$location){
     return {
       get: function(link){
         return $http.get(link).then(function(response){
-          return response.data })
+          return response.data
+        },function(error){
+          $location.path('error')
+        })
       },
       getFilters: function(link){
 
@@ -21,6 +24,7 @@ angular
 
         return $http.get(link).then(function(filters){
           result = {}
+          console.log($location.path());
           Object.keys(filters.data).map( (id)=>filters.data[id]).forEach( function(filter,i){
             if(i==0){
               result.all = {"id":"all","category":"all","title":filter.title,"checked":false}
@@ -35,8 +39,9 @@ angular
             }
           })
           return result
+        },function(error){
+          $location.path('error')
         })
       }
-
     }
   }])

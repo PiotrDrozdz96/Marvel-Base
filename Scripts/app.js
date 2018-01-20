@@ -17,4 +17,7 @@ angular
           return Base.get('Base/'+$route.current.params.base+'/base.JSON')}
       }
     })
+    .otherwise({
+        templateUrl: "templates/error.html" 
+    });
 }]);
