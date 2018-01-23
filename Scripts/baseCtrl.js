@@ -1,14 +1,28 @@
 angular
   .module('app')
-  .controller('baseCtrl', function($scope,filters,chronology,base){
+  .controller('baseCtrl', function($scope,$location,$route,Base){
 
-    $scope.filters = filters;
-    $scope.chronology = chronology;
-    $scope.base = base;
+    let baseId = () => $route.current.params.base
+    $scope.isElement = $route.current.params.element
+
+    Base.getFilters(baseId()).then(function(data){
+      $scope.filters = data;
+    })
+
+    Base.getBase(baseId()).then(function(data){
+      $scope.base = data;
+      if(!$scope.isElement){
+        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data2){
+          $scope.chronology = data2;
+        })
+      }
+      else $scope.chronology = [$scope.isElement].concat(data[$scope.isElement].children)
+    })
+
 
     $scope.filterByCategory = function (filters) {
       return function(id){
-        return base[id].series.some( (category) => filters[category].checked)
+        return $scope.base[id].series.some( (category) => filters[category].checked)
       }
     };
 
@@ -79,15 +93,20 @@ angular
       $(e.target).removeClass(states[state]).addClass(states[~~!state])
     }
 
-    //upack Volume
-    $scope.biggerOn = function (e){
-      $scope.hightGroundVolume = e
-      $scope.hightGroundChildren = e.children ? e.children.map( (id) => base[id] ) :[]
-      $(".hightGround").addClass("on")
-    }
+    $scope.showElement = function(id){
+      if(id){
+        $location.path($location.path()+"/"+id,false)
+        $scope.isElement = true
+        $scope.chronology = $scope.base[id].children ? [id].concat($scope.base[id].children) : [id]
+      }
+      else{
+        $location.path($location.path().substr(1,$location.path().lastIndexOf("/")-1),false)
+        $scope.isElement = false
+        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data){
+          $scope.chronology = data;
+        })
+      }
 
-    $scope.biggerOff = function(){
-      $(".hightGround").removeClass("on")
     }
 
   })

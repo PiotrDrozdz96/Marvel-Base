@@ -1,70 +1,10 @@
 body{
   background-color: black;
   margin: 0;
-
 }
 
 header{
   background-color: FireBrick;
-}
-
-a{
-  color:inherit;
-  text-decoration: none;
-}
-
-.logo{
-  width:150px;
-  margin: 10px 15px;
-}
-
-.wallpaper{
-  overflow: hidden;
-  width: 100%;
-  height: calc(100vh - 113px);
-}
-
-.wallpaper img{
-  width: 100%;
-  height: 100vh;
-}
-
-.navBar{
-  color: DimGray;
-  font-family:courier;
-  margin: 0px 20px;
-}
-
-.navBar ul{
-  float: left;
-  list-style: none;
-  padding:0;
-  margin:0;
-}
-
-.navBar ul.right{
-  float: right;
-}
-
-.navBar li{
-  display: inline-block;
-  position: relative;
-  padding: 10px;
-  background-color: inherit;
-}
-
-.navBar li:hover{
-  background-color: FireBrick;
-  color: white;
-}
-
-.navBar li.active{
-  background-color: FireBrick;
-  color: white;
-}
-
-.navBar div{
-  cursor: pointer;
 }
 
 .after-navBar{
@@ -74,83 +14,64 @@ a{
   background-color: FireBrick;
 }
 
-.dropdown-list{
-  display: none;
-  position: absolute;
-  background-color: white;
-  color: DimGray;
-  width: 170px;
-  top:38px;
-  z-index:2;
-}
-
-.dropdown-list.active{
-  display: block;
-}
-
-.dropdown-list li{
-  display: inherit;
-  margin-left: -10px;
-}
-
-.filters{
+.toolbar{
   float: left;
   border-right: 6px solid FireBrick;
   font-family:courier;
   color: DimGray;
   height: calc(100vh - 120px);
-  width:149px;
+  width: 149px;
   overflow-y: scroll;
 }
 
-.filters div.all{
+.toolbar div.all{
   padding: 10px;
   background-color: FireBrick;
   color: white;
   border-bottom: 2px solid FireBrick;
 }
 
-.filters div.main{
+.toolbar div.main{
   padding: 10px;
   background-color: #ff9999;
   border-bottom: 2px solid FireBrick;
 }
 
-.filters div.volume{
+.toolbar div.volume{
   padding: 10px;
   display:none;
   background-color: Silver;
   border-bottom: 2px solid DimGray;
 }
 
-.filters div.volume.on{
+.toolbar div.volume.on{
   display: block;
 }
 
-.filters div.button{
+.toolbar div.button{
   padding: 10px;
   background-color: Silver;
   border-bottom: 2px solid DimGray;
 }
 
-.filters button{
+.toolbar button{
   font-family:inherit;
   color: inherit;
   border-radius: 10px;
   width: 100%;
 }
 
-.filters button:hover,button.on{
+.toolbar button:hover,button.on{
   color: white;
   background-color: FireBrick;
 }
 
-.filters textarea{
+.toolbar textarea{
   margin:0;
   width: 95%;
 }
 
-.filters select{
+.toolbar select{
   width:100%;
 }
 
@@ -190,6 +111,12 @@ a{
   text-align: center;
 }
 
+.base span{
+  float: right;
+  font-size: 50px;
+  margin-right: 10px;
+}
+
 .element .description{
   position: relative;
   min-width:200px;
@@ -197,29 +124,7 @@ a{
   font-size: medium;
 }
 
-.hightGround{
-  position: absolute;
-  margin:0;
-  z-index:1;
-  width: calc(100vw - 157px);
-  height: calc(100vh - 120px);
-  top:119px;
-  left: 155px;
-  background-color: black;
-  visibility: hidden;
-}
-
-.hightGround.on{
-  visibility: visible;
-}
-
-.hightGround span{
-  float: right;
-  font-size: 50px;
-  margin-right: 10px;
-}
-
-.hightGround .main.element{
+.main.element{
   width: 370px;
   height: 508px;
 }
@@ -228,7 +133,7 @@ a{
   font-size: 30px;
 }
 
-.hightGround .main.element img{
+.main.element img{
   width:244px;
   height: 370px;
 }
