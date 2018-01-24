@@ -5,18 +5,18 @@ angular
     let baseId = () => $route.current.params.base
     $scope.isElement = $route.current.params.element
 
-    Base.getFilters(baseId()).then(function(data){
-      $scope.filters = data;
+    Base.getCategories(baseId()).then(function(data){
+      $scope.categories = data;
     })
 
-    Base.getBase(baseId()).then(function(data){
-      $scope.base = data;
+    Base.getBase(baseId()).then(function(base){
+      $scope.base = base;
       if(!$scope.isElement){
-        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data2){
-          $scope.chronology = data2;
+        Base.getChronology(baseId()).then(function(data){
+          $scope.chronology = data;
         })
       }
-      else $scope.chronology = [$scope.isElement].concat(data[$scope.isElement].children)
+      else $scope.chronology = [$scope.isElement].concat(base[$scope.isElement].children)
     })
 
 
@@ -27,39 +27,39 @@ angular
     };
 
   //FilterFunctions
-    $scope.filterFunction = function(e){
+    $scope.categoryTick = function(e){
 
       function checkAll(){
         var allChecked = []
-        $.each($scope.filters,function(index,filter){
+        $.each($scope.categories,function(index,filter){
           if(index!='all') {allChecked.push(filter.checked)}
         })
-        if($scope.filters[e.target.id].checked){
+        if($scope.categories[e.target.id].checked){
           if( allChecked.every( (check) => check) ){
-            $scope.filters.all.checked=true;
+            $scope.categories.all.checked=true;
           }
         }
-        else $scope.filters.all.checked=false
+        else $scope.categories.all.checked=false
       }
 
-      switch($scope.filters[e.target.id].category){
+      switch($scope.categories[e.target.id].type){
         case 'all':
-          if($scope.filters[e.target.id].checked){
-            $.each($scope.filters,function(index,filter){
+          if($scope.categories[e.target.id].checked){
+            $.each($scope.categories,function(index,filter){
               filter.checked=true;
             })
           }
           else{
-            $.each($scope.filters,function(index,filter){
+            $.each($scope.categories,function(index,filter){
               filter.checked=false;
             })
           }
           break;
         case 'main':
           //children
-          if($scope.filters[e.target.id].children){
-            $.each($scope.filters[e.target.id].children,function(index,id){
-              $scope.filters[id].checked=$scope.filters[e.target.id].checked;
+          if($scope.categories[e.target.id].children){
+            $.each($scope.categories[e.target.id].children,function(index,id){
+              $scope.categories[id].checked=$scope.categories[e.target.id].checked;
             })
           }
           checkAll();
@@ -67,27 +67,27 @@ angular
         case 'volume':
         case "volume on":
           var groupCheck = []
-          $.each($scope.filters[$scope.filters[e.target.id].parent].children,function(index,filter){
-            groupCheck.push($scope.filters[filter].checked)
+          $.each($scope.categories[$scope.categories[e.target.id].parent].children,function(index,filter){
+            groupCheck.push($scope.categories[filter].checked)
           })
-          if($scope.filters[e.target.id].checked){
+          if($scope.categories[e.target.id].checked){
             if( groupCheck.every( (check) => check) ){
-              $scope.filters[$scope.filters[e.target.id].parent].checked=true;
+              $scope.categories[$scope.categories[e.target.id].parent].checked=true;
             }
           }
-          else $scope.filters[$scope.filters[e.target.id].parent].checked=false
+          else $scope.categories[$scope.categories[e.target.id].parent].checked=false
           checkAll();
           break;
         default:
       }
     }
 
-    $scope.dropdown_filter = function(e,element){
+    $scope.dropdown_category = function(e,element){
       var states = ["fa-arrow-down","fa-arrow-up"]
       var state = states.findIndex( (state)=>$(e.target).attr("class").includes(state))
 
       element.children.forEach(function(id){
-        $scope.filters[id].category= state ? "volume" : "volume on"
+        $scope.categories[id].type= state ? "volume" : "volume on"
       })
 
       $(e.target).removeClass(states[state]).addClass(states[~~!state])
@@ -96,13 +96,13 @@ angular
     $scope.showElement = function(id){
       if(id){
         $location.path($location.path()+"/"+id,false)
-        $scope.isElement = true
+        $scope.isElement = id
         $scope.chronology = $scope.base[id].children ? [id].concat($scope.base[id].children) : [id]
       }
       else{
         $location.path($location.path().substr(1,$location.path().lastIndexOf("/")-1),false)
         $scope.isElement = false
-        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data){
+        Base.getChronology(baseId()).then(function(data){
           $scope.chronology = data;
         })
       }

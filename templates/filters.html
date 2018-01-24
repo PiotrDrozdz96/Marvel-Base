@@ -1,6 +1,0 @@
-<div ng-repeat='filter in filters' class={{filter.category}} >
-  <input type='checkbox' ng-click="filterFunction($event)" id={{filter.id}} ng-checked={{filter.checked}}
-  ng-model="filters[filter.id]['checked']">
-  {{filter.title}} <span ng-if="filter.children.length>1"
-    class="fa fa-arrow-down" ng-click="dropdown_filter($event,filter)"></span>
-</div>

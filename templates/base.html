@@ -1,4 +1,4 @@
-<div ng-repeat="id in chronology | filter:filterByCategory(filters)"
+<div ng-repeat="id in chronology | filter:filterByCategory(categories)"
      class='element'categories={{base[id].categories}}
      ng-click="showElement(id)">
   <div class='cover'><img src={{base[id].cover}}></div>
