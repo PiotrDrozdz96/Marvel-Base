@@ -26,57 +26,38 @@ angular
       }
     };
 
-  //FilterFunctions
+  //CategoryFunctions
     $scope.categoryTick = function(e){
 
-      function checkAll(){
-        var allChecked = []
-        $.each($scope.categories,function(index,filter){
-          if(index!='all') {allChecked.push(filter.checked)}
-        })
-        if($scope.categories[e.target.id].checked){
-          if( allChecked.every( (check) => check) ){
-            $scope.categories.all.checked=true;
-          }
-        }
-        else $scope.categories.all.checked=false
+      let category = () => $scope.categories[e.target.id]
+
+      function checkAll(arrayId,parentId){
+        if (category().checked && (arrayId)
+            .map((categoryId) => $scope.categories[categoryId].checked)
+              .every( (check) => check) ){
+                $scope.categories[parentId].checked=true;
+              }
+        else $scope.categories[parentId].checked=false
       }
 
-      switch($scope.categories[e.target.id].type){
-        case 'all':
-          if($scope.categories[e.target.id].checked){
-            $.each($scope.categories,function(index,filter){
-              filter.checked=true;
-            })
-          }
-          else{
-            $.each($scope.categories,function(index,filter){
-              filter.checked=false;
-            })
-          }
+      function changeAll(arrayId,value){
+        $.each(arrayId,function(index,category){
+          $scope.categories[category].checked = value
+        })
+      }
+
+      switch(category().type){
+        case "all":
+          changeAll(Object.keys($scope.categories),category().checked)
           break;
-        case 'main':
-          //children
-          if($scope.categories[e.target.id].children){
-            $.each($scope.categories[e.target.id].children,function(index,id){
-              $scope.categories[id].checked=$scope.categories[e.target.id].checked;
-            })
-          }
-          checkAll();
+        case "main":
+          changeAll(category().children,category().checked)
+          checkAll(Object.keys($scope.categories).slice(1,-1),"all");
           break;
-        case 'volume':
-        case "volume on":
-          var groupCheck = []
-          $.each($scope.categories[$scope.categories[e.target.id].parent].children,function(index,filter){
-            groupCheck.push($scope.categories[filter].checked)
-          })
-          if($scope.categories[e.target.id].checked){
-            if( groupCheck.every( (check) => check) ){
-              $scope.categories[$scope.categories[e.target.id].parent].checked=true;
-            }
-          }
-          else $scope.categories[$scope.categories[e.target.id].parent].checked=false
-          checkAll();
+        case "secondary":
+        case "secondary on":
+          checkAll($scope.categories[category().parent].children,category().parent)
+          checkAll(Object.keys($scope.categories).slice(1,-1),"all");
           break;
         default:
       }
@@ -87,7 +68,7 @@ angular
       var state = states.findIndex( (state)=>$(e.target).attr("class").includes(state))
 
       element.children.forEach(function(id){
-        $scope.categories[id].type= state ? "volume" : "volume on"
+        $scope.categories[id].type= state ? "secondary" : "secondary on"
       })
 
       $(e.target).removeClass(states[state]).addClass(states[~~!state])

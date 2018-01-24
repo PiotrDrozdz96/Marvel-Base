@@ -8,7 +8,7 @@ angular
           constructor(title,checked,series,parent){
             this.id = title+(series ? "_wave" : "")
             this.title = title
-            this.type = series ? "main" : "volume"
+            this.type = series ? "main" : "secondary"
             this.children = series ? series.map( (seria) => seria.title ) : undefined
             this.checked = checked
             this.parent = parent

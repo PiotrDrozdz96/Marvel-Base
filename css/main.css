@@ -37,14 +37,14 @@ header{
   border-bottom: 2px solid FireBrick;
 }
 
-.toolbar div.volume{
+.toolbar div.secondary{
   padding: 10px;
   display:none;
   background-color: Silver;
   border-bottom: 2px solid DimGray;
 }
 
-.toolbar div.volume.on{
+.toolbar div.secondary.on{
   display: block;
 }
 
