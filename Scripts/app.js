@@ -6,11 +6,11 @@ angular
         templateUrl: "templates/home.html"
     })
     .when("/Base/:base",{
-      templateUrl: "templates/main.html",
+      templateUrl: "templates/base.html",
       controller: "baseCtrl",
     })
     .when("/Base/:base/:element",{
-      templateUrl: "templates/main.html",
+      templateUrl: "templates/base.html",
       controller: "baseCtrl",
     })
     .otherwise({

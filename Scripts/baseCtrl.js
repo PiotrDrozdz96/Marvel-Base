@@ -3,7 +3,7 @@ angular
   .controller('baseCtrl', function($scope,$location,$route,Base){
 
     let baseId = () => $route.current.params.base
-    $scope.isElement = $route.current.params.element
+    $scope.element = $route.current.params.element
 
     Base.getCategories(baseId()).then(function(data){
       $scope.categories = data;
@@ -11,18 +11,17 @@ angular
 
     Base.getBase(baseId()).then(function(base){
       $scope.base = base;
-      if(!$scope.isElement){
+      if(!$scope.element){
         Base.getChronology(baseId()).then(function(data){
           $scope.chronology = data;
         })
       }
-      else $scope.chronology = [$scope.isElement].concat(base[$scope.isElement].children)
+      else $scope.chronology = [$scope.element].concat(base[$scope.element].children)
     })
 
-
-    $scope.filterByCategory = function (filters) {
+    $scope.filterByCategory = function (categories) {
       return function(id){
-        return $scope.base[id].series.some( (category) => filters[category].checked)
+        return $scope.base[id].series.some( (category) => categories[category].checked)
       }
     };
 
@@ -75,19 +74,16 @@ angular
     }
 
     $scope.showElement = function(id){
-      if(id){
-        $location.path($location.path()+"/"+id,false)
-        $scope.isElement = id
-        $scope.chronology = $scope.base[id].children ? [id].concat($scope.base[id].children) : [id]
-      }
-      else{
+      $location.path($location.path()+"/"+id,false)
+      $scope.element = id
+      $scope.chronology = $scope.base[id].children ? [id].concat($scope.base[id].children) : [id]
+    }
+    $scope.hideElement = function(){
         $location.path($location.path().substr(1,$location.path().lastIndexOf("/")-1),false)
-        $scope.isElement = false
+        $scope.element = false
         Base.getChronology(baseId()).then(function(data){
           $scope.chronology = data;
         })
       }
-
-    }
 
   })

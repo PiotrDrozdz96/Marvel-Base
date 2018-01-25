@@ -1,13 +1,17 @@
-<div ng-repeat="id in chronology | filter:filterByCategory(categories)"
-     class='element'categories={{base[id].categories}}
-     ng-click="showElement(id)">
-  <div class='cover'><img src={{base[id].cover}}></div>
-  <div class='description'>
-    <div class='title'><b><i>{{base[id].title}}</div></i></b>
-    <div class="number" ng-if="base[id].number && !base[id].children">
-      Vol {{base[id].volume}} #{{base[id].number}}
-    </div>
-    <div class='subTitle'><i>{{base[id].subTitle}}</div></i>
-    <div class='publishedDate'>{{base[id].publishedDate}}</div>
+<div class="after-navBar"></div>
+<div class="toolbar" ng-include="'templates/categories.html'"></div>
+
+<div class="base" ng-if="!element">
+  <div ng-repeat="id in chronology | filter:filterByCategory(categories)"
+       class='element'categories={{base[id].categories}} ng-click="showElement(id)"
+       ng-include="'templates/element.html'">
   </div>
 </div>
+
+<div class="base" ng-if="element">
+  <span class="fa fa-close" ng-click="hideElement()"></span>
+  <div ng-repeat="id in chronology" categories={{base[id].categories}}
+       class="ng-class: $first ? 'main element' : 'element';"
+       ng-include="'templates/element.html'">
+  </div>
+<div>
