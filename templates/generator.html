@@ -16,19 +16,23 @@
       <option ng-repeat="series in categories[selectedWave].series">{{series.title}}</option>
     </select>
   </div>
+  <select ng-model="selectedType">
+    <option>zeszyty</option>
+    <option>tomy</option>
+  </select>
 </div>
 
 <div class="base" ng-switch on="activeMode">
   <div ng-switch-when="view|delete|edit" ng-switch-when-separator="|">
-    <div ng-repeat="id in series[selectedSeries].zeszyty" class='element'
+    <div ng-repeat="id in series[selectedSeries][selectedType]" class='element'
          ng-include="'templates/element.html'">
     </div>
   </div>
   <div ng-switch-when="JSON">
-    <div ng-repeat="id in series[selectedSeries].zeszyty">"{{id}}":{{base[id]}}</div>
+    <div ng-repeat="id in series[selectedSeries][selectedType]">"{{id}}":{{base[id]}}</div>
   </div>
   <div ng-switch-when="array">
-    <div ng-repeat="id in series[selectedSeries].zeszyty">{{id}},</div>
+    <div ng-repeat="id in series[selectedSeries][selectedType]">{{id}},</div>
   </div>
   <div ng-switch-when="volumes">volumes</div>
 </div>

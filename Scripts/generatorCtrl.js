@@ -17,6 +17,7 @@ angular
       $scope.categories = data;
       $scope.selectedWave = data[Object.keys(data)[0]].title
       $scope.selectedSeries = "new"
+      $scope.selectedType = "zeszyty"
     })
 
     Base.get("Base/Comics/base.JSON").then(function(data){
@@ -27,22 +28,25 @@ angular
       $scope.series = data;
     })
 
-    //dzialają na zewnatrz, ale nie w bazie
-
-    $scope.deleteRest = function(end){
-      $scope.series[$scope.selectedSeries].zeszyty = $scope.series[$scope.selectedSeries].zeszyty.slice(0,end)
-    }
-
-    $scope.delete = function(index){
-      $scope.series[$scope.selectedSeries].zeszyty.splice(index,1)
-    }
-
     $scope.changeCover = function (id){
       $scope.base[id].cover = prompt('Cover link',$scope.base[id].cover)
     }
 
+    $scope.delete = function(index){
+      delete $scope.base[$scope.series[$scope.selectedSeries][$scope.selectedType][index]]
+      $scope.series[$scope.selectedSeries][$scope.selectedType].splice(index,1)
+    }
+
+    $scope.deleteRest = function(end){
+      while ($scope.series[$scope.selectedSeries][$scope.selectedType].length != end){
+        delete $scope.base[$scope.series[$scope.selectedSeries][$scope.selectedType].pop()]
+      }
+    }
+
+    //dzialają na zewnatrz, ale nie w bazie
+
     $scope.addElement = function(index){
-      $scope.series[$scope.selectedSeries].zeszyty.splice(index,0,"")
+      $scope.series[$scope.selectedSeries][$scope.selectedType].splice(index,0,"")
     }
 
   })
