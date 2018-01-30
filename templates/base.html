@@ -1,17 +1,22 @@
 <div class="after-navBar"></div>
-<div class="toolbar" ng-include="'templates/categories.html'"></div>
+<div class="toolbar">
+  <div ng-repeat='category in categories' class={{category.type}} >
+    <input type='checkbox' ng-click="categoryTick($event)" id={{category.id}} ng-checked={{category.checked}}
+    ng-model="categories[category.id]['checked']">
+    {{category.title}} <span ng-if="category.children.length>1"
+      class="fa fa-arrow-down" ng-click="dropdown_category($event,category)"></span>
+  </div>
+</div>
 
 <div class="base" ng-if="!element">
   <div ng-repeat="id in chronology | filter:filterByCategory(categories)"
-       class='element'categories={{base[id].categories}} ng-click="showElement(id)"
-       ng-include="'templates/element.html'">
+       class='element'ng-click="showElement(id)" ng-include="'templates/element.html'">
   </div>
 </div>
 
 <div class="base" ng-if="element">
   <span class="fa fa-close" ng-click="hideElement()"></span>
-  <div ng-repeat="id in chronology" categories={{base[id].categories}}
-       class="ng-class: $first ? 'main element' : 'element';"
+  <div ng-repeat="id in chronology" class="ng-class: $first ? 'main element' : 'element';"
        ng-include="'templates/element.html'">
   </div>
 <div>

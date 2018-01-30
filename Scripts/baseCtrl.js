@@ -9,10 +9,10 @@ angular
       $scope.categories = data;
     })
 
-    Base.getBase(baseId()).then(function(base){
+    Base.get("Base/"+baseId()+"/base.JSON").then(function(base){
       $scope.base = base;
       if(!$scope.element){
-        Base.getChronology(baseId()).then(function(data){
+        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data){
           $scope.chronology = data;
         })
       }

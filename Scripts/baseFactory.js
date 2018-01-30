@@ -1,7 +1,15 @@
 angular
   .module('app')
-  .factory('Base',['$http','$location', function($http,$location){
+  .factory('Base',function($http,$location){
     return {
+
+      get: function(link){
+        return $http.get(link).then(function(response){
+          return response.data
+        },function(error){
+          $location.path('error')
+        })
+      },
       getCategories: function(baseId){
 
         class Category{
@@ -34,20 +42,6 @@ angular
         },function(error){
           $location.path('error')
         })
-      },
-      getBase: function(baseId){
-        return $http.get('Base/'+baseId+'/base.JSON').then(function(response){
-          return response.data
-        },function(error){
-          $location.path('error')
-        })
-      },
-      getChronology: function(baseId){
-        return $http.get("Base/"+baseId+"/chronology.JSON").then(function(response){
-          return response.data
-        },function(error){
-          $location.path('error')
-        })
       }
     }
-  }])
+  })

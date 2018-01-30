@@ -1,6 +1,0 @@
-<div ng-repeat='category in categories' class={{category.type}} >
-  <input type='checkbox' ng-click="categoryTick($event)" id={{category.id}} ng-checked={{category.checked}}
-  ng-model="categories[category.id]['checked']">
-  {{category.title}} <span ng-if="category.children.length>1"
-    class="fa fa-arrow-down" ng-click="dropdown_category($event,category)"></span>
-</div>
