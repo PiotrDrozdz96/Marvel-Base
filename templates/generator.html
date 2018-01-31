@@ -22,17 +22,42 @@
   </select>
 </div>
 
-<div class="base" ng-switch on="activeMode">
-  <div ng-switch-when="view|delete|edit" ng-switch-when-separator="|">
-    <div ng-repeat="id in series[selectedSeries][selectedType]" class='element'
-         ng-include="'templates/element.html'">
+<div class="base">
+  <div ng-repeat="id in series[selectedSeries][selectedType]" ng-switch on="activeMode">
+
+    <div ng-switch-when="view">
+      <div class="element" ng-include="'templates/element.html'"></div>
     </div>
+
+    <div ng-switch-when="delete">
+      <button class='additionalOption' ng-click="deleteRest($index)">
+        U
+        s
+        u
+        ń
+        >
+        </button>
+      <div class="element" ng-include="'templates/element.html'"></div>
+      <button ng-click="delete($index)">Usuń</button>
+    </div>
+
+    <div ng-switch-when="edit">
+      <button class='additionalOption' ng-click="addElement($index)">
+        D
+        o
+        d
+        a
+        j</button>
+      <div class="element" ng-include="'templates/editElement.html'"></div>
+    </div>
+
+    <div ng-switch-when="JSON">{{id}}":{{base[id]}}</div>
+
+    <div ng-switch-when="array">{{id}},</div>
+
+    <div ng-switch-when="volumes"><style>.base{height: calc(50vh - 60px);}</style>
+      <div class="element" ng-include="'templates/element.html'"></div>
+    </div>
+
   </div>
-  <div ng-switch-when="JSON">
-    <div ng-repeat="id in series[selectedSeries][selectedType]">"{{id}}":{{base[id]}}</div>
-  </div>
-  <div ng-switch-when="array">
-    <div ng-repeat="id in series[selectedSeries][selectedType]">{{id}},</div>
-  </div>
-  <div ng-switch-when="volumes">volumes</div>
 </div>

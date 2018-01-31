@@ -1,28 +1,11 @@
 <link rel="stylesheet" href="css\element.css" type="text/css">
 
-<div ng-if="activeMode=='delete'" class='additionalOption' ng-click="deleteRest($index)">Usuń></div>
-
-<div ng-if="activeMode!='edit'">
-  <div class='cover'><img src={{base[id].cover}}></div>
-  <div class='description'>
-    <div ng-if="activeMode=='delete'" class='delete' ng-click="delete($index)">Usuń</div>
-    <div class='title'><b><i>{{base[id].title}}</div></i></b>
-    <div class="number" ng-if="base[id].number && !base[id].children">
-      Vol {{base[id].volume}} #{{base[id].number}}
-    </div>
-    <div class='subTitle'><i>{{base[id].subTitle}}</div></i>
-    <div class='publishedDate'>{{base[id].publishedDate}}</div>
+<div class='cover'><img src={{base[id].cover}}></div>
+<div class='description'>
+  <div class='title'><b><i>{{base[id].title}}</div></i></b>
+  <div class="number" ng-if="base[id].number && !base[id].children">
+    Vol {{base[id].volume}} #{{base[id].number}}
   </div>
-</div>
-
-<div ng-if="activeMode=='edit'">
-  <div class='additionalOption' ng-click="addElement($index)">Dodaj</div>
-  <div class='cover'><img ng-click="changeCover(id)" src={{base[id].cover}}></div>
-  <div class='description'>
-    <textarea class='title' rows="1" cols="10" ng-model="base[id].title">{{base[id].title}}</textarea>
-    <textarea class='volume' rows="1" cols="3" ng-model="base[id].volume">{{base[id].volume}}</textarea>
-    <textarea class="number" rows="1" cols="4" ng-model="base[id].number">{{base[id].number}}</textarea>
-    <textarea class='subTitle' ng-model="base[id].subTitle">{{base[id].subTitle}}</textarea>
-    <textarea class='publishedDate' ng-model="base[id].publishedDate">{{base[id].publishedDate}}</textarea>
-  </div>
+  <div class='subTitle'><i>{{base[id].subTitle}}</div></i>
+  <div class='publishedDate'>{{base[id].publishedDate}}</div>
 </div>

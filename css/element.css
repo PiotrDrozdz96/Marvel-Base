@@ -22,33 +22,6 @@
   font-size: medium;
 }
 
-.element .description .delete{
-  display: none;
-}
-
-.element .description:hover .delete{
-  position: absolute;
-  display: block;
-  width:100%;
-  height: 100%;
-  margin-left:16px;
-  background-color: black;
-  opacity: 0.8;
-  color:white;
-}
-
-.element .additionalOption{
-  width: 16px;
-  height: 73%;
-  margin: 0;
-  padding: 0;
-  color: white;
-  background-color: FireBrick;
-  float: left;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-}
-
 .main.element{
   width: 370px;
   height: 508px;

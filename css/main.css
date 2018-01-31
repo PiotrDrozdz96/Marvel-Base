@@ -12,6 +12,18 @@ textarea{
   color: inherit;
 }
 
+button{
+  font-family:inherit;
+  color: inherit;
+  border-radius: 10px;
+  width: 100%;
+}
+
+button:hover,button.on{
+  color: white;
+  background-color: FireBrick;
+}
+
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
@@ -64,23 +76,6 @@ textarea{
   border-bottom: 2px solid DimGray;
 }
 
-.toolbar button{
-  font-family:inherit;
-  color: inherit;
-  border-radius: 10px;
-  width: 100%;
-}
-
-.toolbar button:hover,button.on{
-  color: white;
-  background-color: FireBrick;
-}
-
-.toolbar textarea{
-  margin:0;
-  width: 95%;
-}
-
 .toolbar select{
   width:100%;
 }
@@ -99,4 +94,23 @@ textarea{
   float: right;
   font-size: 50px;
   margin-right: 10px;
+}
+
+.base button{
+  height: 18px;
+  width: 150px;
+  color: white;
+  background-color: FireBrick;
+  padding: 0;
+  float: left;
+  margin-top: 20px;
+  margin-left: -180px;
+}
+
+.base button.additionalOption{
+  width: 16px;
+  height: 200px;
+  margin: 26px 0px;
+  margin-right: -9px;
+
 }
