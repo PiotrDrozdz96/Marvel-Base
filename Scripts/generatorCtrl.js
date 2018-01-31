@@ -43,6 +43,14 @@ angular
       }
     }
 
+    $scope.changeId = function(id,index){
+      let newId = $scope.base[id].title.replace(" ","_")+"_"+$scope.base[id].volume+"_"+$scope.base[id].number
+      $scope.base[id].id = newId
+      $scope.base[newId] = $scope.base[id]
+      delete $scope.base[id]
+      $scope.series[$scope.selectedSeries][$scope.selectedType][index] = newId
+    }
+
     //dzialają na zewnatrz, ale nie w bazie
 
     $scope.addElement = function(index){
