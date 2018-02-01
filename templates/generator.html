@@ -7,14 +7,21 @@
   </div>
   <div class="main">Nurt
     <select ng-model="selectedWave" ng-change="setSeries()">
-      <option ng-repeat="wave in categories">{{wave.title}}</option>
+      <option ng-repeat="wave in categories" ng-if="$index!=0">{{wave.title}}</option>
     </select>
+    <div class="add">
+      <textarea ng-model="newWave">{{newWave}}</textarea>
+      <button ng-click="addWave()">+</button>
+    </div>
   </div>
   <div class="secondary on">Seria
     <select ng-model="selectedSeries">
-      <option>new</option>
       <option ng-repeat="series in categories[selectedWave].series">{{series.title}}</option>
     </select>
+    <div class="add">
+      <textarea ng-model="newSeries">{{newSeries}}</textarea>
+      <button ng-click="addSeries()">+</button>
+    </div>
   </div>
   <select ng-model="selectedType">
     <option>zeszyty</option>
@@ -42,7 +49,7 @@
     </div>
 
     <div ng-switch-when="edit">
-      <button class='additionalOption' ng-click="addElement($index)">
+      <button class='additionalOption' ng-click="openDialog($index)">
         D
         o
         d
@@ -59,5 +66,13 @@
       <div class="element" ng-include="'templates/element.html'"></div>
     </div>
 
+  </div>
+</div>
+<div class="additional_layout">
+  <div class="background"></div>
+  <div class="dialog on">
+    <span class="fa fa-close" ng-click="exitDialog()"></span>
+    <div class="element" ng-include="'templates/emptyElement.html'"></div>
+    <div><button ng-click="addElement()">Dodaj</button></div>
   </div>
 </div>

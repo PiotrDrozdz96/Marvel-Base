@@ -1,8 +1,8 @@
 .element{
   width: 213px;
-  height: 254px;
   padding-bottom: 0px;
-  margin: 26px 0px;
+  margin: 0px;
+  margin-top: 26px;
   float:left;
   text-align: center;
   background-color: inherit;
@@ -16,7 +16,7 @@
 }
 
 .element .description{
-  position: relative;
+
   min-width:200px;
   min-height:100px;
   font-size: medium;

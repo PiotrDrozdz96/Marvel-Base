@@ -81,7 +81,7 @@ angular
     $scope.hideElement = function(){
         $location.path($location.path().substr(1,$location.path().lastIndexOf("/")-1),false)
         $scope.element = false
-        Base.getChronology(baseId()).then(function(data){
+        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data){
           $scope.chronology = data;
         })
       }
