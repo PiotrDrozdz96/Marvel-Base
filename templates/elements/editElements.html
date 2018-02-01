@@ -3,11 +3,11 @@
 <div class='cover'><img ng-click="changeCover(id)" src={{base[id].cover}}></div>
 <div class='description'>
   <textarea class='title' rows="1" cols="12" ng-model="base[id].title" ng-change="changeId(id,$index)"
-            ng-model-options="{updateOn: 'blur'}" >{{base[id].title}}</textarea>
+            ng-model-options="{updateOn: 'blur'}" ></textarea>
   <textarea class='volume' rows="1" cols="3" ng-model="base[id].volume" ng-change="changeId(id,$index)"
-            ng-model-options="{updateOn: 'blur'}" >{{base[id].volume}}</textarea>
+            ng-model-options="{updateOn: 'blur'}" ></textarea>
   <textarea class="number" rows="1" cols="4" ng-model="base[id].number" ng-change="changeId(id,$index)"
-            ng-model-options="{updateOn: 'blur'}" >{{base[id].number}}</textarea>
-  <textarea class='subTitle' ng-model="base[id].subTitle">{{base[id].subTitle}}</textarea>
-  <textarea class='publishedDate' ng-model="base[id].publishedDate">{{base[id].publishedDate}}</textarea>
+            ng-model-options="{updateOn: 'blur'}" ></textarea>
+  <textarea class='subTitle' ng-model="base[id].subTitle"></textarea>
+  <textarea class='publishedDate' ng-model="base[id].publishedDate"></textarea>
 </div>

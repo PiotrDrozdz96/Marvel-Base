@@ -69,24 +69,23 @@ angular
       $scope.newSeries = ""
     }
 
-//Nowe testowe
-  var tempIndex;
-  $scope.openDialog = function(index){
-    $(".additional_layout").addClass("on")
-    tempIndex = index;
-  }
+    var tempIndex;
+    $scope.openDialog = function(template,index){
+      $scope.dialog = template
+      $(".additional_layout").addClass("on")
+      tempIndex = index;
+    }
 
-  $scope.exitDialog = function(){
-    $(".additional_layout").removeClass("on")
-  }
+    $scope.exitDialog = function(){
+      $(".additional_layout").removeClass("on")
+    }
 
-  $scope.addElement = function(){
-    let id = Base.createId($scope.newElement.title,$scope.newElement.volume,$scope.newElement.number)
-    $scope.base[id]=$scope.newElement
-    $scope.series[$scope.selectedSeries][$scope.selectedType].splice(tempIndex,0,id)
-    $scope.exitDialog()
-    setNewElement()
-  }
-
+    $scope.addElement = function(){
+      let id = Base.createId($scope.newElement.title,$scope.newElement.volume,$scope.newElement.number)
+      $scope.base[id]=$scope.newElement
+      $scope.series[$scope.selectedSeries][$scope.selectedType].splice(tempIndex,0,id)
+      $scope.exitDialog()
+      setNewElement()
+    }
 
   })

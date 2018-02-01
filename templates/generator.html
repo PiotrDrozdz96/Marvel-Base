@@ -33,7 +33,7 @@
   <div ng-repeat="id in series[selectedSeries][selectedType]" ng-switch on="activeMode">
 
     <div ng-switch-when="view">
-      <div class="element" ng-include="'templates/element.html'"></div>
+      <div class="element" ng-include="'templates/elements/elements.html'"></div>
     </div>
 
     <div ng-switch-when="delete">
@@ -44,18 +44,18 @@
         ń
         >
         </button>
-      <div class="element" ng-include="'templates/element.html'"></div>
+      <div class="element" ng-include="'templates/elements/elements.html'"></div>
       <button ng-click="delete($index)">Usuń</button>
     </div>
 
     <div ng-switch-when="edit">
-      <button class='additionalOption' ng-click="openDialog($index)">
+      <button class='additionalOption' ng-click="openDialog('addElement',$index)">
         D
         o
         d
         a
         j</button>
-      <div class="element" ng-include="'templates/editElement.html'"></div>
+      <div class="element" ng-include="'templates/elements/editElements.html'"></div>
     </div>
 
     <div ng-switch-when="JSON">{{id}}":{{base[id]}}</div>
@@ -63,16 +63,16 @@
     <div ng-switch-when="array">{{id}},</div>
 
     <div ng-switch-when="volumes"><style>.base{height: calc(50vh - 60px);}</style>
-      <div class="element" ng-include="'templates/element.html'"></div>
+      <div class="element" ng-include="'templates/elements/elements.html'"></div>
     </div>
 
   </div>
 </div>
 <div class="additional_layout">
   <div class="background"></div>
-  <div class="dialog on">
-    <span class="fa fa-close" ng-click="exitDialog()"></span>
-    <div class="element" ng-include="'templates/emptyElement.html'"></div>
-    <div><button ng-click="addElement()">Dodaj</button></div>
+  <div ng-switch on="dialog">
+    <div ng-switch-when="addElement">
+       <div class="dialog" ng-include="'templates/dialogs/addElement.html'"></div>
+    </div>
   </div>
 </div>
