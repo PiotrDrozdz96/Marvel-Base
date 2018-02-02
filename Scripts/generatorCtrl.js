@@ -2,6 +2,35 @@ angular
   .module('app')
   .controller('generatorCtrl', function($scope,Base){
 
+    var dialog = {
+
+      exit: function(result){
+        $scope.dialogResult = result
+        $(".additional_layout").removeClass("on")
+        $scope[$scope.dialog](...$scope.dialogParams)
+      },
+
+      open: function(template,params){
+        if($scope.dialogResult==undefined){
+          $scope.dialog = template
+          $scope.dialogParams = params
+          $(".additional_layout").addClass("on")
+          return false
+        }
+        else{
+          return true
+        }
+      },
+
+      reset: function(){
+        $scope.dialog = undefined;
+        $scope.dialogResult = undefined;
+        $scope.dialogParams = undefined;
+      }
+
+    }
+
+    $scope.exitDialog = (result) => dialog.exit(result)
     $scope.setMode = function(mode){$scope.activeMode = mode}
     $scope.setSeries = function(){$scope.selectedSeries = $scope.categories[$scope.selectedWave].series[0].title}
     let setNewElement = function(){$scope.newElement = {"title":"title","volume":"","number":"","id":"","series":[$scope.selectedSeries],"subTitle":"subTitle","publishedDate":"publishedDate","cover":""}}
@@ -69,23 +98,16 @@ angular
       $scope.newSeries = ""
     }
 
-    var tempIndex;
-    $scope.openDialog = function(template,index){
-      $scope.dialog = template
-      $(".additional_layout").addClass("on")
-      tempIndex = index;
-    }
-
-    $scope.exitDialog = function(){
-      $(".additional_layout").removeClass("on")
-    }
-
-    $scope.addElement = function(){
-      let id = Base.createId($scope.newElement.title,$scope.newElement.volume,$scope.newElement.number)
-      $scope.base[id]=$scope.newElement
-      $scope.series[$scope.selectedSeries][$scope.selectedType].splice(tempIndex,0,id)
-      $scope.exitDialog()
-      setNewElement()
+    $scope.addElement = function(index){
+      if(dialog.open("addElement",[index])){
+        if($scope.dialogResult){
+          let id = Base.createId($scope.newElement.title,$scope.newElement.volume,$scope.newElement.number)
+          $scope.base[id]=$scope.newElement
+          $scope.series[$scope.selectedSeries][$scope.selectedType].splice(index,0,id)
+        }
+        setNewElement()
+        dialog.reset()
+      }
     }
 
   })
