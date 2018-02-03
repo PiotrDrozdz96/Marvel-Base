@@ -24,8 +24,8 @@ angular
 
       reset: function(){
         $scope.dialog = undefined;
-        $scope.dialogResult = undefined;
-        $scope.dialogParams = undefined;
+        $scope.dialogResult = undefined;//nie potrzebnie scope
+        $scope.dialogParams = undefined;//nie potrzebnie scope
       }
 
     }
@@ -35,6 +35,7 @@ angular
     $scope.setSeries = function(){$scope.selectedSeries = $scope.categories[$scope.selectedWave].series[0].title}
     let setNewElement = function(){$scope.newElement = {"title":"title","volume":"","number":"","id":"","series":[$scope.selectedSeries],"subTitle":"subTitle","publishedDate":"publishedDate","cover":""}}
     let selectedElements = () => $scope.series[$scope.selectedSeries][$scope.selectedType]
+    let elementExist = (id) => $scope.base[id] ? true : false
 
     $scope.modes = {view: {id:"view", value:"Wyświetl"},
                     delete: {id:"delete", value:"Usuwanie"},
@@ -98,15 +99,70 @@ angular
       $scope.newSeries = ""
     }
 
+    let addElement = function(id,index){
+      $scope.base[id]=$scope.newElement
+      selectedElements().splice(index,0,id)
+      setNewElement()
+      dialog.reset()
+    }
+
     $scope.addElement = function(index){
       if(dialog.open("addElement",[index])){
         if($scope.dialogResult){
           let id = Base.createId($scope.newElement.title,$scope.newElement.volume,$scope.newElement.number)
-          $scope.base[id]=$scope.newElement
-          $scope.series[$scope.selectedSeries][$scope.selectedType].splice(index,0,id)
+          if(elementExist(id)){
+            dialog.reset()
+            $scope.conflictElements(id,index)
+          }
+          else{
+            addElement(id,index)
+          }
         }
-        setNewElement()
-        dialog.reset()
+        else{
+          setNewElement()
+          dialog.reset()
+        }
+      }
+    }
+
+    $scope.conflictElements = function(id,index){
+      $scope.id = id
+      if(dialog.open("conflictElements",[id,index])){
+        let newId = Base.createId($scope.newElement.title,$scope.newElement.volume,$scope.newElement.number)
+        switch ($scope.dialogResult) {
+          case "exit":
+            setNewElement()
+            dialog.reset()
+            break;
+          case "replace":
+            if(id!=newId){
+              if(elementExist(newId)){
+                dialog.reset()
+                $scope.conflictElements(newId,index)
+              }
+              else{
+                $scope.addElement(index)
+              }
+            }
+            else{
+              let indexInSeries = selectedElements().findIndex((seriesId) => seriesId == id)
+              if(indexInSeries!=-1){
+                index = indexInSeries>=index ? index : index-1;
+                selectedElements().splice(indexInSeries,1)
+              }
+              addElement(id,index)
+            }
+            break;
+          case "check":
+            if(elementExist(newId)){
+              dialog.reset()
+              $scope.conflictElements(newId,index)
+            }
+            else{
+              addElement(newId,index)
+            }
+            break;
+        }
       }
     }
 

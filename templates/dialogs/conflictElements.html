@@ -19,6 +19,6 @@
   <div class="element" ng-include="'templates/elements/elements.html'"></div>
   <div class="element" ng-include="'templates/elements/newElement.html'"></div>
 </div>
-  <button ng-click="addElement()">Zostaw</button>
-  <button ng-click="addElement()">Zastąp</button>
-  <button ng-click="addElement()">Sprawdź zmiany i dodaj</button>
+  <button ng-click="exitDialog('exit')">Zostaw</button>
+  <button ng-click="exitDialog('replace')">Zastąp</button>
+  <button ng-click="exitDialog('check')">Sprawdź zmiany i dodaj</button>
