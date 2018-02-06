@@ -49,7 +49,7 @@
     </div>
 
     <div ng-switch-when="edit">
-      <button class='additionalOption' ng-click="addElement($index)">
+      <button class='additionalOption' ng-click="dialog.open('addElement',[$index])">
         D
         o
         d
@@ -70,7 +70,7 @@
 </div>
 <div class="additional_layout">
   <div class="background"></div>
-  <div ng-switch on="dialog">
+  <div ng-switch on="dialog.template">
     <div ng-switch-when="addElement">
        <div class="dialog" ng-include="'templates/dialogs/addElement.html'"></div>
     </div>
