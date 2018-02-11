@@ -46,6 +46,14 @@ angular
       createId: function(title,volume,number){
         return title.replace(" ","_")+"_"+volume+"_"+number
       },
+      separateId: function(id){
+        let values = id.split("_")
+        let obj = {}
+        obj.number = values.pop()
+        obj.volume = values.pop()
+        obj.title = values.join(" ")
+        return obj
+      },
       createElement: function(title,volume,number,series){
 
         class Element{

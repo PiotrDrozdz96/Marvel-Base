@@ -102,6 +102,7 @@ button:hover,button.on{
   background-color: inherit;
 }
 
+
 .base span{
   float: right;
   font-size: 50px;
@@ -126,6 +127,29 @@ button:hover,button.on{
   z-index: 1;
   margin: 26px 0px;
   margin-right: -9px;
+}
+
+.base .row1{
+  overflow-y: scroll;
+  height: 300px;
+  width:inherit;
+}
+
+.base .row2{
+  border-top: solid 3px FireBrick;
+  overflow-y: scroll;
+  height: calc(100vh - 423px);
+  width: inherit;
+}
+
+.base .row1 button{
+  background-color: inherit;
+  color: DimGray;
+}
+
+.base .row1 button:hover,.base .row1 button.on{
+  background-color: FireBrick;
+  color: white;
 }
 
 .additional_layout{
