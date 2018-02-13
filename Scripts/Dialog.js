@@ -7,14 +7,13 @@ angular
       params: undefined,
 
       exit: function(func){
-        $(".additional_layout").removeClass("on")
+        this.template = undefined
         if(func)this[func](...this.params)
       },
 
       open: function(template,params){
         this.template = template
         this.params = params
-        $(".additional_layout").addClass("on")
       }
 
     }

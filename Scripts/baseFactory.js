@@ -53,22 +53,6 @@ angular
         obj.volume = values.pop()
         obj.title = values.join(" ")
         return obj
-      },
-      createElement: function(title,volume,number,series){
-
-        class Element{
-          constructor(title,volume,number,series){
-            this.title = title
-            this.volume = volume
-            this.number = number
-            this.id = title.replace(" ","_")+"_"+volume+"_"+number
-            this.series = series
-            this.subTitle = ""
-            this.publishedDate = ""
-            this.cover = ""
-          }
-        }
-        return new Element(title,volume,number,series)
       }
     }
   })

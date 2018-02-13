@@ -100,14 +100,4 @@
   </div>
 
 </div>
-<div class="additional_layout">
-  <div class="background"></div>
-  <div ng-switch on="dialog.template">
-    <div ng-switch-when="addElement">
-       <div class="dialog" ng-include="'templates/dialogs/addElement.html'"></div>
-    </div>
-    <div ng-switch-when="conflictElements">
-       <div class="dialog" ng-include="'templates/dialogs/conflictElements.html'"></div>
-    </div>
-  </div>
-</div>
+<div ng-if="dialog.template" ng-include="'templates/dialog.html'"></div>
