@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css\element.css" type="text/css">
 
-<div class='cover'><img ng-click="changeCover(id)" src={{base[id].cover}}></div>
+<div class='cover'><img ng-click="element.btnCover.func(id)" src={{base[id].cover}}></div>
 <div class='description'>
   <textarea class='title' rows="1" cols="12" ng-model="base[id].title" ng-change="changeId(id,$index)"
             ng-model-options="{updateOn: 'blur'}" ></textarea>

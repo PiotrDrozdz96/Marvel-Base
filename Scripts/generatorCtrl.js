@@ -2,27 +2,7 @@ angular
   .module('app')
   .controller('generatorCtrl', function($scope,Base,Dialog){
 
-    Base.get("Base/Comics/categories.JSON").then(function(data){
-      $scope.categories = data;
-      $scope.selectedWave = data[Object.keys(data)[1]].title
-      $scope.selectedSeries = data[$scope.selectedWave].series[0].title
-      $scope.selectedType = "zeszyty"
-    })
-
-    Base.get("Base/Comics/base.JSON").then(function(data){
-      $scope.base = data;
-    })
-
-    Base.get("Base/Comics/series.JSON").then(function(data){
-      $scope.series = data;
-    })
-
-    $scope.setMode = function(mode){$scope.activeMode = mode}
-    $scope.setSeries = function(){$scope.selectedSeries = $scope.categories[$scope.selectedWave].series[0].title}
-    let setNewElement = function(){$scope.newElement = {"title":"title","volume":"","number":"","id":"","series":[$scope.selectedSeries],"subTitle":"subTitle","publishedDate":"publishedDate","cover":""}}
-    let selectedElements = () => $scope.series[$scope.selectedSeries].zeszyty//zmienić na parametr
-    let elementExist = (id) => $scope.base[id] ? true : false
-    let argsToId = (obj) => [obj.title,obj.volume,obj.number]
+    //get Data
 
     $scope.modes = {view: {id:"view", value:"Wyświetl"},
                     delete: {id:"delete", value:"Usuwanie"},
@@ -31,26 +11,82 @@ angular
                     array: {id:"array", value: "Array"},
                     volumes: {id:"volumes", value: "Twórz Tomy"}
     }
-    $scope.activeMode = "view";
-    $scope.unPackVolume = {id:"",index:0,wave:"",series:""}
-    setNewElement();
 
-    $scope.changeCover = function (id){
-      $scope.base[id].cover = prompt('Cover link',$scope.base[id].cover)
-    }
+    $scope.setMode = function(mode){$scope.activeMode = mode}
 
-    $scope.changeNewElementCover = function (){
-      $scope.newElement.cover = prompt('Cover link',$scope.newElement.cover)
-    }
+    Base.get("Base/Comics/base.JSON").then(function(data){
+      $scope.base = data;
+    })
 
-    $scope.delete = function(index){
-      delete $scope.base[selectedElements()[index]]
-      selectedElements().splice(index,1)
-    }
+    Base.get("Base/Comics/categories.JSON").then(function(categoriesData){
+      $scope.waves = {
+        data: categoriesData,
+        selected: categoriesData[Object.keys(categoriesData)[1]].title,
+        new: "",
+        set: function(){this.selected = this.data[Object.keys(this.data)[1]].title},
+        add: function(){if(this.new!=""){
+          this.data[this.new] = {title:this.new,checked:false,series:[]}
+          this.selected = this.new
+          this.new = ""
+        }},
+        remove: function(wave){
+          if(confirm("Czy na pewno chcesz usunąć nurt, wraz z seriami i elemenatmi?")){
+            while(this.data[wave].series.length!=0){
+              $scope.series.remove(wave,this.data[wave].series[0].title,true)
+            }
+            delete this.data[wave]
+            this.set()
+            $scope.series.set()
+          }
+        }
+      }
+      Base.get("Base/Comics/series.JSON").then(function(seriesData){
+        $scope.series = {
+          data: seriesData,
+          selected: categoriesData[$scope.waves.selected].series[0].title,
+          new: "",
+          set: function(){this.selected = $scope.waves.data[$scope.waves.selected].series[0].title},
+          add: function(){if(this.new!=""){
+            $scope.waves.data[$scope.waves.selected].series.push({title:this.new,checked:false})
+            this.data[this.new] = {zeszyty:[],tomy:[]}
+            this.selected = this.new
+            this.new = ""
+          }},
+          remove: function(wave,series,message){
+            if(series!=null && (message || confirm("Czy na pewno chcesz usunąć serię, wraz ze wszystkimi elementami?"))){
+              this.data[series].zeszyty.concat(this.data[series].tomy).forEach(
+                function(id){ delete $scope.base[id] } )
+              delete this.data[series]
+              let index = $scope.waves.data[wave].series.findIndex((child) => child.title==series)
+              $scope.waves.data[wave].series.splice(index,1)
+              if($scope.waves.data[wave].series.length!=0) this.set()
+            }
+          }
+        }
+      })
+      $scope.selectedType = "zeszyty"
+    })
 
-    $scope.deleteRest = function(end){
-      while (selectedElements().length != end){
-        delete $scope.base[selectedElements().pop()]
+    //element functions
+    $scope.element = {
+      exist: (id) => $scope.base[id] ? true : false,
+      changeCover: function (id){
+        $scope.base[id].cover = prompt('Cover link',$scope.base[id].cover)
+      },
+      selected: () => $scope.series.data[$scope.series.selected].zeszyty,
+      deleteRest: function(end){
+        while (this.selected().length != end){
+          delete $scope.base[this.selected().pop()]
+        }
+      },
+      delete: function(index){
+        delete $scope.base[this.selected()[index]]
+        this.selected().splice(index,1)
+      },
+      add: function(id,index){
+        $scope.base[id]=$scope.newElement
+        this.selected().splice(index,0,id)
+        setNewElement()
       }
     }
 
@@ -64,26 +100,20 @@ angular
         $scope.base[id].id = newId
         $scope.base[newId] = $scope.base[id]
         delete $scope.base[id]
-        selectedElements()[index] = newId
+        $scope.element.selected()[index] = newId
       }
     }
 
-    $scope.addWave = function(){
-      $scope.categories[$scope.newWave] = {title:$scope.newWave,checked:false,series:[]}
-      $scope.selectedWave = $scope.newWave
-      $scope.newWave = ""
-    }
+    let setNewElement = function(){$scope.newElement = {"title":"title","volume":"","number":"","id":"","series":[$scope.selectedSeries],"subTitle":"subTitle","publishedDate":"publishedDate","cover":""}}
+    let argsToId = (obj) => [obj.title,obj.volume,obj.number]
 
-    $scope.addSeries = function(){
-      $scope.categories[$scope.selectedWave].series.push({title:$scope.newSeries,checked:false})
-      $scope.selectedSeries = $scope.newSeries
-      $scope.newSeries = ""
-    }
 
-    let addElement = function(id,index){
-      $scope.base[id]=$scope.newElement
-      selectedElements().splice(index,0,id)
-      setNewElement()
+    $scope.setMode("view")
+    $scope.unPackVolume = {id:"",index:0,wave:"",series:""}
+    setNewElement();
+
+    $scope.changeNewElementCover = function (){
+      $scope.newElement.cover = prompt('Cover link',$scope.newElement.cover)
     }
 
     $scope.dialog = Object.assign(Dialog,{
@@ -91,14 +121,14 @@ angular
 
       tryAddElement: function(index){
         let id = Base.createId(...argsToId($scope.newElement))
-        if(elementExist(id)){ $scope.id = id; Dialog.open('conflictElements',[index]) }
-        else addElement(id,index)
+        if($scope.element.exist(id)){ $scope.id = id; Dialog.open('conflictElements',[index]) }
+        else $scope.element.add(id,index)
       },
 
       replaceElement: function(index){
         let newId = Base.createId(...argsToId($scope.newElement))
         if($scope.id!=newId){
-          if(elementExist(newId)){
+          if($scope.element.exist(newId)){
             $scope.id = newId; Dialog.open('conflictElements',[index])
           }
           else{
@@ -106,12 +136,12 @@ angular
           }
         }
         else{
-          let indexInSeries = selectedElements().findIndex((seriesId) => seriesId == newId)
+          let indexInSeries = $scope.element.selected().findIndex((seriesId) => seriesId == newId)
           if(indexInSeries!=-1){
             index = indexInSeries>=index ? index : index-1;
-            selectedElements().splice(indexInSeries,1)
+            $scope.element.selected().splice(indexInSeries,1)
           }
-          addElement(newId,index)
+          $scope.element.add(newId,index)
         }
       }
     })
@@ -123,8 +153,8 @@ angular
       $scope.unPackVolume = {
         "id": id,
         index:$scope.base[id].children.length,
-        wave: $scope.selectedWave,
-        series: $scope.selectedSeries
+        wave: $scope.waves.selected,
+        series: $scope.series.selected
       }
     }
 
@@ -135,8 +165,8 @@ angular
     $scope.pack = function(){
       $scope.id = ""
       $scope.unPackVolume.id = ""
-      $scope.selectedWave = $scope.unPackVolume.wave
-      $scope.selectedSeries = $scope.unPackVolume.series
+      $scope.waves.selected = $scope.unPackVolume.wave
+      $scope.series.selected = $scope.unPackVolume.series
     }
 
     $scope.removeChild = function(index){

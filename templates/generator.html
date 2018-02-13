@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="css\generator.css" type="text/css">
+
 <div class="after-navBar"></div>
 
 <div class="toolbar">
@@ -5,104 +7,81 @@
     <button ng-repeat="mode in modes" class="ng-class: activeMode==mode.id ? 'on' : '';"
     ng-click="setMode(mode.id)">{{mode.value}}</button>
   </div>
+
   <div class="main">Nurt
-    <select ng-model="selectedWave" ng-change="setSeries()">
-      <option ng-repeat="wave in categories" ng-if="$index!=0">{{wave.title}}</option>
+    <select ng-model="waves.selected" ng-change="series.set()">
+      <option ng-repeat="wave in waves.data" ng-if="$index!=0">{{wave.title}}</option>
     </select>
-    <div class="add">
-      <textarea ng-model="newWave"></textarea>
-      <button ng-click="addWave()">+</button>
+    <div class="form-mini">
+      <textarea ng-model="waves.new"></textarea>
+      <button ng-click="waves.add()">+</button>
+      <button ng-click="waves.remove(waves.selected)">-</button>
     </div>
   </div>
   <div class="secondary on">Seria
-    <select ng-model="selectedSeries">
-      <option ng-repeat="series in categories[selectedWave].series">{{series.title}}</option>
+    <select ng-model="series.selected">
+      <option ng-repeat="series in waves.data[waves.selected].series">{{series.title}}</option>
     </select>
-    <div class="add">
-      <textarea ng-model="newSeries"></textarea>
-      <button ng-click="addSeries()">+</button>
+    <div class="form-mini">
+      <textarea ng-model="series.new"></textarea>
+      <button ng-click="series.add()">+</button>
+      <button ng-click="series.remove(waves.selected,series.selected)">-</button>
     </div>
   </div>
   <select ng-model="selectedType">
     <option>zeszyty</option>
     <option>tomy</option>
   </select>
+
 </div>
 
 <div class="base" ng-switch on="activeMode">
 
-  <div ng-switch-when="view" ng-repeat="id in series[selectedSeries][selectedType]">
-    <div class="element" ng-include="'templates/elements/elements.html'"></div>
+  <div ng-switch-when="view" ng-repeat="id in series.data[series.selected].zeszyty">
+    <div class="element" ng-include="'templates/elements/element.html'"></div>
   </div>
 
-  <div ng-switch-when="delete" ng-repeat="id in series[selectedSeries].zeszyty">
-    <button class='additionalOption' ng-click="deleteRest($index)">
-      U
-      s
-      u
-      ń
-      >
-      </button>
-    <div class="element" ng-include="'templates/elements/elements.html'"></div>
-    <button ng-click="delete($index)">Usuń</button>
+  <div class="elementOptions" ng-switch-when="delete"
+       ng-repeat="id in series.data[series.selected].zeszyty">
+    <button class="vertical" ng-click="element.deleteRest($index)">{{"Usuń>".split("").join("\n")}}</button>
+    <button ng-click="element.delete($index)">Usuń</button>
+    <div class="element" ng-include="'templates/elements/element.html'"></div>
   </div>
 
   <div ng-switch-when="edit">
-    <div ng-repeat="id in series[selectedSeries].zeszyty">
-      <button class='additionalOption' ng-click="dialog.open('addElement',[$index])">
-        D
-        o
-        d
-        a
-        j</button>
-      <div class="element" ng-include="'templates/elements/editElements.html'"></div>
+    <div ng-repeat="id in series.data[series.selected].zeszyty">
+      <div class="elementOptions">
+        <button class="vertical" ng-click="dialog.open('addElement',[$index])">{{"Dodaj".split("").join("\n")}}</button>
+        <div class="element" ng-include="'templates/elements/editElement.html'"></div>
+      </div>
     </div>
-    <button class='additionalOption'
-            ng-click="dialog.open('addElement',[series[selectedSeries].zeszyty.length])">
-      D
-      o
-      d
-      a
-      j</button>
+    <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].zeszyty.length])">
+      {{"Dodaj".split("").join("\n")}}</button>
   </div>
 
-  <div ng-switch-when="JSON" ng-repeat="id in series[selectedSeries][selectedType]">
+  <div ng-switch-when="JSON" ng-repeat="id in series.data[series.selected][selectedType]">
     {{id}}":{{base[id]}}</div>
 
-  <div ng-switch-when="array">{{series[selectedSeries][selectedType]}}</div>
+  <div ng-switch-when="array">{{series.data[series.selected][selectedType]}}</div>
 
   <div ng-switch-when="volumes">
     <div class="row1">
       <div ng-if="unPackVolume.id!=''">
         <span class="fa fa-close" ng-click="pack()"></span>
-        <div class="element"  ng-include="'templates/elements/editElements.html'"></div>
+        <div class="element"  ng-include="'templates/elements/editElement.html'"></div>
         <div ng-repeat="id in base[unPackVolume.id].children">
-          <button ng-click="unPackIndex($index)"
-          class="ng-class: $index==unPackVolume.index ? 'additionalOption on' : 'additionalOption';">
-            D
-            o
-            d
-            a
-            j</button>
           <div class="element" ng-click="removeChild($index)"
-               ng-include="'templates/elements/elements.html'"></div>
+               ng-include="'templates/elements/element.html'"></div>
         </div>
-        <button ng-click="unPackIndex(base[unPackVolume.id].children.length)"
-        class="ng-class: base[unPackVolume.id].children.length==unPackVolume.index ? 'additionalOption on' : 'additionalOption';">
-          D
-          o
-          d
-          a
-          j</button>
       </div>
     </div>
     <div class="row2">
       <div class="element" ng-if="unPackVolume.id!=''" ng-click="addChild(id)"
-           ng-repeat="id in series[selectedSeries].zeszyty"
-           ng-include="'templates/elements/elements.html'"></div>
+           ng-repeat="id in series.data[series.selected].zeszyty"
+           ng-include="'templates/elements/element.html'"></div>
       <div class="element" ng-if="unPackVolume.id==''" ng-click="unPack(id)"
-           ng-repeat="id in series[selectedSeries].tomy"
-           ng-include="'templates/elements/elements.html'"></div>
+           ng-repeat="id in series.data[series.selected].tomy"
+           ng-include="'templates/elements/element.html'"></div>
     </div>
   </div>
 

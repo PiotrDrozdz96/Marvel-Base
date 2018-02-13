@@ -1,12 +1,18 @@
 <style>
   .dialog{
     left: calc(50vw - 130px);
-    top: calc(50vh - 230px);
+    top: calc(50vh - 210px);
     width: 260px;
-    height: 460px;
+    height: 420px;
+  }
+
+  .dialog .elements{
+    height: 380px;
   }
 </style>
 
-<span class="fa fa-close" ng-click="dialog.exit('setNewElement')"></span>
-<div class="element" ng-include="'templates/elements/newElement.html'"></div>
-<div><button ng-click="dialog.exit('tryAddElement')">Dodaj</button></div>
+<div><span class="fa fa-close" ng-click="dialog.exit('setNewElement')"></span></div>
+<div class="elements">
+  <div class="element" ng-include="'templates/elements/newElement.html'"></div>
+</div>
+<button ng-click="dialog.exit('tryAddElement')">Dodaj</button>

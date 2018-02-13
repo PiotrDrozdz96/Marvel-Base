@@ -71,27 +71,6 @@ button:hover,button.on{
   display: block;
 }
 
-.toolbar select{
-  width:100%;
-}
-
-.toolbar button{
-  border-radius: 10px;
-}
-
-.add textarea{
-  background-color: white;
-  color: black;
-  width: 50%;
-  height: 15px;
-  margin-top: 5px;
-}
-
-.add button{
-  width: 25px;
-  height: 25px;
-}
-
 .base{
   margin-top: 16px;
   margin-left: 159px;
@@ -102,90 +81,8 @@ button:hover,button.on{
   background-color: inherit;
 }
 
-
 .base span{
   float: right;
   font-size: 50px;
   margin-right: 10px;
-}
-
-.base button{
-  height: 18px;
-  width: 150px;
-  color: white;
-  background-color: FireBrick;
-  padding: 0;
-  float: left;
-  margin-top: 20px;
-  margin-left: -180px;
-}
-
-.base button.additionalOption{
-  width: 16px;
-  height: 185px;
-  position: relative;
-  z-index: 1;
-  margin: 26px 0px;
-  margin-right: -9px;
-}
-
-.base .row1{
-  overflow-y: scroll;
-  height: 300px;
-  width:inherit;
-}
-
-.base .row2{
-  border-top: solid 3px FireBrick;
-  overflow-y: scroll;
-  height: calc(100vh - 423px);
-  width: inherit;
-}
-
-.base .row1 button{
-  background-color: inherit;
-  color: DimGray;
-}
-
-.base .row1 button:hover,.base .row1 button.on{
-  background-color: FireBrick;
-  color: white;
-}
-
-.additional_layout{
-  visibility: hidden;
-}
-
-.additional_layout.on{
-  visibility: visible;
-}
-
-.background{
-  background-color: black;
-  opacity: 0.8;
-  z-index: 2;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100vw;
-  height: 100vh;
-}
-
-.dialog{
-  border: 10px solid FireBrick;
-  color: DimGray;
-  border-radius: 10px;
-  background-color: black;
-  position: absolute;
-  z-index: 2;
-}
-
-.dialog span{
-  float: right;
-  font-size: 35px;
-  margin-right: 10px;
-}
-
-.dialog div{
-  margin: 15px;
 }

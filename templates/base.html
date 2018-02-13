@@ -10,13 +10,13 @@
 
 <div class="base" ng-if="!element">
   <div ng-repeat="id in chronology | filter:filterByCategory(categories)"
-       class='element'ng-click="showElement(id)" ng-include="'templates/elements/elements.html'">
+       class='element'ng-click="showElement(id)" ng-include="'templates/elements/element.html'">
   </div>
 </div>
 
 <div class="base" ng-if="element">
   <span class="fa fa-close" ng-click="hideElement()"></span>
   <div ng-repeat="id in chronology" class="ng-class: $first ? 'main element' : 'element';"
-       ng-include="'templates//elements/elements.html'">
+       ng-include="'templates//elements/element.html'">
   </div>
 <div>
