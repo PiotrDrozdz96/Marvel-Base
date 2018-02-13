@@ -28,11 +28,6 @@
       <button ng-click="series.remove(waves.selected,series.selected)">-</button>
     </div>
   </div>
-  <select ng-model="selectedType">
-    <option>zeszyty</option>
-    <option>tomy</option>
-  </select>
-
 </div>
 
 <div class="base" ng-switch on="activeMode">
@@ -43,45 +38,64 @@
 
   <div class="elementOptions" ng-switch-when="delete"
        ng-repeat="id in series.data[series.selected].zeszyty">
-    <button class="vertical" ng-click="element.deleteRest($index)">{{"Usuń>".split("").join("\n")}}</button>
+    <button class="vertical" ng-click="element.deleteRest($index)">
+      {{"Usuń>".split("").join("\n")}}</button>
     <button ng-click="element.delete($index)">Usuń</button>
     <div class="element" ng-include="'templates/elements/element.html'"></div>
   </div>
 
   <div ng-switch-when="edit">
-    <div ng-repeat="id in series.data[series.selected].zeszyty">
-      <div class="elementOptions">
-        <button class="vertical" ng-click="dialog.open('addElement',[$index])">{{"Dodaj".split("").join("\n")}}</button>
-        <div class="element" ng-include="'templates/elements/editElement.html'"></div>
-      </div>
+    <div class="elementOptions" ng-repeat="id in series.data[series.selected].zeszyty">
+      <button class="vertical" ng-click="dialog.open('addElement',[$index])">
+        {{"Dodaj".split("").join("\n")}}</button>
+      <div class="element" ng-include="'templates/elements/editElement.html'"></div>
     </div>
     <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].zeszyty.length])">
       {{"Dodaj".split("").join("\n")}}</button>
   </div>
 
-  <div ng-switch-when="JSON" ng-repeat="id in series.data[series.selected][selectedType]">
-    {{id}}":{{base[id]}}</div>
+  <div ng-switch-when="JSON">
+     <div ng-repeat="id in series.data[series.selected].zeszyty">{{id}}":{{base[id]}}</div>
+     <hr>
+     <div ng-repeat="id in series.data[series.selected].tomy">{{id}}":{{base[id]}}</div>
+  </div>
 
-  <div ng-switch-when="array">{{series.data[series.selected][selectedType]}}</div>
+  <div ng-switch-when="array">
+    <div>{{series.data[series.selected].zeszyty}}</div>
+    <div>{{series.data[series.selected].tomy}}</div>
+  </div>
 
   <div ng-switch-when="volumes">
     <div class="row1">
-      <div ng-if="unPackVolume.id!=''">
-        <span class="fa fa-close" ng-click="pack()"></span>
+      <div ng-if="volumes.id!=''">
+        <span class="fa fa-close" ng-click="volumes.pack()"></span>
         <div class="element"  ng-include="'templates/elements/editElement.html'"></div>
-        <div ng-repeat="id in base[unPackVolume.id].children">
-          <div class="element" ng-click="removeChild($index)"
+        <div class="elementOptions" ng-repeat="id in base[volumes.id].children">
+          <button class="ng-class: volumes.index==$index ? 'vertical on' : 'vertical'"
+                  ng-click="volumes.setIndex($index)">{{"Dodaj".split("").join("\n")}}
+          </button>
+          <div class="element" ng-click="volumes.removeChild($index)"
                ng-include="'templates/elements/element.html'"></div>
         </div>
+        <button class="ng-class: volumes.index==base[id].children.length ? 'vertical on' : 'vertical'"
+                ng-click="volumes.setIndex(base[id].children.length)">{{"Dodaj".split("").join("\n")}}
+        </button>
       </div>
     </div>
     <div class="row2">
-      <div class="element" ng-if="unPackVolume.id!=''" ng-click="addChild(id)"
+      <div class="element" ng-if="volumes.id!=''" ng-click="volumes.addChild(id)"
            ng-repeat="id in series.data[series.selected].zeszyty"
            ng-include="'templates/elements/element.html'"></div>
-      <div class="element" ng-if="unPackVolume.id==''" ng-click="unPack(id)"
-           ng-repeat="id in series.data[series.selected].tomy"
-           ng-include="'templates/elements/element.html'"></div>
+      <div ng-if="volumes.id==''">
+        <div class="elementOptions" ng-repeat="id in series.data[series.selected].tomy">
+          <button class="vertical" ng-click="dialog.open('addElement',[$index])">
+            {{"Dodaj".split("").join("\n")}}</button>
+          <button ng-click="element.delete($index)">Usuń</button>
+          <div class="element" ng-click="volumes.unPack(id)" ng-include="'templates/elements/element.html'"></div>
+        </div>
+        <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].tomy.length])">
+          {{"Dodaj".split("").join("\n")}}</button>
+      </div>
     </div>
   </div>
 
