@@ -29,8 +29,11 @@ angular
         new: "",
         set: function(){this.selected = this.data[Object.keys(this.data)[1]].title},
         add: function(){if(this.new!=""){
-          this.data[this.new] = {title:this.new,checked:false,series:[]}
-          this.selected = this.new
+          if(!this.data[this.new]){
+            this.data[this.new] = {title:this.new,checked:false,series:[]}
+            this.selected = this.new
+          }
+          else alert("Istnieje taki nurt")
           this.new = ""
         }},
         remove: function(wave){
@@ -39,8 +42,11 @@ angular
               $scope.series.remove(wave,this.data[wave].series[0].title,true)
             }
             delete this.data[wave]
-            this.set()
-            $scope.series.set()
+            if(Object.keys(this.data)[1]){
+              this.set()
+              $scope.series.set()
+            }
+            else{this.selected=""; $scope.series.selected=""}
           }
         }
       }
@@ -51,10 +57,13 @@ angular
           selected: categoriesData[$scope.waves.selected].series[0].title,
           new: "",
           set: function(){this.selected = $scope.waves.data[$scope.waves.selected].series[0].title},
-          add: function(){if(this.new!=""){
-            $scope.waves.data[$scope.waves.selected].series.push({title:this.new,checked:false})
-            this.data[this.new] = {zeszyty:[],tomy:[]}
-            this.selected = this.new
+          add: function(){if(this.new!="" && $scope.waves.selected!=""){
+            if(!this.data[this.new]){
+              $scope.waves.data[$scope.waves.selected].series.push({title:this.new,checked:false})
+              this.data[this.new] = {zeszyty:[],tomy:[]}
+              this.selected = this.new
+            }
+            else alert("Istnieje taka seria")
             this.new = ""
           }},
           remove: function(wave,series,message){
@@ -65,6 +74,7 @@ angular
               let index = $scope.waves.data[wave].series.findIndex((child) => child.title==series)
               $scope.waves.data[wave].series.splice(index,1)
               if($scope.waves.data[wave].series.length!=0) this.set()
+              else this.selected=""
             }
           }
         }

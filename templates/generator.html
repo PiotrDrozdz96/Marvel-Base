@@ -50,8 +50,8 @@
         {{"Dodaj".split("").join("\n")}}</button>
       <div class="element" ng-include="'templates/elements/editElement.html'"></div>
     </div>
-    <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].zeszyty.length])">
-      {{"Dodaj".split("").join("\n")}}</button>
+    <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].zeszyty.length])"
+            ng-if="series.selected!=''">{{"Dodaj".split("").join("\n")}}</button>
   </div>
 
   <div ng-switch-when="JSON">
@@ -93,8 +93,8 @@
           <button ng-click="element.delete($index)">Usuń</button>
           <div class="element" ng-click="volumes.unPack(id)" ng-include="'templates/elements/element.html'"></div>
         </div>
-        <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].tomy.length])">
-          {{"Dodaj".split("").join("\n")}}</button>
+        <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].tomy.length])"
+                ng-if="series.selected!=''">{{"Dodaj".split("").join("\n")}}</button>
       </div>
     </div>
   </div>
