@@ -143,24 +143,20 @@ angular
         else $scope.element.add(id,index)
       },
 
-      replaceElement: function(index){
-        let newId = Base.createId(...argsToId($scope.newElement.get()))
-        if($scope.id!=newId){
-          if($scope.element.exist(newId)){
-            $scope.id = newId; Dialog.open('conflictElements',[index])
-          }
-          else{
-            Dialog.open('addElement',[index])
-          }
-        }
-        else{
-          let indexInSeries = $scope.element.selected().findIndex((seriesId) => seriesId == newId)
-          if(indexInSeries!=-1){
-            index = indexInSeries>=index ? index : index-1;
-            $scope.element.selected().splice(indexInSeries,1)
-          }
-          $scope.element.add(newId,index)
-        }
+      grabElements: function(index,pageString){
+        let items = $(pageString).find(".wikia-gallery-item ")
+        this.tryAddElements(index,items)
+      },
+
+      tryAddElements: function(index,items){
+        let item = items.get(0)
+        items.splice(0,1)
+        $scope.newElement = Object.assign($scope.newElement,
+                            Base.grabElement($(item).find('.lightbox-caption div').html(),
+                            $(item).find('img').attr('src'),$scope.series.selected) )
+        let id = $scope.newElement.id
+        if(!$scope.element.exist(id)) $scope.element.add(id,index)
+        if(items.length!=0) this.tryAddElements(index+1,items)
       }
     })
 

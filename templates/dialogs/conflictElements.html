@@ -1,17 +1,18 @@
 <style>
   .dialog{
     left: calc(50vw - 270px);
-    top: calc(50vh - 250px);
+    top: calc(50vh - 235px);
     width: 540px;
-    height: 500px;
+    height: 470px;
   }
 
   .dialog .elements{
     height: 400px;
+    margin-left: 40px;
   }
 
   .dialog button{
-    width: 32.5%;
+    width: 49%;
   }
 </style>
 <div><center>Element istnieje już w bazie</center></div>
@@ -20,5 +21,4 @@
   <div class="element" ng-include="'templates/elements/newElement.html'"></div>
 </div>
   <button ng-click="dialog.exit('setNewElement')">Zostaw</button>
-  <button ng-click="dialog.exit('replaceElement')">Zastąp</button>
   <button ng-click="dialog.exit('tryAddElement')">Sprawdź zmiany i dodaj</button>

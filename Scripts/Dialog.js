@@ -6,14 +6,17 @@ angular
       template: undefined,
       params: undefined,
 
-      exit: function(func){
+      exit: function(func,additionalParams){
         this.template = undefined
-        if(func)this[func](...this.params)
+        if(func){
+          if(additionalParams) this[func](...this.params,...additionalParams)
+          else this[func](...this.params)
+        }
       },
 
       open: function(template,params){
         this.template = template
-        this.params = params
+        if(params) this.params = params
       }
 
     }

@@ -53,6 +53,25 @@ angular
         obj.volume = values.pop()
         obj.title = values.join(" ")
         return obj
+      },
+      grabElement: function(description,cover,series){
+        class Element{
+          constructor(description,cover){
+            let allTitle = $($($(description)[0].outerHTML)[0].innerHTML)[0].title
+            this.title = allTitle.slice(0,allTitle.indexOf("Vol")-1)
+            allTitle = allTitle.slice(this.title.length+5)
+            this.volume = allTitle.slice(0,allTitle.indexOf(" "))
+            this.number = allTitle.slice(allTitle.indexOf(" ")+1)
+            this.id = (this.title+" "+this.volume+" "+this.number).replace(/ /g,"_")
+            this.series = [series]
+            this.subTitle = (($(description)[2]||{childNodes:{"0":""}}).childNodes["0"]||{data:""}).data
+            let publishedDateIndex = this.subTitle ? 5 : 3
+            this.publishedDate =
+              (($(description)[publishedDateIndex]||{childNodes:{"0":""}}).childNodes["0"]||{data:""}).data
+            this.cover = cover
+          }
+        }
+        return new Element(description,cover)
       }
     }
   })

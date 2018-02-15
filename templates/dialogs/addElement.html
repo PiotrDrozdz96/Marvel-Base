@@ -1,18 +1,12 @@
 <style>
   .dialog{
     left: calc(50vw - 130px);
-    top: calc(50vh - 210px);
+    top: calc(50vh - 33px);
     width: 260px;
-    height: 420px;
-  }
-
-  .dialog .elements{
-    height: 380px;
+    height: 66px;
   }
 </style>
 
-<div><span class="fa fa-close" ng-click="dialog.exit('setNewElement')"></span></div>
-<div class="elements">
-  <div class="element" ng-include="'templates/elements/newElement.html'"></div>
-</div>
-<button ng-click="dialog.exit('tryAddElement')">Dodaj</button>
+<button ng-click="dialog.open('addSingleElement')">Dodaj pojedyńczy element</button>
+<button ng-click="dialog.open('grabElements')">Dodaj elementy z marvel.wikia.com</button>
+<button ng-click="dialog.exit()">Wyjdź</button>
