@@ -28,6 +28,10 @@
       <button ng-click="series.remove(waves.selected,series.selected)">-</button>
     </div>
   </div>
+  <select ng-if="activeMode=='chronology'" ng-model="chronology.selected">
+    <option>zeszyty</option>
+    <option>tomy</option>
+  </select>
 </div>
 
 <div class="base" ng-switch on="activeMode">
@@ -52,17 +56,6 @@
     </div>
     <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].zeszyty.length])"
             ng-if="series.selected!=''">{{"Dodaj".split("").join("\n")}}</button>
-  </div>
-
-  <div ng-switch-when="JSON">
-     <div ng-repeat="id in series.data[series.selected].zeszyty">{{id}}":{{base[id]}}</div>
-     <hr>
-     <div ng-repeat="id in series.data[series.selected].tomy">{{id}}":{{base[id]}}</div>
-  </div>
-
-  <div ng-switch-when="array">
-    <div>{{series.data[series.selected].zeszyty}}</div>
-    <div>{{series.data[series.selected].tomy}}</div>
   </div>
 
   <div ng-switch-when="volumes">
@@ -97,6 +90,55 @@
                 ng-if="series.selected!=''">{{"Dodaj".split("").join("\n")}}</button>
       </div>
     </div>
+  </div>
+
+  <div ng-switch-when="chronology">
+    <div class="row1">
+      <div class="elementOptions" ng-repeat="id in chronology.data">
+        <button class="ng-class: chronology.index==$index ? 'vertical on' : 'vertical'"
+                ng-click="chronology.setIndex($index)">{{"Dodaj".split("").join("\n")}}
+        </button>
+        <div class="element"  ng-click="chronology.remove($index)"
+             ng-include="'templates/elements/element.html'"></div>
+      </div>
+      <button class="ng-class: chronology.index==chronology.data.length ? 'vertical on' : 'vertical'"
+              ng-click="chronology.setIndex(chronology.data.length)">{{"Dodaj".split("").join("\n")}}
+      </button>
+    </div>
+    <div class="row2">
+      <div class="element" ng-repeat="id in series.data[series.selected][chronology.selected]"
+          ng-click="chronology.add(id)"  ng-include="'templates/elements/element.html'"></div>
+    </div>
+  </div>
+
+  <div ng-switch-when="base.JSON">
+     <div>{</div>
+     <div ng-repeat="element in base">
+       <div ng-if="!$last">{{element.id}}:{{element}},</div>
+       <div ng-if="$last">{{element.id}}:{{element}}</div>
+     </div>
+     <div>}</div>
+  </div>
+
+  <div ng-switch-when="categories.JSON">
+    <div>{</div>
+    <div ng-repeat="wave in waves.data">
+      <div ng-if="!$last">{{wave.title}}:{{wave}},</div>
+      <div ng-if="$last">{{wave.title}}:{{wave}}</div>
+    </div>
+    <div>}</div>
+  </div>
+
+  <div ng-switch-when="series.JSON">
+    <div>{</div>
+    <div ng-repeat="(key,value) in series.data">
+      <div>{{key}}:{</div>
+      <div>"zeszyty":{{value.zeszyty}},</div>
+      <div ng-if="!$last">"tomy":{{value.tomy}}},</div>
+      <div ng-if="$last">"tomy":{{value.tomy}}}</div>
+      <br>
+    </div>
+    <div>}</div>
   </div>
 
 </div>

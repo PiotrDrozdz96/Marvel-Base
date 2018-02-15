@@ -1,5 +1,5 @@
 {
-  "Marvel-now":{"title":"Marvel Now","series":[]},
+  "Marvel now":{"title":"Marvel Now","series":[]},
   "Avengers":{"title":"Avengers","checked":false,"series":[{"title":"Avengers","checked":true},
                                           {"title":"New Avengers","checked":true},
                                           {"title":"Thor","checked":false},

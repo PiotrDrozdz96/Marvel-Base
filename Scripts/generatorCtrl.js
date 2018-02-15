@@ -3,13 +3,15 @@ angular
   .controller('generatorCtrl', function($scope,Base,Dialog){
 
     //Data
-    $scope.modes = {view: {id:"view", value:"Wyświetl"},
-                    delete: {id:"delete", value:"Usuwanie"},
-                    edit: {id:"edit", value: "Edycja /Dodawanie"},
-                    JSON: {id:"JSON", value: "JSON"},
-                    array: {id:"array", value: "Array"},
-                    volumes: {id:"volumes", value: "Twórz Tomy"}
-    }
+    $scope.modes = [{id:"view", value:"Wyświetl"},
+                    {id:"delete", value:"Usuwanie"},
+                    {id:"edit", value: "Edycja /Dodawanie"},
+                    {id:"volumes", value: "Twórz Tomy"},
+                    {id:"chronology", value: "Twórz chronologie"},
+                    {id:"base.JSON", value: "base.JSON"},
+                    {id:"categories.JSON", value: "categories.JSON"},
+                    {id:"series.JSON", value: "series.JSON"}
+    ]
     $scope.activeMode = "view"
     $scope.setMode = function(mode){
       $scope.activeMode = mode
@@ -137,10 +139,13 @@ angular
     $scope.dialog = Object.assign(Dialog,{
       setNewElement: () => $scope.newElement.set(),
 
-      tryAddElement: function(index){
+      tryAddElement: function(index,nextElements){
         let id = Base.createId(...argsToId($scope.newElement.get()))
         if($scope.element.exist(id)){ $scope.id = id; Dialog.open('conflictElements',[index]) }
-        else $scope.element.add(id,index)
+        else {
+          $scope.element.add(id,index)
+          if(nextElements) this.tryAddElements(index+1,nextElements)
+        }
       },
 
       grabElements: function(index,pageString){
@@ -155,8 +160,14 @@ angular
                             Base.grabElement($(item).find('.lightbox-caption div').html(),
                             $(item).find('img').attr('src'),$scope.series.selected) )
         let id = $scope.newElement.id
-        if(!$scope.element.exist(id)) $scope.element.add(id,index)
-        if(items.length!=0) this.tryAddElements(index+1,items)
+        if(!$scope.element.exist(id)){
+          $scope.element.add(id,index)
+          if(items.length!=0) this.tryAddElements(index+1,items)
+        }
+        else{
+          $scope.id = id
+          Dialog.open('conflictGrabingElement',[index,items])
+        }
       }
     })
 
@@ -192,5 +203,25 @@ angular
         if(this.index>index) this.index--
       }
     }
+
+    Base.get("Base/Comics/chronology.JSON").then(function(chronologyData){
+      $scope.chronology = {
+        data: chronologyData,
+        index: chronologyData.length,
+        selected: "zeszyty",
+        setIndex: function(index){this.index=index},
+        add: function(id){
+          if(this.data.findIndex((c) => c==id)==-1){
+            this.data.splice(this.index,0,id)
+            this.index++
+          }
+          else alert("Element znajduje się już na liście")
+        },
+        remove: function(index){
+          this.data.splice(index,1)
+          if(this.index>index) this.index--
+        }
+      }
+    })
 
   })
