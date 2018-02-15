@@ -7,10 +7,7 @@ angular
                     {id:"delete", value:"Usuwanie"},
                     {id:"edit", value: "Edycja /Dodawanie"},
                     {id:"volumes", value: "Twórz Tomy"},
-                    {id:"chronology", value: "Twórz chronologie"},
-                    {id:"base.JSON", value: "base.JSON"},
-                    {id:"categories.JSON", value: "categories.JSON"},
-                    {id:"series.JSON", value: "series.JSON"}
+                    {id:"chronology", value: "Twórz chronologie"}
     ]
     $scope.activeMode = "view"
     $scope.setMode = function(mode){
@@ -223,5 +220,23 @@ angular
         }
       }
     })
+
+    //http://jsfiddle.net/Zarich/TzVd3/378/
+    function downloadInnerText(filename, elId, mimeType) {
+      var elHtml = document.getElementById(elId).innerText;
+      var link = document.createElement('a');
+      mimeType = mimeType || 'text/plain';
+
+      link.setAttribute('download', filename);
+      link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+      link.click();
+    }
+
+    $scope.download = function(){
+      downloadInnerText("base.JSON","base.JSON")
+      downloadInnerText("categories.JSON","categories.JSON")
+      downloadInnerText("series.JSON","series.JSON")
+      downloadInnerText("chronology.JSON","chronology.JSON")
+    }
 
   })

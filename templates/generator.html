@@ -6,6 +6,7 @@
   <div class="main">
     <button ng-repeat="mode in modes" class="ng-class: activeMode==mode.id ? 'on' : '';"
     ng-click="setMode(mode.id)">{{mode.value}}</button>
+    <button ng-click="download()">Pobierz bazę</button>
   </div>
 
   <div class="main">Nurt
@@ -111,35 +112,7 @@
     </div>
   </div>
 
-  <div ng-switch-when="base.JSON">
-     <div>{</div>
-     <div ng-repeat="element in base">
-       <div ng-if="!$last">{{element.id}}:{{element}},</div>
-       <div ng-if="$last">{{element.id}}:{{element}}</div>
-     </div>
-     <div>}</div>
-  </div>
-
-  <div ng-switch-when="categories.JSON">
-    <div>{</div>
-    <div ng-repeat="wave in waves.data">
-      <div ng-if="!$last">{{wave.title}}:{{wave}},</div>
-      <div ng-if="$last">{{wave.title}}:{{wave}}</div>
-    </div>
-    <div>}</div>
-  </div>
-
-  <div ng-switch-when="series.JSON">
-    <div>{</div>
-    <div ng-repeat="(key,value) in series.data">
-      <div>{{key}}:{</div>
-      <div>"zeszyty":{{value.zeszyty}},</div>
-      <div ng-if="!$last">"tomy":{{value.tomy}}},</div>
-      <div ng-if="$last">"tomy":{{value.tomy}}}</div>
-      <br>
-    </div>
-    <div>}</div>
-  </div>
-
 </div>
+
+<div hidden ng-include="'templates/filesToDownload.html'"></div>
 <div ng-if="dialog.template" ng-include="'templates/dialog.html'"></div>
