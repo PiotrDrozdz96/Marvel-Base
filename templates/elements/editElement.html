@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="css\element.css" type="text/css">
+
+<div class='cover'><img ng-click="element.changeCover(id)" src={{base[id].cover}}></div>
+<div class='description'>
+  <textarea class='title' rows="1" cols="12" ng-model="base[id].title" ng-change="element.changeId(id,$index)"
+            ng-model-options="{updateOn: 'blur'}" ></textarea>
+  <textarea class='volume' rows="1" cols="3" ng-model="base[id].volume" ng-change="element.changeId(id,$index)"
+            ng-model-options="{updateOn: 'blur'}" ></textarea>
+  <textarea class="number" rows="1" cols="4" ng-model="base[id].number" ng-change="element.changeId(id,$index)"
+            ng-model-options="{updateOn: 'blur'}" ></textarea>
+  <textarea class='subTitle' ng-model="base[id].subTitle"></textarea>
+  <textarea class='publishedDate' ng-model="base[id].publishedDate"></textarea>
+</div>

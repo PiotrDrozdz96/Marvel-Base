@@ -1,7 +1,15 @@
 angular
   .module('app')
-  .factory('Base',['$http','$location', function($http,$location){
+  .factory('Base',function($http,$location){
     return {
+
+      get: function(link){
+        return $http.get(link).then(function(response){
+          return response.data
+        },function(error){
+          $location.path('error')
+        })
+      },
       getCategories: function(baseId){
 
         class Category{
@@ -35,19 +43,35 @@ angular
           $location.path('error')
         })
       },
-      getBase: function(baseId){
-        return $http.get('Base/'+baseId+'/base.JSON').then(function(response){
-          return response.data
-        },function(error){
-          $location.path('error')
-        })
+      createId: function(title,volume,number){
+        return title.replace(/ /g,"_")+"_"+volume+"_"+number
       },
-      getChronology: function(baseId){
-        return $http.get("Base/"+baseId+"/chronology.JSON").then(function(response){
-          return response.data
-        },function(error){
-          $location.path('error')
-        })
+      separateId: function(id){
+        let values = id.split("_")
+        let obj = {}
+        obj.number = values.pop()
+        obj.volume = values.pop()
+        obj.title = values.join(" ")
+        return obj
+      },
+      grabElement: function(description,cover,series){
+        class Element{
+          constructor(description,cover){
+            let allTitle = $($($(description)[0].outerHTML)[0].innerHTML)[0].title
+            this.title = allTitle.slice(0,allTitle.indexOf("Vol")-1)
+            allTitle = allTitle.slice(this.title.length+5)
+            this.volume = allTitle.slice(0,allTitle.indexOf(" "))
+            this.number = allTitle.slice(allTitle.indexOf(" ")+1)
+            this.id = (this.title+" "+this.volume+" "+this.number).replace(/ /g,"_")
+            this.series = [series]
+            this.subTitle = (($(description)[2]||{childNodes:{"0":""}}).childNodes["0"]||{data:""}).data
+            let publishedDateIndex = this.subTitle ? 5 : 3
+            this.publishedDate =
+              (($(description)[publishedDateIndex]||{childNodes:{"0":""}}).childNodes["0"]||{data:""}).data
+            this.cover = cover
+          }
+        }
+        return new Element(description,cover)
       }
     }
-  }])
+  })

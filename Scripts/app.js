@@ -13,6 +13,10 @@ angular
       templateUrl: "templates/base.html",
       controller: "baseCtrl",
     })
+    .when("/Generator",{
+      templateUrl: "templates/generator.html",
+      controller: "generatorCtrl"
+    })
     .otherwise({
         templateUrl: "templates/error.html"
     });

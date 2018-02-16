@@ -54,7 +54,7 @@ a{
   color: DimGray;
   width: 170px;
   top:  38px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .dropdown-list.active{

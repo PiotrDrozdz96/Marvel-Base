@@ -1,0 +1,118 @@
+<link rel="stylesheet" href="css\generator.css" type="text/css">
+
+<div class="after-navBar"></div>
+
+<div class="toolbar">
+  <div class="main">
+    <button ng-repeat="mode in modes" class="ng-class: activeMode==mode.id ? 'on' : '';"
+    ng-click="setMode(mode.id)">{{mode.value}}</button>
+    <button ng-click="download()">Pobierz bazę</button>
+  </div>
+
+  <div class="main">Nurt
+    <select ng-model="waves.selected" ng-change="series.set()">
+      <option ng-repeat="wave in waves.data" ng-if="$index!=0">{{wave.title}}</option>
+    </select>
+    <div class="form-mini">
+      <textarea ng-model="waves.new"></textarea>
+      <button ng-click="waves.add()">+</button>
+      <button ng-click="waves.remove(waves.selected)">-</button>
+    </div>
+  </div>
+  <div class="secondary on">Seria
+    <select ng-model="series.selected">
+      <option ng-repeat="series in waves.data[waves.selected].series">{{series.title}}</option>
+    </select>
+    <div class="form-mini">
+      <textarea ng-model="series.new"></textarea>
+      <button ng-click="series.add()">+</button>
+      <button ng-click="series.remove(waves.selected,series.selected)">-</button>
+    </div>
+  </div>
+  <select ng-if="activeMode=='chronology'" ng-model="chronology.selected">
+    <option>zeszyty</option>
+    <option>tomy</option>
+  </select>
+</div>
+
+<div class="base" ng-switch on="activeMode">
+
+  <div ng-switch-when="view" ng-repeat="id in series.data[series.selected].zeszyty">
+    <div class="element" ng-include="'templates/elements/element.html'"></div>
+  </div>
+
+  <div class="elementOptions" ng-switch-when="delete"
+       ng-repeat="id in series.data[series.selected].zeszyty">
+    <button class="vertical" ng-click="element.deleteRest($index)">
+      {{"Usuń>".split("").join("\n")}}</button>
+    <button ng-click="element.delete($index)">Usuń</button>
+    <div class="element" ng-include="'templates/elements/element.html'"></div>
+  </div>
+
+  <div ng-switch-when="edit">
+    <div class="elementOptions" ng-repeat="id in series.data[series.selected].zeszyty">
+      <button class="vertical" ng-click="dialog.open('addElement',[$index])">
+        {{"Dodaj".split("").join("\n")}}</button>
+      <div class="element" ng-include="'templates/elements/editElement.html'"></div>
+    </div>
+    <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].zeszyty.length])"
+            ng-if="series.selected!=''">{{"Dodaj".split("").join("\n")}}</button>
+  </div>
+
+  <div ng-switch-when="volumes">
+    <div class="row1">
+      <div ng-if="volumes.id!=''">
+        <span class="fa fa-close" ng-click="volumes.pack()"></span>
+        <div class="element"  ng-include="'templates/elements/editElement.html'"></div>
+        <div class="elementOptions" ng-repeat="id in base[volumes.id].children">
+          <button class="ng-class: volumes.index==$index ? 'vertical on' : 'vertical'"
+                  ng-click="volumes.setIndex($index)">{{"Dodaj".split("").join("\n")}}
+          </button>
+          <div class="element" ng-click="volumes.removeChild($index)"
+               ng-include="'templates/elements/element.html'"></div>
+        </div>
+        <button class="ng-class: volumes.index==base[id].children.length ? 'vertical on' : 'vertical'"
+                ng-click="volumes.setIndex(base[id].children.length)">{{"Dodaj".split("").join("\n")}}
+        </button>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="element" ng-if="volumes.id!=''" ng-click="volumes.addChild(id)"
+           ng-repeat="id in series.data[series.selected].zeszyty"
+           ng-include="'templates/elements/element.html'"></div>
+      <div ng-if="volumes.id==''">
+        <div class="elementOptions" ng-repeat="id in series.data[series.selected].tomy">
+          <button class="vertical" ng-click="dialog.open('addSingleElement',[$index])">
+            {{"Dodaj".split("").join("\n")}}</button>
+          <button ng-click="element.delete($index)">Usuń</button>
+          <div class="element" ng-click="volumes.unPack(id)" ng-include="'templates/elements/element.html'"></div>
+        </div>
+        <button class="vertical" ng-click="dialog.open('addSingleElement',[series.data[series.selected].tomy.length])"
+                ng-if="series.selected!=''">{{"Dodaj".split("").join("\n")}}</button>
+      </div>
+    </div>
+  </div>
+
+  <div ng-switch-when="chronology">
+    <div class="row1">
+      <div class="elementOptions" ng-repeat="id in chronology.data">
+        <button class="ng-class: chronology.index==$index ? 'vertical on' : 'vertical'"
+                ng-click="chronology.setIndex($index)">{{"Dodaj".split("").join("\n")}}
+        </button>
+        <div class="element"  ng-click="chronology.remove($index)"
+             ng-include="'templates/elements/element.html'"></div>
+      </div>
+      <button class="ng-class: chronology.index==chronology.data.length ? 'vertical on' : 'vertical'"
+              ng-click="chronology.setIndex(chronology.data.length)">{{"Dodaj".split("").join("\n")}}
+      </button>
+    </div>
+    <div class="row2">
+      <div class="element" ng-repeat="id in series.data[series.selected][chronology.selected]"
+          ng-click="chronology.add(id)"  ng-include="'templates/elements/element.html'"></div>
+    </div>
+  </div>
+
+</div>
+
+<div hidden ng-include="'templates/filesToDownload.html'"></div>
+<div ng-if="dialog.template" ng-include="'templates/dialog.html'"></div>
