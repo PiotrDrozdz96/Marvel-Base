@@ -150,5 +150,9 @@
   "Runaways":{
     "series": ["Runaways"], "cover":"covers/MCU_Series/Runaways.jpg",
     "title":"Runaways", "subTitle":"Sezon 1",
-    "publishedDate": "9 January 2018"}
+    "publishedDate": "9 January 2018"},
+  "Panther":{
+    "series": ["Filmy"], "cover":"covers/movies/Panther.png",
+    "title":"Czarna Pantera", "subTitle":"",
+    "publishedDate": "14 February 2018"}
 }
