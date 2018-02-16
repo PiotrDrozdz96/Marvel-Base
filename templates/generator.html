@@ -82,12 +82,12 @@
            ng-include="'templates/elements/element.html'"></div>
       <div ng-if="volumes.id==''">
         <div class="elementOptions" ng-repeat="id in series.data[series.selected].tomy">
-          <button class="vertical" ng-click="dialog.open('addElement',[$index])">
+          <button class="vertical" ng-click="dialog.open('addSingleElement',[$index])">
             {{"Dodaj".split("").join("\n")}}</button>
           <button ng-click="element.delete($index)">Usuń</button>
           <div class="element" ng-click="volumes.unPack(id)" ng-include="'templates/elements/element.html'"></div>
         </div>
-        <button class="vertical" ng-click="dialog.open('addElement',[series.data[series.selected].tomy.length])"
+        <button class="vertical" ng-click="dialog.open('addSingleElement',[series.data[series.selected].tomy.length])"
                 ng-if="series.selected!=''">{{"Dodaj".split("").join("\n")}}</button>
       </div>
     </div>

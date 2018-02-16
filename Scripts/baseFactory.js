@@ -44,7 +44,7 @@ angular
         })
       },
       createId: function(title,volume,number){
-        return title.replace(" ","_")+"_"+volume+"_"+number
+        return title.replace(/ /g,"_")+"_"+volume+"_"+number
       },
       separateId: function(id){
         let values = id.split("_")

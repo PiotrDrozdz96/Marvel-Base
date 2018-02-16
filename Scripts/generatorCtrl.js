@@ -100,6 +100,7 @@ angular
       },
       add: function(id,index){
         $scope.base[id]=$scope.newElement.get()
+        $scope.base[id].id = id
         if($scope.series.type=="tomy") $scope.base[id].children=[]
         this.selected().splice(index,0,id)
         $scope.newElement.set()
@@ -114,6 +115,10 @@ angular
           $scope.base[id].id = newId
           $scope.base[newId] = $scope.base[id]
           delete $scope.base[id]
+          if($scope.activeMode=="volumes"){
+            $scope.id = $scope.volumes.id = newId
+            index  = this.selected().findIndex( (c)=>c==id)
+          }
           this.selected()[index] = newId
         }
       }
@@ -175,6 +180,10 @@ angular
       setIndex: function(index){this.index=index},
       unPack: function(id){
         $scope.id = this.id = id
+        if(!$scope.base[id].children.every( (childId)=>$scope.base[childId] ) ){
+          $scope.base[id].children.reduce( (arr,current) =>
+            $scope.base[current] ? arr.concat([current]) : arr,[])
+        }
         this.index = $scope.base[id].children.length
         this.wave = $scope.waves.selected
         this.series =  $scope.series.selected
