@@ -143,7 +143,11 @@ angular
 
       tryAddElement: function(index,nextElements){
         let id = Base.createId(...argsToId($scope.newElement.get()))
-        if($scope.element.exist(id)){ $scope.id = id; Dialog.open('conflictElements',[index]) }
+        if($scope.element.exist(id)){
+          $scope.id = id;
+          if (nextElements) Dialog.open('conflictGrabingElement',[index,nextElements])
+          else Dialog.open('conflictElements',[index])
+        }
         else {
           $scope.element.add(id,index)
           if(nextElements) this.tryAddElements(index+1,nextElements)
@@ -230,6 +234,13 @@ angular
       }
     })
 
+    $scope.download = function(){
+      downloadInnerText("base.JSON","base.JSON")
+      downloadInnerText("categories.JSON","categories.JSON")
+      downloadInnerText("series.JSON","series.JSON")
+      downloadInnerText("chronology.JSON","chronology.JSON")
+    }
+
     //http://jsfiddle.net/Zarich/TzVd3/378/
     function downloadInnerText(filename, elId, mimeType) {
       var elHtml = document.getElementById(elId).innerText;
@@ -239,13 +250,6 @@ angular
       link.setAttribute('download', filename);
       link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
       link.click();
-    }
-
-    $scope.download = function(){
-      downloadInnerText("base.JSON","base.JSON")
-      downloadInnerText("categories.JSON","categories.JSON")
-      downloadInnerText("series.JSON","series.JSON")
-      downloadInnerText("chronology.JSON","chronology.JSON")
     }
 
   })

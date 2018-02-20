@@ -35,3 +35,10 @@ angular
         return original.apply($location, [path]);
     };
 }])
+  .filter('orderWave', function(){
+    return function(input) {
+      if (!angular.isObject(input)) return input;
+      var keys = Object.keys(input)
+      return [input[keys.shift()],...keys.sort().map( (key)=>input[key])]
+    }
+  });

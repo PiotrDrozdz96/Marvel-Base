@@ -11,7 +11,7 @@
 
   <div class="main">Nurt
     <select ng-model="waves.selected" ng-change="series.set()">
-      <option ng-repeat="wave in waves.data" ng-if="$index!=0">{{wave.title}}</option>
+      <option ng-repeat="wave in waves.data | orderWave" ng-if="$index!=0">{{wave.title}}</option>
     </select>
     <div class="form-mini">
       <textarea ng-model="waves.new"></textarea>
@@ -21,7 +21,7 @@
   </div>
   <div class="secondary on">Seria
     <select ng-model="series.selected">
-      <option ng-repeat="series in waves.data[waves.selected].series">{{series.title}}</option>
+      <option ng-repeat="series in waves.data[waves.selected].series | orderBy: 'title'">{{series.title}}</option>
     </select>
     <div class="form-mini">
       <textarea ng-model="series.new"></textarea>
