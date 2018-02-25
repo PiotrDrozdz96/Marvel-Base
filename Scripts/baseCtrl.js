@@ -2,21 +2,16 @@ angular
   .module('app')
   .controller('baseCtrl', function($scope,$location,$route,Base){
 
-    let baseId = () => $route.current.params.base
     $scope.element = $route.current.params.element
-
-    Base.getCategories(baseId()).then(function(data){
-      $scope.categories = data;
-    })
-
-    Base.get("Base/"+baseId()+"/base.JSON").then(function(base){
-      $scope.base = base;
+    var chronology;
+    Base.get().then(function(data){
+      chronology = data.chronology
+      $scope.categories = Base.convertCategories(data.categories)
+      $scope.base = data.base;
       if(!$scope.element){
-        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data){
-          $scope.chronology = data;
-        })
+        $scope.chronology = chronology;
       }
-      else $scope.chronology = [$scope.element].concat(base[$scope.element].children)
+      else $scope.chronology = [$scope.element].concat(data.base[$scope.element].children)
     })
 
     $scope.filterByCategory = function (categories) {
@@ -81,9 +76,7 @@ angular
     $scope.hideElement = function(){
         $location.path($location.path().substr(1,$location.path().lastIndexOf("/")-1),false)
         $scope.element = false
-        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data){
-          $scope.chronology = data;
-        })
+        $scope.chronology = chronology;
       }
 
   })

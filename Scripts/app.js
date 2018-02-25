@@ -5,11 +5,11 @@ angular
     .when("/", {
         templateUrl: "templates/home.html"
     })
-    .when("/Base/:base",{
+    .when("/Base",{
       templateUrl: "templates/base.html",
       controller: "baseCtrl",
     })
-    .when("/Base/:base/:element",{
+    .when("/Base/:element",{
       templateUrl: "templates/base.html",
       controller: "baseCtrl",
     })
@@ -35,3 +35,10 @@ angular
         return original.apply($location, [path]);
     };
 }])
+  .filter('orderWave', function(){
+    return function(input) {
+      if (!angular.isObject(input)) return input;
+      var keys = Object.keys(input)
+      return [input[keys.shift()],...keys.sort().map( (key)=>input[key])]
+    }
+  });
