@@ -16,19 +16,15 @@ angular
       if($scope.volumes.id) $scope.volumes.pack()
     }
 
-    var backup;
-    Base.get().then(function(data){backup = data})
+    Base.get("Base/Comics/base.JSON").then(function(data){
+      $scope.base = data;
+    })
 
-    Base.get().then(function(data){
-
-      //Base
-      $scope.base = data.base
-
-      //Categories
-
+    //Categories
+    Base.get("Base/Comics/categories.JSON").then(function(categoriesData){
       $scope.waves = {
-        data: data.categories,
-        selected: data.categories[Object.keys(data.categories)[1]].title,
+        data: categoriesData,
+        selected: categoriesData[Object.keys(categoriesData)[1]].title,
         new: "",
         set: function(){this.selected = this.data[Object.keys(this.data)[1]].title},
         add: function(){if(this.new!=""){
@@ -53,54 +49,35 @@ angular
           }
         }
       }
-
-      $scope.series = {
-        data: data.series,
-        type: "zeszyty",
-        selected: data.categories[$scope.waves.selected].series[0].title,
-        new: "",
-        set: function(){this.selected = $scope.waves.data[$scope.waves.selected].series[0].title},
-        add: function(){if(this.new!="" && $scope.waves.selected!=""){
-          if(!this.data[this.new]){
-            $scope.waves.data[$scope.waves.selected].series.push({title:this.new,checked:false})
-            this.data[this.new] = {zeszyty:[],tomy:[]}
-            this.selected = this.new
-          }
-          else alert("Istnieje taka seria")
-          this.new = ""
-        }},
-        remove: function(wave,series,message){
-          if(series!=null && (message || confirm("Czy na pewno chcesz usunąć serię, wraz ze wszystkimi elementami?"))){
-            this.data[series].zeszyty.concat(this.data[series].tomy).forEach(
-              function(id){ delete $scope.base[id] } )
-            delete this.data[series]
-            let index = $scope.waves.data[wave].series.findIndex((child) => child.title==series)
-            $scope.waves.data[wave].series.splice(index,1)
-            if($scope.waves.data[wave].series.length!=0) this.set()
-            else this.selected=""
+      Base.get("Base/Comics/series.JSON").then(function(seriesData){
+        $scope.series = {
+          data: seriesData,
+          type: "zeszyty",
+          selected: categoriesData[$scope.waves.selected].series[0].title,
+          new: "",
+          set: function(){this.selected = $scope.waves.data[$scope.waves.selected].series[0].title},
+          add: function(){if(this.new!="" && $scope.waves.selected!=""){
+            if(!this.data[this.new]){
+              $scope.waves.data[$scope.waves.selected].series.push({title:this.new,checked:false})
+              this.data[this.new] = {zeszyty:[],tomy:[]}
+              this.selected = this.new
+            }
+            else alert("Istnieje taka seria")
+            this.new = ""
+          }},
+          remove: function(wave,series,message){
+            if(series!=null && (message || confirm("Czy na pewno chcesz usunąć serię, wraz ze wszystkimi elementami?"))){
+              this.data[series].zeszyty.concat(this.data[series].tomy).forEach(
+                function(id){ delete $scope.base[id] } )
+              delete this.data[series]
+              let index = $scope.waves.data[wave].series.findIndex((child) => child.title==series)
+              $scope.waves.data[wave].series.splice(index,1)
+              if($scope.waves.data[wave].series.length!=0) this.set()
+              else this.selected=""
+            }
           }
         }
-      }
-
-      //Chronology
-      $scope.chronology = {
-        data: data.chronology,
-        index: data.chronology.length,
-        selected: "zeszyty",
-        setIndex: function(index){this.index=index},
-        add: function(id){
-          if(this.data.findIndex((c) => c==id)==-1){
-            this.data.splice(this.index,0,id)
-            this.index++
-          }
-          else alert("Element znajduje się już na liście")
-        },
-        remove: function(index){
-          this.data.splice(index,1)
-          if(this.index>index) this.index--
-        }
-      }
-
+      })
     })
 
     //Element functions
@@ -237,21 +214,42 @@ angular
       }
     }
 
-    $scope.upload = function(){
-      Dialog.open("uploadProgress")
-      Base.put([{
-        chronology:$scope.chronology.data,
-        categories:$scope.waves.data,
-        base:$scope.base,
-        series:$scope.series.data
-      }]).then(function(message){
-        if(message) Dialog.open("uploadComplete")
-        else{
-          Base.put([backup]).then(function(message){
-            Dialog.open("uploadError")
-          })
+    Base.get("Base/Comics/chronology.JSON").then(function(chronologyData){
+      $scope.chronology = {
+        data: chronologyData,
+        index: chronologyData.length,
+        selected: "zeszyty",
+        setIndex: function(index){this.index=index},
+        add: function(id){
+          if(this.data.findIndex((c) => c==id)==-1){
+            this.data.splice(this.index,0,id)
+            this.index++
+          }
+          else alert("Element znajduje się już na liście")
+        },
+        remove: function(index){
+          this.data.splice(index,1)
+          if(this.index>index) this.index--
         }
-      })
+      }
+    })
+
+    $scope.download = function(){
+      downloadInnerText("base.JSON","base.JSON")
+      downloadInnerText("categories.JSON","categories.JSON")
+      downloadInnerText("series.JSON","series.JSON")
+      downloadInnerText("chronology.JSON","chronology.JSON")
+    }
+
+    //http://jsfiddle.net/Zarich/TzVd3/378/
+    function downloadInnerText(filename, elId, mimeType) {
+      var elHtml = document.getElementById(elId).innerText;
+      var link = document.createElement('a');
+      mimeType = mimeType || 'text/plain';
+
+      link.setAttribute('download', filename);
+      link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+      link.click();
     }
 
   })

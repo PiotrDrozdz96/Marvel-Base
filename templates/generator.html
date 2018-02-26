@@ -6,7 +6,7 @@
   <div class="main">
     <button ng-repeat="mode in modes" class="ng-class: activeMode==mode.id ? 'on' : '';"
     ng-click="setMode(mode.id)">{{mode.value}}</button>
-    <button ng-click="upload()">Zapisz zmiany</button>
+    <button ng-click="download()">Pobierz bazę</button>
   </div>
 
   <div class="main">Nurt
@@ -114,4 +114,5 @@
 
 </div>
 
+<div hidden ng-include="'templates/filesToDownload.html'"></div>
 <div ng-if="dialog.template" ng-include="'templates/dialog.html'"></div>

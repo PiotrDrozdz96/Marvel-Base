@@ -35,6 +35,7 @@
     "Street":{"title":"Street","checked":false,
     "series":[
       {"title":"Deadpool","checked":false},
+      {"title":"Moon Knight","checked":false},
       {"title":"Ms. Marvel","checked":false},
       {"title":"Thunderbolts","checked":false}
       

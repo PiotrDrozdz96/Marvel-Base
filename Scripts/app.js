@@ -5,11 +5,11 @@ angular
     .when("/", {
         templateUrl: "templates/home.html"
     })
-    .when("/Base",{
+    .when("/Base/:base",{
       templateUrl: "templates/base.html",
       controller: "baseCtrl",
     })
-    .when("/Base/:element",{
+    .when("/Base/:base/:element",{
       templateUrl: "templates/base.html",
       controller: "baseCtrl",
     })

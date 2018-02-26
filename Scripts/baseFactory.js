@@ -3,23 +3,14 @@ angular
   .factory('Base',function($http,$location){
     return {
 
-      get: function(){
-        return $http.get("https://api.mlab.com/api/1/databases/marvel-base/collections/marvel-base?apiKey=aWB04CMreTxIgNrhXTjunUFKThYS4LgK")
-                    .then(function(response){
-                      return response.data[0]
-                    },function(error){
-                      $location.path('error')
-                    })
+      get: function(link){
+        return $http.get(link).then(function(response){
+          return response.data
+        },function(error){
+          $location.path('error')
+        })
       },
-      put: function(data){
-        return $http.put("https://api.mlab.com/api/1/databases/marvel-base/collections/marvel-base?apiKey=aWB04CMreTxIgNrhXTjunUFKThYS4LgK",data)
-                    .then(function(response){
-                      return true
-                    },function(error){
-                      return false
-                    })
-      },
-      convertCategories: function(categories){
+      getCategories: function(baseId){
 
         class Category{
           constructor(title,checked,series,parent){
@@ -32,22 +23,25 @@ angular
           }
         }
 
-        result = {}
-        Object.keys(categories).map( (id)=>categories[id]).forEach( function(category,i){
-          if(i==0){
-            result.all = {id:"all",type:"all",title:category.title,"checked":false}
-          }
-          else{
-            result[category.title+"_wave"] = new Category(category.title,category.checked,category.series)
-          }
-          if(category.series){
-            category.series.forEach(function(child){
-              result[child.title] = new Category(child.title,child.checked,undefined,category.title+"_wave")
-            })
-          }
+        return $http.get('Base/'+baseId+'/categories.JSON').then(function(categories){
+          result = {}
+          Object.keys(categories.data).map( (id)=>categories.data[id]).forEach( function(category,i){
+            if(i==0){
+              result.all = {id:"all",type:"all",title:category.title,"checked":false}
+            }
+            else{
+              result[category.title+"_wave"] = new Category(category.title,category.checked,category.series)
+            }
+            if(category.series){
+              category.series.forEach(function(child){
+                result[child.title] = new Category(child.title,child.checked,undefined,category.title+"_wave")
+              })
+            }
+          })
+          return result
+        },function(error){
+          $location.path('error')
         })
-        return result
-
       },
       createId: function(title,volume,number){
         return title.replace(/ /g,"_")+"_"+volume+"_"+number
