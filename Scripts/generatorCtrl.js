@@ -30,7 +30,7 @@ angular
 
     let folder = $route.current.params.base
     if(folder!="user"){
-      Base.getAll(folder).then(function(data){loadBase(data)})
+      Base.get(folder).then(function(data){loadBase(data)})
     }
     else{
       Dialog.open("loadBase")

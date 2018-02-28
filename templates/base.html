@@ -1,18 +1,29 @@
 <div class="after-navBar"></div>
 <div class="toolbar">
-  <div ng-repeat='category in categories' class={{category.type}} >
-    <input type='checkbox' ng-click="categoryTick($event)" id={{category.id}} ng-checked={{category.checked}}
-    ng-model="categories[category.id]['checked']">
-    {{category.title}} <span ng-if="category.children.length>1"
-      class="fa fa-arrow-down" ng-click="dropdown_category($event,category)"></span>
+  <div ng-repeat="wave in categories">
+    <div ng-if="$first" class="all">
+      <input type="checkbox" ng-model="wave.checked"
+             ng-change="categoryTick.all(wave.checked)"> {{wave.title}}
+    </div>
+    <div ng-if="!$first" class="main">
+      <input type="checkbox" ng-model="wave.checked" ng-change="categoryTick.main(wave)">
+        {{wave.title}} <span ng-if="wave.series.length>1"class="fa fa-arrow-down"
+                             ng-click="dropdown_category($event,wave)"></span>
+    </div>
+    <div ng-if="!$first && wave.series.length>1">
+      <div ng-repeat="series in wave.series" class="ng-class: wave.open ? 'secondary on' : 'secondary'">
+        <input type="checkbox" ng-model="series.checked"
+               ng-change="categoryTick.secondary(wave,series)"> {{series.title}}
+      </div>
+    </div>
   </div>
-  <!--<div ng-if="folder=='user'" class="secondary on">
+  <div ng-if="folder=='user'" class="secondary on">
     <button ng-click="download()">Zapisz zaznaczenia</button/>
-  </div>-->
+  </div>
 </div>
 
 <div class="base" ng-if="!element">
-  <div ng-repeat="id in chronology | filter:filterByCategory(categories)"
+  <div ng-repeat="id in chronology | filter:filterByCategory()"
        class='element'ng-click="showElement(id)" ng-include="'templates/elements/element.html'">
   </div>
 </div>

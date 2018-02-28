@@ -3,7 +3,7 @@ angular
   .factory('Base',function($http,$location){
     return {
 
-      getAll: function(folder){
+      get: function(folder){
         return $http.get("Base/"+folder+"/base.JSON").then(function(base){
           return $http.get("Base/"+folder+"/categories.JSON").then(function(categories){
             return $http.get("Base/"+folder+"/series.JSON").then(function(series){
@@ -18,36 +18,6 @@ angular
             },function(error){$location.path('error')})
           },function(error){$location.path('error')})
         },function(error){$location.path('error')})
-      },
-      convertCategories: function(categories){
-
-        class Category{
-          constructor(title,checked,series,parent){
-            this.id = title+(series ? "_wave" : "")
-            this.title = title
-            this.type = series ? "main" : "secondary"
-            this.children = series ? series.map( (seria) => seria.title ) : undefined
-            this.checked = checked
-            this.parent = parent
-          }
-        }
-
-        result = {}
-        Object.keys(categories).map( (id)=>categories[id]).forEach( function(category,i){
-          if(i==0){
-            result.all = {id:"all",type:"all",title:category.title,"checked":false}
-          }
-          else{
-            result[category.title+"_wave"] = new Category(category.title,category.checked,category.series)
-          }
-          if(category.series){
-            category.series.forEach(function(child){
-              result[child.title] = new Category(child.title,child.checked,undefined,category.title+"_wave")
-            })
-          }
-        })
-        return result
-
       },
       createId: function(title,volume,number){
         return title.replace(/ /g,"_")+"_"+volume+"_"+number

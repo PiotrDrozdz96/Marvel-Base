@@ -20,7 +20,7 @@ angular
 
     let loadBase = function(data){
       $scope.base = data["base.JSON"]
-      $scope.categories = Base.convertCategories(data["categories.JSON"])
+      $scope.categories = data["categories.JSON"]
       chronology = data["chronology.JSON"]
       if(!$scope.element){
         $scope.chronology = chronology
@@ -35,7 +35,7 @@ angular
     $scope.element = $route.current.params.element
 
     if($scope.folder!="user"){
-      Base.getAll($scope.folder).then(function(data){
+      Base.get($scope.folder).then(function(data){
         loadBase(data)
       })
     }
@@ -43,57 +43,44 @@ angular
       Dialog.open("loadBase")
     }
 
-    $scope.filterByCategory = function (categories) {
-      return function(id){
-        return $scope.base[id].series.some( (category) => categories[category].checked)
-      }
-    };
+    $scope.filterByCategory = () => (id) =>
+        $scope.base[id].series.some( (category) =>
+          $scope.categoryTick.array().find( (obj) => obj.title == category).checked
+        )
 
-  //CategoryFunctions
-    $scope.categoryTick = function(e){
-
-      let category = () => $scope.categories[e.target.id]
-
-      function checkAll(arrayId,parentId){
-        if (category().checked && (arrayId)
-            .map((categoryId) => $scope.categories[categoryId].checked)
-              .every( (check) => check) ){
-                $scope.categories[parentId].checked=true;
-              }
-        else $scope.categories[parentId].checked=false
-      }
-
-      function changeAll(arrayId,value){
-        $.each(arrayId,function(index,category){
-          $scope.categories[category].checked = value
-        })
-      }
-
-      switch(category().type){
-        case "all":
-          changeAll(Object.keys($scope.categories),category().checked)
-          break;
-        case "main":
-          changeAll(category().children,category().checked)
-          checkAll(Object.keys($scope.categories).slice(1,-1),"all");
-          break;
-        case "secondary":
-        case "secondary on":
-          checkAll($scope.categories[category().parent].children,category().parent)
-          checkAll(Object.keys($scope.categories).slice(1,-1),"all");
-          break;
-        default:
+    $scope.categoryTick = {
+      array: () => Object.keys($scope.categories)
+        .reduce( (arr,key) =>
+          [...arr,...$scope.categories[key].series]
+      ,[]),
+      changeAll: function(array,checked){
+        array.forEach(function(element){element.checked=checked})
+      },
+      checkAll: function(array,checked,primary){
+        if(checked && array.every((obj)=>obj.checked)){
+          primary.checked = true
+        }
+        else primary.checked = false
+      },
+      all: function(checked){
+        this.changeAll(Object.values($scope.categories),checked)
+        this.changeAll(this.array(),checked)
+      },
+      main: function(wave){
+        this.changeAll(wave.series,wave.checked)
+        this.checkAll(Object.values($scope.categories).slice(1),wave.checked,Object.values($scope.categories)[0])
+      },
+      secondary: function(wave,series){
+        this.checkAll($scope.categories[wave.title].series,series.checked,wave)
+        this.checkAll(Object.values($scope.categories).slice(1),wave.checked,Object.values($scope.categories)[0])
       }
     }
 
-    $scope.dropdown_category = function(e,element){
+    $scope.dropdown_category = function(e,wave){
       var states = ["fa-arrow-down","fa-arrow-up"]
       var state = states.findIndex( (state)=>$(e.target).attr("class").includes(state))
 
-      element.children.forEach(function(id){
-        $scope.categories[id].type= state ? "secondary" : "secondary on"
-      })
-
+      wave.open = !state
       $(e.target).removeClass(states[state]).addClass(states[~~!state])
     }
 
@@ -121,5 +108,9 @@ angular
         }
       }
     })
+
+    $scope.download = function(){
+      Base.downloadInnerText("categories.JSON","categories.JSON")
+    }
 
   })
