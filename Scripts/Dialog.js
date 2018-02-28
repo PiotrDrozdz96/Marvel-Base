@@ -4,7 +4,7 @@ angular
     return {
 
       template: undefined,
-      params: undefined,
+      params: [],
 
       exit: function(func,additionalParams){
         this.template = undefined

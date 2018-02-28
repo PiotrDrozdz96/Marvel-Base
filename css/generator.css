@@ -6,6 +6,16 @@
   border-radius: 10px;
 }
 
+.baseTitle{
+  background-color: FireBrick;
+  color: white;
+  font-style: inherit;
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  font-size: 20px;
+}
+
 .form-mini textarea{
   background-color: white;
   color: black;

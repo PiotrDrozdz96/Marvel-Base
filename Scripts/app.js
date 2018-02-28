@@ -13,7 +13,7 @@ angular
       templateUrl: "templates/base.html",
       controller: "baseCtrl",
     })
-    .when("/Generator",{
+    .when("/Generator/:base",{
       templateUrl: "templates/generator.html",
       controller: "generatorCtrl"
     })

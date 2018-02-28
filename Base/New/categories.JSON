@@ -1,0 +1,12 @@
+
+  {
+    "New Base":{"title":"New Base","checked":false,
+    "series":[
+
+    ]},
+    "New Wave":{"title":"New Wave","checked":false,
+    "series":[
+        {"title":"New Series","checked":false}
+    ]}
+
+  }

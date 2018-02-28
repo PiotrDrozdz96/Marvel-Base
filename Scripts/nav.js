@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 //NavBar
 
-  $(".navBar ul.left > li").on('click', function(){
+  $(".navBar ul.left > li, .navBar ul.right > li").on('click', function(){
     if ( $(this).hasClass('active') ){
       $(this).removeClass('active')
       $(this).children().removeClass('active')

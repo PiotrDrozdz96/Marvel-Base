@@ -6,6 +6,9 @@
     {{category.title}} <span ng-if="category.children.length>1"
       class="fa fa-arrow-down" ng-click="dropdown_category($event,category)"></span>
   </div>
+  <!--<div ng-if="folder=='user'" class="secondary on">
+    <button ng-click="download()">Zapisz zaznaczenia</button/>
+  </div>-->
 </div>
 
 <div class="base" ng-if="!element">
@@ -19,4 +22,7 @@
   <div ng-repeat="id in chronology" class="ng-class: $first ? 'main element' : 'element';"
        ng-include="'templates//elements/element.html'">
   </div>
-<div>
+</div>
+
+<div hidden ng-include="'templates/categoriesToDownload.html'"></div>
+<div ng-if="dialog.template" ng-include="'templates/dialog.html'"></div>

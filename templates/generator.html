@@ -3,6 +3,9 @@
 <div class="after-navBar"></div>
 
 <div class="toolbar">
+  <div class="main" ng-repeat="wave in waves.data" ng-if="$first">
+    <textarea class="baseTitle" ng-model=wave.title></textarea>
+  </div>
   <div class="main">
     <button ng-repeat="mode in modes" class="ng-class: activeMode==mode.id ? 'on' : '';"
     ng-click="setMode(mode.id)">{{mode.value}}</button>

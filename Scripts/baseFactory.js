@@ -3,14 +3,23 @@ angular
   .factory('Base',function($http,$location){
     return {
 
-      get: function(link){
-        return $http.get(link).then(function(response){
-          return response.data
-        },function(error){
-          $location.path('error')
-        })
+      getAll: function(folder){
+        return $http.get("Base/"+folder+"/base.JSON").then(function(base){
+          return $http.get("Base/"+folder+"/categories.JSON").then(function(categories){
+            return $http.get("Base/"+folder+"/series.JSON").then(function(series){
+              return $http.get("Base/"+folder+"/chronology.JSON").then(function(chronology){
+                return {
+                  "base.JSON": base.data,
+                  "categories.JSON": categories.data,
+                  "series.JSON": series.data,
+                  "chronology.JSON": chronology.data
+                }
+              },function(error){$location.path('error')})
+            },function(error){$location.path('error')})
+          },function(error){$location.path('error')})
+        },function(error){$location.path('error')})
       },
-      getCategories: function(baseId){
+      convertCategories: function(categories){
 
         class Category{
           constructor(title,checked,series,parent){
@@ -23,25 +32,22 @@ angular
           }
         }
 
-        return $http.get('Base/'+baseId+'/categories.JSON').then(function(categories){
-          result = {}
-          Object.keys(categories.data).map( (id)=>categories.data[id]).forEach( function(category,i){
-            if(i==0){
-              result.all = {id:"all",type:"all",title:category.title,"checked":false}
-            }
-            else{
-              result[category.title+"_wave"] = new Category(category.title,category.checked,category.series)
-            }
-            if(category.series){
-              category.series.forEach(function(child){
-                result[child.title] = new Category(child.title,child.checked,undefined,category.title+"_wave")
-              })
-            }
-          })
-          return result
-        },function(error){
-          $location.path('error')
+        result = {}
+        Object.keys(categories).map( (id)=>categories[id]).forEach( function(category,i){
+          if(i==0){
+            result.all = {id:"all",type:"all",title:category.title,"checked":false}
+          }
+          else{
+            result[category.title+"_wave"] = new Category(category.title,category.checked,category.series)
+          }
+          if(category.series){
+            category.series.forEach(function(child){
+              result[child.title] = new Category(child.title,child.checked,undefined,category.title+"_wave")
+            })
+          }
         })
+        return result
+
       },
       createId: function(title,volume,number){
         return title.replace(/ /g,"_")+"_"+volume+"_"+number
@@ -72,6 +78,16 @@ angular
           }
         }
         return new Element(description,cover)
+      },
+      //http://jsfiddle.net/Zarich/TzVd3/378/
+      downloadInnerText: function(filename, elId, mimeType) {
+        var elHtml = document.getElementById(elId).innerText;
+        var link = document.createElement('a');
+        mimeType = mimeType || 'text/plain';
+
+        link.setAttribute('download', filename);
+        link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+        link.click();
       }
     }
   })

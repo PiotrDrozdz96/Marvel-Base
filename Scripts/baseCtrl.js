@@ -1,23 +1,47 @@
 angular
   .module('app')
-  .controller('baseCtrl', function($scope,$location,$route,Base){
+  .controller('baseCtrl', function($scope,$location,$route,Base,Dialog){
 
-    let baseId = () => $route.current.params.base
+    //https://www.javascripture.com/FileReader
+    //readAsText example
+    $scope.openFile = function(event){
+      $scope.temp = {}
+      var input = event
+
+      var reader = []
+      for(let i=0; i<input.files.length; i++){
+        reader[i] = new FileReader();
+        reader[i].readAsText(input.files[i])
+        reader[i].onload = function(){
+          $scope.temp[input.files[i].name] = JSON.parse(reader[i].result)
+        }
+      }
+    }
+
+    let loadBase = function(data){
+      $scope.base = data["base.JSON"]
+      $scope.categories = Base.convertCategories(data["categories.JSON"])
+      chronology = data["chronology.JSON"]
+      if(!$scope.element){
+        $scope.chronology = chronology
+      }
+      else $scope.chronology = [$scope.element]
+        .concat(data["base.JSON"][$scope.element].children)
+    }
+
+
+    $scope.folder = $route.current.params.base
+    let chronology = []
     $scope.element = $route.current.params.element
 
-    Base.getCategories(baseId()).then(function(data){
-      $scope.categories = data;
-    })
-
-    Base.get("Base/"+baseId()+"/base.JSON").then(function(base){
-      $scope.base = base;
-      if(!$scope.element){
-        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data){
-          $scope.chronology = data;
-        })
-      }
-      else $scope.chronology = [$scope.element].concat(base[$scope.element].children)
-    })
+    if($scope.folder!="user"){
+      Base.getAll($scope.folder).then(function(data){
+        loadBase(data)
+      })
+    }
+    else{
+      Dialog.open("loadBase")
+    }
 
     $scope.filterByCategory = function (categories) {
       return function(id){
@@ -81,9 +105,21 @@ angular
     $scope.hideElement = function(){
         $location.path($location.path().substr(1,$location.path().lastIndexOf("/")-1),false)
         $scope.element = false
-        Base.get("Base/"+baseId()+"/chronology.JSON").then(function(data){
-          $scope.chronology = data;
-        })
+        $scope.chronology = chronology;
+    }
+
+    $scope.dialog = Object.assign(Dialog,{
+      loadUserBase: function(){
+        if($scope.temp["base.JSON"] && $scope.temp["categories.JSON"] &&
+           $scope.temp["chronology.JSON"]){
+             loadBase($scope.temp)
+             delete $scope.temp
+           }
+        else{
+          delete $scope.temp
+          Dialog.open('loadBaseError')
+        }
       }
+    })
 
   })
