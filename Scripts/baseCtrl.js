@@ -29,7 +29,6 @@ angular
         .concat(data["base.JSON"][$scope.element].children)
     }
 
-
     $scope.folder = $route.current.params.base
     let chronology = []
     $scope.element = $route.current.params.element
