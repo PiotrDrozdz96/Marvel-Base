@@ -1,0 +1,15 @@
+<div class="toolbar">
+  <div *ngFor="let wave of categories.data let first = first" >
+    <div [ngClass]="{'all': first, 'main': !first}">
+      <input type="checkbox" [(checked)]="wave.checked">
+      {{wave.title}}
+    </div>
+    <div *ngIf="!first && wave.series.length>1">
+      <div *ngFor="let series of wave.series" class='secondary'>
+        <input type="checkbox" [(checked)]="series.checked"> 
+        {{series.title}}
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,27 @@
+<nav class="navbar">
+    <ul class="navbar-list">
+        <li class="navbar-item"><a href="">Strona Główna</a></li>
+        <li class="navbar-item" (click)="dropdown($event)">
+            <a>Video</a>
+            <div class="dropdown">
+                <a href="">MCU</a>
+                <a href="">Fox</a>
+            </div>
+        </li>
+        <li class="navbar-item" (click)="dropdown($event)">
+            <a>Komiksy</a>
+            <div class="dropdown">
+                <a href="">Marvel Now</a>
+                <a href="">Moje Komiksy</a>
+            </div>
+        </li>
+        <li class="navbar-item" (click)="dropdown($event)">
+            <a>Generator Kolekcji</a>
+            <div class="dropdown">
+                <a href="">Marvel Nowa</a>
+                <a href="">Nowa Kolekcja</a>
+                <a href="">Moja Kolekcja</a>
+            </div>
+        </li>
+    </ul>
+</nav>

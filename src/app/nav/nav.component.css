@@ -1,0 +1,59 @@
+.navbar{
+    background-color: firebrick;
+    color: white;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    font-size: 20px;
+    box-shadow: 0 2px 5px 0 dimgray;
+}
+
+.navbar-list{
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+.navbar-item{
+    display: inline-block;
+}
+
+.navbar-item:hover,.navbar-item.on{
+    background-color: white;
+    color: firebrick; 
+}
+
+.navbar-item a{
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    height: 55px;
+    width: calc(100% - 24px);
+    line-height: 55px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.dropdown{
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: firebrick;
+    max-width: 200px;
+    box-shadow: 5px 5px 5px 0 dimgray;
+}
+
+.dropdown a{
+    min-width: 100px;
+}
+
+.dropdown a:hover{
+    background-color: firebrick;
+    color: white;
+}
+
+.navbar-item.on .dropdown{
+    display: block;
+}
+
