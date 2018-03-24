@@ -8,26 +8,26 @@
     margin-top: 55px;
   }
 
-  .toolbar div.all{
+  .toolbar .all{
     padding: 10px;
     background-color: FireBrick;
     color: white;
     border-bottom: 2px solid FireBrick;
   }
   
-  .toolbar div.main{
+  .toolbar .main{
     padding: 10px;
     background-color: #ff9999;
     border-bottom: 2px solid FireBrick;
   }
   
-  .toolbar div.secondary{
+  .toolbar .secondary{
     padding: 10px;
     display:none;
     background-color: Silver;
     border-bottom: 2px solid DimGray;
   }
   
-  .toolbar div.secondary.on{
+  .toolbar .main.on .secondary{
     display: block;
   }
