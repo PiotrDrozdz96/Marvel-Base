@@ -1,0 +1,20 @@
+.element{
+    width: 220px;
+    height: 300px;
+    margin-top: 10px;
+    float:left;
+    text-align: center;
+    background-color: inherit;
+  }
+  
+  .element img{
+    width: 122px;
+    height: 185px;
+  }
+  
+  .element .description{
+    min-width:200px;
+    min-height:100px;
+    font-size: medium;
+  }
+  

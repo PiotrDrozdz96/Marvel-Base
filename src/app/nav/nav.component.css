@@ -1,7 +1,7 @@
 .navbar{
     background-color: firebrick;
     color: white;
-    position: fixed;
+    /* position: fixed; */
     z-index: 10;
     width: 100%;
     font-size: 20px;

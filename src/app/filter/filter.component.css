@@ -5,7 +5,8 @@
     color: DimGray;
     height: calc(100vh - 55px);
     width: 149px;
-    margin-top: 55px;
+    /* margin-top: 55px; */
+    box-shadow: 0 0 5px 0 dimgray;
   }
 
   .toolbar .all{
