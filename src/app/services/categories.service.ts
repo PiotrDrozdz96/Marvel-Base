@@ -19,4 +19,16 @@ export class CategoriesService {
     return this.http.get('assets/data/Comics/categories.JSON');
   }
 
+  changeAll(array:  Array<Category>, checked: boolean) {
+    array.forEach(function (element) { element.checked = checked; });
+  }
+
+  checkAll(array: Array<Category>, checked: boolean, primary: Category) {
+    if (checked && array.every((obj) => obj.checked)) {
+      primary.checked = true;
+    } else {
+      primary.checked = false;
+    }
+  }
+
 }

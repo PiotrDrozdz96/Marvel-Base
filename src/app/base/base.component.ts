@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Base } from '../models/base';
-import { ElementComponent} from '../element/element.component';
+import { ElementComponent } from '../element/element.component';
+import { CategoriesService } from '../services/categories.service';
 
 @Component({
   selector: 'app-base',
@@ -15,20 +16,25 @@ export class BaseComponent implements OnInit {
   base: Base;
   chronology: Array<string>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private categories: CategoriesService ) {
+
     this.getJSON('assets/data/Comics/base.JSON').subscribe(data => {
       this.base = data;
     });
     this.getJSON('assets/data/Comics/chronology.JSON').subscribe(data => {
       this.chronology = data;
     });
-   }
+  }
 
   private getJSON(link): Observable<any> {
     return this.http.get(link);
   }
 
   ngOnInit() {
+  }
+
+  test() {
+    console.log(this.categories.data);
   }
 
 }
