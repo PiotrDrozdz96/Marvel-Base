@@ -1,5 +1,5 @@
 <div class="base">
-    <div *ngFor="let id of chronology">
-        <app-element [element]="base[id]" (click)="test()"></app-element>
+    <div *ngFor="let element of data">
+        <app-element [element]="element"></app-element>
     </div>
 </div>

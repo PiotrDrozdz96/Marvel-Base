@@ -1,11 +1,11 @@
 <div class="toolbar">
-  <div *ngFor="let wave of categories.data let first = first">
+  <div *ngFor="let wave of categories.array let first = first">
     <div [ngClass]="{'all': first, 'main': !first}">
-      <input type="checkbox" [(checked)]="wave.checked" (click)="main(wave,first)"> {{wave.title}}
+      <input type="checkbox" [(ngModel)]="wave.checked" (change)="categories.change(wave)"> {{wave.title}}
       <span *ngIf="!first && wave.series.length>1" class="fa fa-arrow-down" (click)="dropdown($event)"></span>
       <div *ngIf="!first && wave.series.length>1">
           <div *ngFor="let series of wave.series" class='secondary'>
-            <input type="checkbox" [(checked)]="series.checked" (click)="secondary(wave,series)"> {{series.title}}
+            <input type="checkbox" [(ngModel)]="series.checked" (change)="categories.change(wave,series)"> {{series.title}}
           </div>
         </div>
     </div>

@@ -3,3 +3,7 @@ export interface Category {
     checked: boolean;
     series?: Array<Category>;
 }
+
+export interface Categories {
+    [index: string]: Category;
+}

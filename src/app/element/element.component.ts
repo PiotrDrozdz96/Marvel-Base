@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Element } from '../models/base';
+ import { MarvelElement } from '../models/base';
 
 @Component({
   selector: 'app-element',
@@ -10,7 +10,7 @@ import { Element } from '../models/base';
 export class ElementComponent implements OnInit {
 
   @Input()
-  element: Element;
+  element: MarvelElement;
 
   constructor() { }
 

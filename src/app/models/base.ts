@@ -1,4 +1,4 @@
-export interface Element {
+export interface MarvelElement {
     title: string;
     volume: string;
     number: string;
@@ -10,5 +10,5 @@ export interface Element {
 }
 
 export interface Base {
-    [index: string]: Element;
+    [index: string]: MarvelElement;
 }

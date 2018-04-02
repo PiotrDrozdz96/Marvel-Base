@@ -1,56 +1,57 @@
 
-[
-  {"title":"Marvel Now","checked":false,
-  "series":[
-    
-  ]},
-  {"title":"Avengers","checked":false,
-  "series":[
-    {"title":"Avengers","checked":true},
-    {"title":"Captain America","checked":true},
-    {"title":"Hawkeye","checked":false},
-    {"title":"New Avengers","checked":true},
-    {"title":"Thor","checked":false},
-    {"title":"Uncanny Avengers","checked":true}
-    
-  ]},
-  {"title":"Cosmic","checked":false,
-  "series":[
-    {"title":"Guardians of the Galaxy","checked":false},
-    {"title":"Nova","checked":true},
-    {"title":"Thanos","checked":true}
-    
-  ]},
-  {"title":"Eventy","checked":true,
-  "series":[
-    {"title":"Age of Ultron","checked":true},
-    {"title":"Avengers vs. X-Men","checked":true},
-    {"title":"Axis","checked":true},
-    {"title":"Infinity","checked":true},
-    {"title":"Original Sin","checked":true}
-    
-  ]},
-  {"title":"Spider-Man","checked":false,
-  "series":[
-    {"title":"Spider-Man","checked":false}
-    
-  ]},
-  {"title":"Street","checked":false,
-  "series":[
-    {"title":"Deadpool","checked":false},
-    {"title":"Moon Knight","checked":false},
-    {"title":"Ms. Marvel","checked":false},
-    {"title":"Thunderbolts","checked":false}
-    
-  ]},
-  {"title":"X-men","checked":false,
-  "series":[
-    {"title":"All-New X-men","checked":false},
-    {"title":"Magneto","checked":true},
-    {"title":"Uncanny X-men","checked":false},
-    {"title":"Wolverine","checked":false},
-    {"title":"Wolverine and the X-Men","checked":false},
-    {"title":"X-men: Battle of the Atom","checked":false}
-    
-  ]}
-]
+  {
+    "Marvel Now":{"title":"Marvel Now","checked":false,
+    "series":[
+      
+    ]},
+    "Avengers":{"title":"Avengers","checked":false,
+    "series":[
+      {"title":"Avengers","checked":true},
+      {"title":"Captain America","checked":true},
+      {"title":"Hawkeye","checked":false},
+      {"title":"New Avengers","checked":true},
+      {"title":"Thor","checked":false},
+      {"title":"Uncanny Avengers","checked":true}
+      
+    ]},
+    "Cosmic":{"title":"Cosmic","checked":false,
+    "series":[
+      {"title":"Guardians of the Galaxy","checked":false},
+      {"title":"Nova","checked":true},
+      {"title":"Thanos","checked":true}
+      
+    ]},
+    "Eventy":{"title":"Eventy","checked":true,
+    "series":[
+      {"title":"Age of Ultron","checked":true},
+      {"title":"Avengers vs. X-Men","checked":true},
+      {"title":"Axis","checked":true},
+      {"title":"Infinity","checked":true},
+      {"title":"Original Sin","checked":true}
+      
+    ]},
+    "Spider-Man":{"title":"Spider-Man","checked":false,
+    "series":[
+      {"title":"Spider-Man","checked":false}
+      
+    ]},
+    "Street":{"title":"Street","checked":false,
+    "series":[
+      {"title":"Deadpool","checked":false},
+      {"title":"Moon Knight","checked":false},
+      {"title":"Ms. Marvel","checked":false},
+      {"title":"Thunderbolts","checked":false}
+      
+    ]},
+    "X-men":{"title":"X-men","checked":false,
+    "series":[
+      {"title":"All-New X-men","checked":false},
+      {"title":"Magneto","checked":true},
+      {"title":"Uncanny X-men","checked":false},
+      {"title":"Wolverine","checked":false},
+      {"title":"Wolverine and the X-Men","checked":false},
+      {"title":"X-men: Battle of the Atom","checked":false}
+      
+    ]}
+  
+  }
