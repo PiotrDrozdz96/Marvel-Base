@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Categories, Category } from '../models/categories';
 
 @Injectable()
 export class CategoriesService {
 
-  object: Categories;
-  array: Array<Category>;
+  private categories: Categories = {};
+  observator = new BehaviorSubject<Categories>(this.categories);
 
   constructor(private http: HttpClient) {
     this.getJSON().subscribe(data => {
-      this.object = data;
-      this.array = Object.keys(data).map(id => data[id]);
+      this.categories = data;
+      this.observator.next(data);
     });
   }
 
@@ -34,11 +35,11 @@ export class CategoriesService {
   }
 
   change(wave: Category, series?: Category) {
-    const array = Object.keys(this.object).map(id => this.object[id]);
+    const array = Object.keys(this.categories).map(id => this.categories[id]);
     if (series) {
       this.checkAll(wave.series, series.checked, wave);
       this.checkAll(array.slice(1), wave.checked, array[0]);
-    } else if (wave.title === Object.keys(this.object)[0]) {
+    } else if (wave.title === Object.keys(this.categories)[0]) {
       this.changeAll(
         array.slice(1).concat(
           array.slice(1).reduce((arr, category) => arr.concat(category.series), [])),
@@ -48,6 +49,9 @@ export class CategoriesService {
       this.changeAll(wave.series, wave.checked);
       this.checkAll(array.slice(1), wave.checked, array[0]);
     }
+    this.observator.next(this.categories);
   }
+
+  get(): Observable<Categories> { return this.observator.asObservable(); }
 
 }
