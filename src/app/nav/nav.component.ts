@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.list = [
-      {title: 'Strona Główna', icon: 'fa fa-home'},
+      {title: 'Główna', icon: 'fa fa-home'},
       {title: 'Video', icon: 'fa fa-television', dropdown: [
         {title: 'MCU', icon: 'fa fa-angle-right'},
         {title: 'Fox', icon: 'fa fa-angle-right'}
@@ -29,7 +29,7 @@ export class NavComponent implements OnInit {
         {title: 'Marvel Now', icon: 'fa fa-angle-right'},
         {title: 'Moje Komiksy', icon: 'fa fa-angle-right'}
       ]},
-      {title: 'Generator Kolekcji', icon: 'fa fa-building', dropdown: [
+      {title: 'Generator', icon: 'fa fa-building', dropdown: [
         {title: 'Marvel Now', icon: 'fa fa-angle-right'},
         {title: 'Nowa Kolekcja', icon: 'fa fa-angle-right'},
         {title: 'Moje Komiksy', icon: 'fa fa-angle-right'}
@@ -38,7 +38,11 @@ export class NavComponent implements OnInit {
   }
 
   dropdown(event: any) {
-    this.onItem = this.dropdownService.dropdown(this.renderer, this.onItem, event.path[1]);
+    this.onItem = this.dropdownService.dropdown(
+      this.renderer,
+      this.onItem,
+      event.path.find(e => e.className === 'navbar-item' || e.className === 'navbar-item on')
+    );
  }
 
 }

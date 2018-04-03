@@ -1,19 +1,26 @@
 <nav class="navbar">
     <ul class="navbar-list">
+        <li class="navbar-item">
+            <a>
+                <i class="fa fa-bars"></i>
+            </a>
+        </li>
         <div *ngFor="let item of list">
-            <div *ngIf="!item.dropdown">
-                <li class="navbar-item">
-                    <a [href]="item.href" [ngClass]="item.icon">{{item.title}}</a>
-                </li>
-            </div>
-            <div *ngIf="item.dropdown">
-                <li class="navbar-item" (click)="dropdown($event)">
-                    <a [ngClass]="item.icon">{{item.title}}</a>
-                    <div class="dropdown">
-                        <a *ngFor="let dropItem of item.dropdown" [href]="dropItem.href">{{dropItem.title}}</a>
-                    </div>
-                </li>
-            </div>
+            <li *ngIf="!item.dropdown" class="navbar-item">
+                <a [href]="item.href">
+                    <i [ngClass]="item.icon"></i>
+                    <span>{{item.title}}</span>
+                </a>
+            </li>
+            <li *ngIf="item.dropdown" class="navbar-item" (click)="dropdown($event)">
+                <a>
+                    <i [ngClass]="item.icon"></i>
+                    <span>{{item.title}}</span>
+                </a>
+                <div class="dropdown">
+                    <a *ngFor="let dropItem of item.dropdown" [href]="dropItem.href">{{dropItem.title}}</a>
+                </div>
+            </li>
         </div>
     </ul>
 </nav>

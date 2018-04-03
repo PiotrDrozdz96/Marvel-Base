@@ -1,29 +1,29 @@
-.navbar{
+.navbar {
     background-color: firebrick;
     color: white;
-    /* position: fixed; */
-    z-index: 10;
-    width: 100%;
+    /* z-index: 10; */
+    /* width: 100vw; */
     font-size: 20px;
+    height: 55px;
     box-shadow: 0 2px 5px 0 dimgray;
 }
 
-.navbar-list{
+.navbar-list {
     list-style: none;
     display: flex;
     margin: 0;
 }
 
-.navbar-item{
+.navbar-item {
     display: inline-block;
 }
 
-.navbar-item:hover,.navbar-item.on{
+.navbar-item.on {
     background-color: white;
-    color: firebrick; 
+    color: firebrick;
 }
 
-.navbar-item a{
+.navbar-item a {
     display: flex;
     text-decoration: none;
     color: inherit;
@@ -31,11 +31,19 @@
     height: 55px;
     width: calc(100% - 24px);
     line-height: 55px;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding: 0px 12px;
 }
 
-.dropdown{
+.navbar-item a i, .navbar-item a span {
+    line-height: 55px;
+}
+
+.navbar-item a i {
+    padding: 0 5px;
+    font-size: 20px;
+}
+
+.dropdown {
     display: none;
     position: absolute;
     background-color: white;
@@ -44,16 +52,36 @@
     box-shadow: 5px 5px 5px 0 dimgray;
 }
 
-.dropdown a{
+.dropdown a {
     min-width: 100px;
 }
 
-.dropdown a:hover{
+.dropdown a:hover {
     background-color: firebrick;
     color: white;
 }
 
-.navbar-item.on .dropdown{
+.navbar-item.on .dropdown {
     display: block;
 }
 
+@media screen and (max-width: 570px) {
+    .navbar-list {
+        padding: 0 10px;
+    }
+    .navbar-item a {
+        display: block;
+    }
+    .navbar-item a span, .dropdown a {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    .navbar-item a, .navbar-item a i:not(:only-child), .navbar-item a span:not(:only-child) {
+        line-height: 25px;
+    }
+    .navnar-item i:only-child {
+        font-size: 20px;
+    }
+}
