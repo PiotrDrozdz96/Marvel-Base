@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { DropdownService } from './services/dropdown.service';
-import { BaseComponent } from './base/base.component';
+import { ElementsComponent } from './elements/elements.component';
 import { ElementComponent } from './element/element.component';
 
 
@@ -16,7 +16,7 @@ import { ElementComponent } from './element/element.component';
     AppComponent,
     NavComponent,
     CategoriesComponent,
-    BaseComponent,
+    ElementsComponent,
     ElementComponent
   ],
   imports: [

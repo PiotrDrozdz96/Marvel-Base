@@ -9,11 +9,11 @@ import { Base, MarvelElement } from '../models/base';
 import { Categories, Category } from '../models/categories';
 
 @Component({
-  selector: 'app-base',
-  templateUrl: './base.component.html',
-  styleUrls: ['./base.component.css']
+  selector: 'app-elements',
+  templateUrl: './elements.component.html',
+  styleUrls: ['./elements.component.css']
 })
-export class BaseComponent implements OnInit {
+export class ElementsComponent implements OnInit {
 
   base: Base;
   chronology: Array<string>;
