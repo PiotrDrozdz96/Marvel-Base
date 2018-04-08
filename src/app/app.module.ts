@@ -9,6 +9,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { DropdownService } from './services/dropdown.service';
 import { ElementsComponent } from './elements/elements.component';
 import { ElementComponent } from './element/element.component';
+import { BaseComponent } from './base/base.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ElementComponent } from './element/element.component';
     NavComponent,
     CategoriesComponent,
     ElementsComponent,
-    ElementComponent
+    ElementComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,

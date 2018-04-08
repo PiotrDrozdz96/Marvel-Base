@@ -9,12 +9,12 @@ import { Categories, Category } from '../models/categories';
 export class CategoriesService {
 
   private categories: Categories = {};
-  observator = new BehaviorSubject<Categories>(this.categories);
+  private categoriesObs = new BehaviorSubject<Categories>(this.categories);
 
   constructor(private http: HttpClient) {
     this.getJSON().subscribe(data => {
       this.categories = data;
-      this.observator.next(data);
+      this.categoriesObs.next(data);
     });
   }
 
@@ -49,9 +49,9 @@ export class CategoriesService {
       this.changeAll(wave.series, wave.checked);
       this.checkAll(array.slice(1), wave.checked, array[0]);
     }
-    this.observator.next(this.categories);
+    this.categoriesObs.next(this.categories);
   }
 
-  get(): Observable<Categories> { return this.observator.asObservable(); }
+  get(): Observable<Categories> { return this.categoriesObs.asObservable(); }
 
 }

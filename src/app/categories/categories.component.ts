@@ -20,7 +20,7 @@ export class CategoriesComponent implements OnInit {
     private renderer: Renderer2,
     private dropdownService: DropdownService
   ) {
-    this.categoriesService.get().subscribe((categories: Categories) => {
+    this.categoriesService.get().subscribe(categories => {
       this.categories = Object.keys(categories).map(id => categories[id]);
     });
   }

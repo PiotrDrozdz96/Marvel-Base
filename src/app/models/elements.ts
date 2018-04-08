@@ -9,6 +9,6 @@ export interface MarvelElement {
     cover: string;
 }
 
-export interface Base {
+export interface MarvelElements {
     [index: string]: MarvelElement;
 }

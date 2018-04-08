@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
- import { MarvelElement } from '../models/base';
+ import { MarvelElement } from '../models/elements';
 
 @Component({
   selector: 'app-element',
