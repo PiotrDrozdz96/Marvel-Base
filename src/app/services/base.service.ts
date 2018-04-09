@@ -7,6 +7,7 @@ import { ChronologyService } from './chronology.service';
 import { CategoriesService } from './categories.service';
 
 import { MarvelElement } from '../models/elements';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class BaseService {
@@ -15,13 +16,21 @@ export class BaseService {
     private baseObs = new BehaviorSubject<Array<MarvelElement>>(this.base);
 
     constructor(
+        private route: ActivatedRoute,
         private elementsService: ElementsService,
         private chronologyService: ChronologyService,
         private categoriesService: CategoriesService
     ) {
-        this.elementsService.get().subscribe(elements => {
-            this.chronologyService.get().subscribe(chronology => {
-                this.categoriesService.get().subscribe(categories => {
+        this.route.paramMap.subscribe(params => {
+            const baseLink = params.get('base');
+            this.elementsService.set(baseLink);
+            this.chronologyService.set(baseLink);
+            this.categoriesService.set(baseLink);
+        });
+
+        this.categoriesService.get().subscribe(categories => {
+            this.elementsService.get().subscribe(elements => {
+                this.chronologyService.get().subscribe(chronology => {
 
                     const series = Object.keys(categories).map(id =>
                         categories[id]).slice(1).reduce((arr, category) =>

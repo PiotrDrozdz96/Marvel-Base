@@ -11,15 +11,17 @@ export class CategoriesService {
   private categories: Categories = {};
   private categoriesObs = new BehaviorSubject<Categories>(this.categories);
 
-  constructor(private http: HttpClient) {
-    this.getJSON().subscribe(data => {
+  constructor(private http: HttpClient) { }
+
+  set(baseLink: string) {
+    this.getJSON(baseLink).subscribe(data => {
       this.categories = data;
       this.categoriesObs.next(data);
     });
   }
 
-  private getJSON(): Observable<any> {
-    return this.http.get('assets/data/Comics/categories.JSON');
+  private getJSON(baseLink: string): Observable<any> {
+    return this.http.get('assets/data/' + baseLink + '/categories.JSON');
   }
 
   private changeAll(array: Array<Category>, checked: boolean) {

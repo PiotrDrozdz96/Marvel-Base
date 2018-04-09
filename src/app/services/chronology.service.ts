@@ -9,15 +9,17 @@ export class ChronologyService {
   private chronology: Array<string> = [];
   private chronologyObs = new BehaviorSubject<Array<string>>(this.chronology);
 
-  constructor(private http: HttpClient) {
-    this.getJSON().subscribe(data => {
+  constructor(private http: HttpClient) { }
+
+  set(baseLink: string) {
+    this.getJSON(baseLink).subscribe(data => {
       this.chronology = data;
       this.chronologyObs.next(data);
     });
   }
 
-  private getJSON(): Observable<any> {
-    return this.http.get('assets/data/Comics/chronology.JSON');
+  private getJSON(baseLink: string): Observable<any> {
+    return this.http.get('assets/data/' + baseLink + '/chronology.JSON');
   }
 
   get(): Observable<Array<string>> { return this.chronologyObs.asObservable(); }

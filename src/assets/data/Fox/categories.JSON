@@ -1,0 +1,10 @@
+{
+
+  "Fox X-men Universe":{"title":"Fox X-men Universe","series":[]},
+  "Filmy":{"title":"Filmy","checked":false,"series":[{"title":"Oryginalni X-Men","checked":true},
+                                                      {"title":"Nowi X-Men","checked":true},
+                                                      {"title":"Wolverine","checked":false},
+                                                      {"title":"Deadpool","checked":false}]},
+  "Seriale":{"title":"Seriale","checked":false,"series":[{"title":"Seriale","checked":false}]}
+
+}
