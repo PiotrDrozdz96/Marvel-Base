@@ -7,7 +7,7 @@
         </li>
         <div *ngFor="let item of list">
             <li *ngIf="!item.dropdown" class="navbar-item">
-                <a [href]="item.href">
+                <a [routerLink]="item.href">
                     <i [ngClass]="item.icon"></i>
                     <span>{{item.title}}</span>
                 </a>
@@ -18,7 +18,7 @@
                     <span>{{item.title}}</span>
                 </a>
                 <div class="dropdown">
-                    <a *ngFor="let dropItem of item.dropdown" [href]="dropItem.href">{{dropItem.title}}</a>
+                    <a *ngFor="let dropItem of item.dropdown" [routerLink]="dropItem.href">{{dropItem.title}}</a>
                 </div>
             </li>
         </div>
