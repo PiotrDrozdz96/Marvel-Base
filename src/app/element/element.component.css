@@ -9,7 +9,7 @@
   
   .element img{
     width: 122px;
-    height: 185px;
+    height: 186px;
   }
   
   .element .description{
@@ -17,4 +17,41 @@
     min-height:100px;
     font-size: medium;
   }
+
+  @media screen and (max-width: 878px) {
+    .element{
+      width: 146px;
+      height: 200px;
+      margin-top: 8px;
+    }
+
+    .element img{
+      width: 81px;
+      height: 124px;
+    }
+
+    .element .description{
+      min-width:133px;
+      min-height:66px;
+      font-size: small;
+    }
+  }
   
+  @media screen and (max-width: 592px) {
+    .element{
+      width: 110px;
+      height: 150px;
+      margin-top: 5px;
+    }
+
+    .element img{
+      width: 61px;
+      height: 93px;
+    }
+
+    .element .description{
+      min-width:100px;
+      min-height:50px;
+      font-size: x-small;
+    }
+  }
