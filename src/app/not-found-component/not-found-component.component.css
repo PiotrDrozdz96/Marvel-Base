@@ -1,8 +1,0 @@
-#not-found{
-    width: 100%;
-    height: calc( 100vh - 55px);
-    background-image: url('not-found.png');
-    background-repeat: no-repeat; 
-    background-position: center;
-    background-size: contain;
-}

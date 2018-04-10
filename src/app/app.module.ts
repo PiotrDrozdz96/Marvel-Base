@@ -12,7 +12,7 @@ import { ElementsComponent } from './elements/elements.component';
 import { ElementComponent } from './element/element.component';
 import { BaseComponent } from './base/base.component';
 import { HomeComponent } from './home/home.component';
-import { NotFoundComponentComponent } from './not-found-component/not-found-component.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { NotFoundComponentComponent } from './not-found-component/not-found-comp
     ElementComponent,
     BaseComponent,
     HomeComponent,
-    NotFoundComponentComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +34,7 @@ import { NotFoundComponentComponent } from './not-found-component/not-found-comp
       { path: '', component: HomeComponent },
       { path: 'Base/:base', component: BaseComponent },
       { path: 'Base', component: BaseComponent },
-      { path: '**', component: NotFoundComponentComponent}
+      { path: '**', component: NotFoundComponent}
     ])
   ],
   providers: [DropdownService],
