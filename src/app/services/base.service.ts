@@ -32,12 +32,14 @@ export class BaseService {
             this.elementsService.get().subscribe(elements => {
                 this.chronologyService.get().subscribe(chronology => {
 
-                    const series = Object.keys(categories).map(id =>
-                        categories[id]).slice(1).reduce((arr, category) =>
-                            arr.concat(category.series), []);
+                    const series = Object.values(categories).slice(1)
+                        .reduce((arr, category) => arr.concat(category.series), []);
+
                     this.base = chronology.filter(id => elements[id] === undefined ? false :
-                        elements[id].series.some(category =>
-                            series.find(obj => obj.title === category).checked)).map(id => elements[id]);
+                        elements[id].series.some(category => {
+                            const finded = series.find(obj => obj.title === category);
+                            return finded !== undefined ? finded.checked : false; })
+                        ).map(id => elements[id]);
                     this.baseObs.next(this.base);
                 });
             });
