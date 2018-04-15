@@ -44,4 +44,14 @@ export class BaseService {
     });
     return returnedObs.asObservable();
   }
+
+  getChilds(parentId: string) {
+    const defaultArr = [];
+    const returnedObs = new BehaviorSubject(defaultArr);
+
+    this.elementsObs.asObservable().subscribe(elements => {
+      returnedObs.next([elements[parentId], ...elements[parentId].children.map( id => elements[id])]);
+    });
+    return returnedObs.asObservable();
+  }
 }

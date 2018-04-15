@@ -19,7 +19,7 @@ export class CategoriesService {
         this.categoriesObs.next(data);
       });
     });
-   }
+  }
 
   private getJSON(baseLink: string): Observable<any> {
     return this.http.get('assets/data/' + baseLink + '/categories.JSON');

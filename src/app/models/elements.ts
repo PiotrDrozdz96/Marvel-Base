@@ -4,6 +4,7 @@ export interface MarvelElement {
     number: string;
     id: string;
     series: Array<string>;
+    children?: Array<string>;
     subTitle: string;
     publishedDate: string;
     cover: string;

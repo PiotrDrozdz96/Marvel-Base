@@ -1,8 +1,16 @@
-.base{
-    /* padding-top: 55px; */
+.base {
     height: calc(100vh - 55px);
     overflow-y: scroll;
+}
+
+.elements{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+span {
+    float: right;
+    font-size: 40px;
+    margin-right: 5px;
 }

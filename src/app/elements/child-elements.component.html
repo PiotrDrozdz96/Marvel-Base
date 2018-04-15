@@ -1,0 +1,9 @@
+<div class="base">
+  <span class="fa fa-close" [routerLink]="'../'"></span>
+  <div class="elements">
+    <app-element [element]="parent"></app-element>
+    <div *ngFor="let element of child">
+      <app-element [element]="element"></app-element>
+    </div>
+  </div>
+</div>

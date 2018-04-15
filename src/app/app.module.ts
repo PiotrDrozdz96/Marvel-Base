@@ -13,6 +13,7 @@ import { ElementComponent } from './element/element.component';
 import { BaseComponent } from './base/base.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ChildElementsComponent } from './elements/child-elements.component';
 
 
 @NgModule({
@@ -24,16 +25,20 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ElementComponent,
     BaseComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ChildElementsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'Base/:base', component: BaseComponent },
-      { path: 'Base', component: BaseComponent },
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'Base', component: NotFoundComponent },
+      { path: 'Base/:base', component: BaseComponent , children: [
+        { path: '', component: ElementsComponent},
+        { path: ':id', component: ChildElementsComponent}
+      ]},
       { path: '**', component: NotFoundComponent}
     ])
   ],
