@@ -50,7 +50,9 @@ export class BaseService {
     const returnedObs = new BehaviorSubject(defaultArr);
 
     this.elementsObs.asObservable().subscribe(elements => {
-      returnedObs.next([elements[parentId], ...elements[parentId].children.map( id => elements[id])]);
+      if (elements[parentId]) {
+        returnedObs.next([elements[parentId], ...(elements[parentId].children || []).map(id => elements[id])]);
+      }
     });
     return returnedObs.asObservable();
   }
