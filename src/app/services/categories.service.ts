@@ -14,10 +14,12 @@ export class CategoriesService {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
-      this.getJSON(params.get('base')).subscribe(data => {
-        this.categories = data;
-        this.categoriesObs.next(data);
-      });
+      if (params.get('base') !== 'User') {
+        this.getJSON(params.get('base')).subscribe(data => {
+          this.categories = data;
+          this.categoriesObs.next(data);
+        });
+      }
     });
   }
 
@@ -56,5 +58,12 @@ export class CategoriesService {
   }
 
   get(): Observable<Categories> { return this.categoriesObs.asObservable(); }
+
+  set(link: string) {
+    this.getJSON(link).subscribe(data => {
+      this.categories = data;
+      this.categoriesObs.next(data);
+    });
+  }
 
 }

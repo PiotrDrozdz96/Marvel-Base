@@ -16,10 +16,12 @@ export class BaseService {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
-      this.getJSON(params.get('base')).subscribe(data => {
-        this.elements = data;
-        this.elementsObs.next(data);
-      });
+      if (params.get('base') !== 'User') {
+        this.getJSON(params.get('base')).subscribe(data => {
+          this.elements = data;
+          this.elementsObs.next(data);
+        });
+      }
     });
   }
 
@@ -55,5 +57,12 @@ export class BaseService {
       }
     });
     return returnedObs.asObservable();
+  }
+
+  set(link: string) {
+    this.getJSON(link).subscribe(data => {
+      this.elements = data;
+      this.elementsObs.next(data);
+    });
   }
 }

@@ -12,17 +12,26 @@ export class ChronologyService {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
-      this.getJSON(params.get('base')).subscribe(data => {
-        this.chronology = data;
-        this.chronologyObs.next(data);
-      });
+      if (params.get('base') !== 'User') {
+        this.getJSON(params.get('base')).subscribe(data => {
+          this.chronology = data;
+          this.chronologyObs.next(data);
+        });
+      }
     });
   }
-
 
   private getJSON(baseLink: string): Observable<any> {
     return this.http.get('assets/data/' + baseLink + '/chronology.JSON');
   }
 
   get(): Observable<Array<string>> { return this.chronologyObs.asObservable(); }
+
+  set(link: string) {
+    this.getJSON(link).subscribe(data => {
+      this.chronology = data;
+      this.chronologyObs.next(data);
+    });
+  }
+
 }
