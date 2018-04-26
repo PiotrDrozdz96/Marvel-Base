@@ -59,11 +59,9 @@ export class CategoriesService {
 
   get(): Observable<Categories> { return this.categoriesObs.asObservable(); }
 
-  set(link: string) {
-    this.getJSON(link).subscribe(data => {
-      this.categories = data;
-      this.categoriesObs.next(data);
-    });
+  set(data) {
+    this.categories = data;
+    this.categoriesObs.next(data);
   }
 
 }

@@ -59,10 +59,8 @@ export class BaseService {
     return returnedObs.asObservable();
   }
 
-  set(link: string) {
-    this.getJSON(link).subscribe(data => {
-      this.elements = data;
-      this.elementsObs.next(data);
-    });
+  set(data) {
+    this.elements = data;
+    this.elementsObs.next(data);
   }
 }

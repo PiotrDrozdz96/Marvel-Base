@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -14,6 +16,8 @@ import { BaseComponent } from './base/base.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ChildElementsComponent } from './elements/child-elements.component';
+import { LoadBaseDialog } from './dialogs/load-base/load-base.dialog';
+
 
 
 @NgModule({
@@ -26,12 +30,18 @@ import { ChildElementsComponent } from './elements/child-elements.component';
     BaseComponent,
     HomeComponent,
     NotFoundComponent,
-    ChildElementsComponent
+    ChildElementsComponent,
+    LoadBaseDialog
+  ],
+  entryComponents: [
+     LoadBaseDialog
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'Base', component: NotFoundComponent },

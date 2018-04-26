@@ -27,11 +27,9 @@ export class ChronologyService {
 
   get(): Observable<Array<string>> { return this.chronologyObs.asObservable(); }
 
-  set(link: string) {
-    this.getJSON(link).subscribe(data => {
-      this.chronology = data;
-      this.chronologyObs.next(data);
-    });
+  set(data) {
+    this.chronology = data;
+    this.chronologyObs.next(data);
   }
 
 }

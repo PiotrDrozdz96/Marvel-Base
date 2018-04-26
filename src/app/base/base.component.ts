@@ -3,6 +3,8 @@ import { BaseService } from '../services/base.service';
 import { CategoriesService } from '../services/categories.service';
 import { ChronologyService } from '../services/chronology.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { LoadBaseDialog } from '../dialogs/load-base/load-base.dialog';
 
 @Component({
   selector: 'app-base',
@@ -14,15 +16,21 @@ export class BaseComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private dialog: MatDialog,
     private baseService: BaseService,
     private categoriesService: CategoriesService,
     private chronologyService: ChronologyService
   ) {
     this.route.paramMap.subscribe(params => {
       if (params.get('base') === 'User') {
-        this.baseService.set('Marvel_Now');
-        this.categoriesService.set('Marvel_Now');
-        this.chronologyService.set('Marvel_Now');
+
+        const dialogRef = this.dialog.open(LoadBaseDialog, { width: '360px'} );
+        dialogRef.afterClosed().subscribe(result => {
+          baseService.set(result['base.JSON']);
+          categoriesService.set(result['categories.JSON']);
+          chronologyService.set(result['chronology.JSON']);
+        });
+
       }
     });
   }
