@@ -23,15 +23,22 @@ export class BaseComponent implements OnInit {
   ) {
     this.route.paramMap.subscribe(params => {
       if (params.get('base') === 'User') {
-
-        const dialogRef = this.dialog.open(LoadBaseDialog, { width: '360px'} );
-        dialogRef.afterClosed().subscribe(result => {
-          baseService.set(result['base.JSON']);
-          categoriesService.set(result['categories.JSON']);
-          chronologyService.set(result['chronology.JSON']);
-        });
-
+        this.loadBase();
       }
+    });
+  }
+
+  loadBase() {
+    const dialogRef = this.dialog.open(LoadBaseDialog, { width: '360px' });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result['base.JSON'] && result['categories.JSON'] && result['chronology.JSON']) {
+        this.baseService.set(result['base.JSON']);
+        this.categoriesService.set(result['categories.JSON']);
+        this.chronologyService.set(result['chronology.JSON']);
+      } else if (result !== undefined) {
+        this.loadBase();
+      }
+
     });
   }
 

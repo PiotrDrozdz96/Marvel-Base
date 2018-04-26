@@ -3,8 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-load-base',
-  templateUrl: './load-base.dialog.html',
-  styleUrls: ['./load-base.dialog.css']
+  templateUrl: './load-base.dialog.html'
 })
 // tslint:disable-next-line:component-class-suffix
 export class LoadBaseDialog {
