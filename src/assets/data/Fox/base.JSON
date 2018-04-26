@@ -46,6 +46,10 @@
   "Gifted":{
     "series": ["Seriale"], "cover":"assets/data/Fox/covers/Gifted.png",
     "title":"Gifted: Naznaczeni", "subTitle":"Sezon 1",
-    "publishedDate": "15 January 2018"}
+    "publishedDate": "15 January 2018"},
+  "Legion2":{
+    "series": ["Seriale"], "cover":"assets/data/Fox/covers/Legion2.png",
+    "title":"Legion", "subTitle":"Sezon 2",
+    "publishedDate": "5 June 2018"}
 
 }

@@ -154,5 +154,17 @@
   "Panther":{
     "series": ["Filmy"], "cover":"assets/data/MCU/covers/movies/Panther.png",
     "title":"Czarna Pantera", "subTitle":"",
-    "publishedDate": "14 February 2018"}
+    "publishedDate": "14 February 2018"},
+  "JessicaJones2":{
+    "series": ["Netflix"], "cover":"assets/data/MCU/covers/netflix/Jessica2.png",
+    "title":"Jessica Jones", "subTitle":"Sezon 2",
+    "publishedDate": "8 February 2018"},
+  "Shield5":{
+    "series": ["Agenci T.A.R.C.Z.Y."],"cover":"assets/data/MCU/covers/ABC_Series/Season5.png",
+    "title":"Agenci T.A.R.C.Z.Y.", "subTitle":"Sezon 5",
+    "publishedDate": "18 May 2018"},
+  "Avengers3":{
+    "series": ["Filmy"], "cover":"assets/data/MCU/covers/movies/Avengers3.png",
+    "title":"Avengers", "subTitle":"Wojna bez granic",
+    "publishedDate": "26 April 2018"}
 }
