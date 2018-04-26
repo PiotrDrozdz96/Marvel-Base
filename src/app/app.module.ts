@@ -17,6 +17,13 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ChildElementsComponent } from './elements/child-elements.component';
 import { LoadBaseDialog } from './dialogs/load-base/load-base.dialog';
+import { GeneratorComponent } from './generator/generator.component';
+import { GeneratorToolbarComponent } from './generator/generator-toolbar/generator-toolbar.component';
+import { GeneratorViewComponent } from './generator/generator-view/generator-view.component';
+import { GeneratorDeleteComponent } from './generator/generator-delete/generator-delete.component';
+import { GeneratorEditComponent } from './generator/generator-edit/generator-edit.component';
+import { GeneratorVolumesComponent } from './generator/generator-volumes/generator-volumes.component';
+import { GeneratorChronologyComponent } from './generator/generator-chronology/generator-chronology.component';
 
 
 
@@ -31,7 +38,14 @@ import { LoadBaseDialog } from './dialogs/load-base/load-base.dialog';
     HomeComponent,
     NotFoundComponent,
     ChildElementsComponent,
-    LoadBaseDialog
+    LoadBaseDialog,
+    GeneratorComponent,
+    GeneratorToolbarComponent,
+    GeneratorViewComponent,
+    GeneratorDeleteComponent,
+    GeneratorEditComponent,
+    GeneratorVolumesComponent,
+    GeneratorChronologyComponent
   ],
   entryComponents: [
      LoadBaseDialog
@@ -48,6 +62,14 @@ import { LoadBaseDialog } from './dialogs/load-base/load-base.dialog';
       { path: 'Base/:base', component: BaseComponent , children: [
         { path: '', component: ElementsComponent},
         { path: ':id', component: ChildElementsComponent}
+      ]},
+      { path: 'Generator/:base', component: GeneratorComponent, children: [
+        {path: '', redirectTo: 'view', pathMatch: 'full'},
+        {path: 'view', component: GeneratorViewComponent},
+        {path: 'delete', component: GeneratorDeleteComponent},
+        {path: 'edit', component: GeneratorEditComponent},
+        {path: 'volumes', component: GeneratorVolumesComponent},
+        {path: 'chronology', component: GeneratorChronologyComponent},
       ]},
       { path: '**', component: NotFoundComponent}
     ])

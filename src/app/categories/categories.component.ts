@@ -8,7 +8,7 @@ import { Categories, Category } from '../models/categories';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['../../toolbar.css']
 })
 export class CategoriesComponent implements OnInit {
 
