@@ -9,7 +9,7 @@
     color: inherit;
 }
 
-.toolbar button:hover{
+.toolbar button:hover, .toolbar button.on{
     background-color: firebrick;
     color: white;
 }

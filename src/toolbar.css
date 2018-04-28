@@ -29,7 +29,7 @@
     border-bottom: 2px solid DimGray;
   }
   
-  .toolbar .main.on .secondary{
+  .toolbar .main.on .secondary, .toolbar .secondary.on{
     display: block;
   }
 

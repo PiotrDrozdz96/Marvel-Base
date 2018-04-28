@@ -21,7 +21,7 @@ export class CategoriesComponent implements OnInit {
     private dropdownService: DropdownService
   ) {
     this.categoriesService.get().subscribe(categories => {
-      this.categories = Object.keys(categories).map(id => categories[id]);
+      this.categories = Object.values(categories);
     });
   }
 

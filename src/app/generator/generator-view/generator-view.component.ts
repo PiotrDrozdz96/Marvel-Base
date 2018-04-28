@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneratorService } from '../../services/generator.service';
 
 @Component({
   selector: 'app-generator-view',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneratorViewComponent implements OnInit {
 
-  constructor() { }
+  selectedSeries: string;
+
+  constructor(private generatorService: GeneratorService) {
+    generatorService.getSelectedSeries().subscribe(selectedSeries => {
+      this.selectedSeries = selectedSeries;
+    });
+  }
 
   ngOnInit() {
   }
