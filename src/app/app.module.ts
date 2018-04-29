@@ -19,9 +19,7 @@ import { ChildElementsComponent } from './elements/child-elements.component';
 import { LoadBaseDialog } from './dialogs/load-base/load-base.dialog';
 import { GeneratorComponent } from './generator/generator.component';
 import { GeneratorToolbarComponent } from './generator/generator-toolbar/generator-toolbar.component';
-import { GeneratorViewComponent } from './generator/generator-view/generator-view.component';
-import { GeneratorDeleteComponent } from './generator/generator-delete/generator-delete.component';
-import { GeneratorEditComponent } from './generator/generator-edit/generator-edit.component';
+import { GeneratorIssuesComponent } from './generator/generator-issues/generator-issues.component';
 import { GeneratorVolumesComponent } from './generator/generator-volumes/generator-volumes.component';
 import { GeneratorChronologyComponent } from './generator/generator-chronology/generator-chronology.component';
 
@@ -41,9 +39,7 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
     LoadBaseDialog,
     GeneratorComponent,
     GeneratorToolbarComponent,
-    GeneratorViewComponent,
-    GeneratorDeleteComponent,
-    GeneratorEditComponent,
+    GeneratorIssuesComponent,
     GeneratorVolumesComponent,
     GeneratorChronologyComponent
   ],
@@ -64,10 +60,8 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
         { path: ':id', component: ChildElementsComponent}
       ]},
       { path: 'Generator/:base', component: GeneratorComponent, children: [
-        {path: '', redirectTo: 'view', pathMatch: 'full'},
-        {path: 'view', component: GeneratorViewComponent},
-        {path: 'delete', component: GeneratorDeleteComponent},
-        {path: 'edit', component: GeneratorEditComponent},
+        {path: '', redirectTo: 'issues', pathMatch: 'full'},
+        {path: 'issues', component: GeneratorIssuesComponent},
         {path: 'volumes', component: GeneratorVolumesComponent},
         {path: 'chronology', component: GeneratorChronologyComponent},
       ]},

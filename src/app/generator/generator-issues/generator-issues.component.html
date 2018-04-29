@@ -1,0 +1,16 @@
+<div class="base">
+    <div class="elements">
+        <div *ngFor="let element of elements" class="element-container">
+            <app-element [element]="element"></app-element>
+            <div class="element-options-container">
+                <div class="element-options">
+                    <i class="fa fa-plus-square" (click)="add()"></i>
+                    <i class="fa fa-trash" (click)="trash()"></i>
+                    <i class="fa fa-arrow-circle-left" (click)="turnLeft()"></i>
+                    <i class="fa fa-arrow-circle-right" (click)="turnRight()"></i>
+                    <i class="fa fa-edit" (click)="edit()"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

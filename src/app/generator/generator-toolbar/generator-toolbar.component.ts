@@ -25,11 +25,9 @@ export class GeneratorToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.toolbar = [{ id: 'view', value: 'Wyświetl' },
-    { id: 'delete', value: 'Usuwanie' },
-    { id: 'edit', value: 'Edycja /Dodawanie' },
-    { id: 'volumes', value: 'Twórz Tomy' },
-    { id: 'chronology', value: 'Twórz chronologie' }];
+    this.toolbar = [{ id: 'issue', value: 'Zeszyty' },
+    { id: 'volumes', value: 'Tomy' },
+    { id: 'chronology', value: 'Chronologia' }];
 
     this.categoriesService.get().subscribe(categories => {
       this.categories = categories;

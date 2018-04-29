@@ -6,11 +6,11 @@ import { BaseService } from '../../services/base.service';
 import { MarvelElement } from '../../models/elements';
 
 @Component({
-  selector: 'app-generator-view',
-  templateUrl: './generator-view.component.html',
-  styleUrls: ['./generator-view.component.css']
+  selector: 'app-generator-issues',
+  templateUrl: './generator-issues.component.html',
+  styleUrls: ['./generator-issues.component.css']
 })
-export class GeneratorViewComponent implements OnInit {
+export class GeneratorIssuesComponent implements OnInit {
 
   selectedSeries: string;
   elements: Array<MarvelElement>;
@@ -32,6 +32,26 @@ export class GeneratorViewComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  add() {
+    console.log('add');
+  }
+
+  trash() {
+    console.log('trash');
+  }
+
+  turnLeft() {
+    console.log('turnLeft');
+  }
+
+  turnRight() {
+    console.log('turnRight');
+  }
+
+  edit() {
+    console.log('edit');
   }
 
 }
