@@ -30,21 +30,29 @@ export class BaseService {
   }
 
   get(ids: Array<string>, categories?: Categories): Observable<Array<MarvelElement>> {
-    const series = Object.values(categories).slice(1)
-      .reduce((arr, category) => arr.concat(category.series), []);
-
     const defaultArr = [];
     const returnedObs = new BehaviorSubject(defaultArr);
 
-    this.elementsObs.asObservable().subscribe(elements => {
-      returnedObs.next(ids.filter(id => elements[id] === undefined ? false :
-        elements[id].series.some(category => {
-          const finded = series.find(obj => obj.title === category);
-          return finded !== undefined ? finded.checked : false;
-        })
-      ).map(id => elements[id]));
-    });
-    return returnedObs.asObservable();
+    if (categories !== undefined) {
+      const series = Object.values(categories).slice(1)
+        .reduce((arr, category) => arr.concat(category.series), []);
+
+      this.elementsObs.asObservable().subscribe(elements => {
+        returnedObs.next(ids.filter(id => elements[id] === undefined ? false :
+          elements[id].series.some(category => {
+            const finded = series.find(obj => obj.title === category);
+            return finded !== undefined ? finded.checked : false;
+          })
+        ).map(id => elements[id]));
+      });
+      return returnedObs.asObservable();
+    } else {
+      this.elementsObs.asObservable().subscribe(elements => {
+        returnedObs.next(ids.map( id => elements[id]));
+      });
+      return returnedObs.asObservable();
+    }
+
   }
 
   getChilds(parentId: string) {

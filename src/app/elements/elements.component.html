@@ -1,7 +1,5 @@
 <div class="base">
     <div class="elements">
-        <div *ngFor="let element of data">
-            <app-element [element]="element" [routerLink]="element.id"></app-element>
-        </div>
+        <app-element *ngFor="let element of data" [element]="element" [routerLink]="element.id"></app-element>
     </div>
 </div>

@@ -1,0 +1,30 @@
+.base {
+    height: calc(100vh - 55px);
+    overflow-y: scroll;
+}
+
+.elements{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+span {
+    float: right;
+    font-size: 40px;
+    margin-right: 5px;
+}
+
+.element-options{
+    display: none;
+}
+
+.element-container:hover .element-options{
+    display: block;
+    position: absolute;
+    background: black;
+    opacity: 0.5;
+    width: 220px;
+    height: 295px;
+    margin-top: 5px;
+}
