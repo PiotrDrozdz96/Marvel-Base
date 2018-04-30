@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Element istnieje już w bazie</h1>
+<div mat-dialog-content>
+  <app-element [element]="element"></app-element>
+  <app-edit-element [element]="newElement"></app-edit-element>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Ok</button>
+</div>

@@ -1,4 +1,7 @@
 @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+.mat-dialog-title{
+    text-align: center;
+}
 
 .mat-dialog-container{
     border: 10px solid FireBrick;

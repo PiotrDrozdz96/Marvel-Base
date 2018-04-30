@@ -1,0 +1,10 @@
+textarea{
+    resize: none;
+    background-color: inherit;
+    color: inherit;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}

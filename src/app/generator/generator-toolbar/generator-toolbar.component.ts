@@ -25,7 +25,7 @@ export class GeneratorToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.toolbar = [{ id: 'issue', value: 'Zeszyty' },
+    this.toolbar = [{ id: 'issues', value: 'Zeszyty' },
     { id: 'volumes', value: 'Tomy' },
     { id: 'chronology', value: 'Chronologia' }];
 

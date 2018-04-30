@@ -12,11 +12,14 @@ import { CategoriesComponent } from './categories/categories.component';
 import { DropdownService } from './services/dropdown.service';
 import { ElementsComponent } from './elements/elements.component';
 import { ElementComponent } from './element/element.component';
+import { EditElementComponent } from './element/edit-element.component';
 import { BaseComponent } from './base/base.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ChildElementsComponent } from './elements/child-elements.component';
 import { LoadBaseDialog } from './dialogs/load-base/load-base.dialog';
+import { EditElementDialog } from './dialogs/edit-element/edit-element.dialog';
+import { ConflictElementsDialog } from './dialogs/conflict-elements/conflict-elements.dialog';
 import { GeneratorComponent } from './generator/generator.component';
 import { GeneratorToolbarComponent } from './generator/generator-toolbar/generator-toolbar.component';
 import { GeneratorIssuesComponent } from './generator/generator-issues/generator-issues.component';
@@ -32,11 +35,14 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
     CategoriesComponent,
     ElementsComponent,
     ElementComponent,
+    EditElementComponent,
     BaseComponent,
     HomeComponent,
     NotFoundComponent,
     ChildElementsComponent,
     LoadBaseDialog,
+    EditElementDialog,
+    ConflictElementsDialog,
     GeneratorComponent,
     GeneratorToolbarComponent,
     GeneratorIssuesComponent,
@@ -44,7 +50,9 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
     GeneratorChronologyComponent
   ],
   entryComponents: [
-     LoadBaseDialog
+     LoadBaseDialog,
+     EditElementDialog,
+     ConflictElementsDialog
   ],
   imports: [
     BrowserModule,

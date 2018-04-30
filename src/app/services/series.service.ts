@@ -34,4 +34,9 @@ export class SeriesService {
     this.seriesObs.next(data);
   }
 
+  update(seriesName: string, type: string, series: Array<string>) {
+    this.series[seriesName][type] = series;
+    this.seriesObs.next(this.series);
+  }
+
 }

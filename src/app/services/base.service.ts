@@ -48,7 +48,7 @@ export class BaseService {
       return returnedObs.asObservable();
     } else {
       this.elementsObs.asObservable().subscribe(elements => {
-        returnedObs.next(ids.map( id => elements[id]));
+        returnedObs.next(ids.map(id => elements[id]));
       });
       return returnedObs.asObservable();
     }
@@ -70,5 +70,24 @@ export class BaseService {
   set(data) {
     this.elements = data;
     this.elementsObs.next(data);
+  }
+
+  trash(id: string) {
+    delete this.elements[id];
+    this.elementsObs.next(this.elements);
+  }
+
+  update(id: string, element: MarvelElement) {
+    if (id === element.id) {
+      this.elements[id] = element;
+      this.elementsObs.next(this.elements);
+    } else {
+      if (this.elements[element.id] ) {
+        return this.elements[element.id];
+      } else {
+        this.elements[element.id] = element;
+        this.trash(id);
+      }
+    }
   }
 }
