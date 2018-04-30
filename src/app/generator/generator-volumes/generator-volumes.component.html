@@ -1,3 +1,22 @@
-<p>
-  generator-volumes works!
-</p>
+<div class="base b1">
+  <div class="elements">
+
+  </div>
+</div>
+<div class="base b2">
+  <div class="elements">
+    <div *ngFor="let element of elements let index = index" class="element-container">
+      <app-element [element]="element"></app-element>
+      <div class="element-options-container">
+          <div class="element-options">
+              <i class="fa fa-plus-square" (click)="add()"></i>
+              <i class="fa fa-trash" (click)="trash(element,index)"></i>
+              <i class="fa fa-arrow-circle-left" (click)="moveLeft(index)"></i>
+              <i class="fa fa-arrow-circle-right" (click)="moveRight(index)"></i>
+              <i class="fa fa-edit" (click)="edit(element,index)"></i>
+              <i class="fa fa-file-archive-o"></i>
+          </div>
+      </div>
+  </div>
+  </div>
+</div>
