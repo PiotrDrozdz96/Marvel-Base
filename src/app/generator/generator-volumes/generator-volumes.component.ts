@@ -13,7 +13,10 @@ import { EditElementDialog } from '../../dialogs/edit-element/edit-element.dialo
 })
 export class GeneratorVolumesComponent implements OnInit {
 
-  elements: Array<MarvelElement>;
+  volumesElements: Array<MarvelElement>;
+  issuesElements: Array<MarvelElement>;
+  childElements: Array<MarvelElement> = [];
+  unpackElement: MarvelElement;
   series: Array<string>;
 
   constructor(
@@ -22,13 +25,16 @@ export class GeneratorVolumesComponent implements OnInit {
     private baseService: BaseService,
     private dialog: MatDialog
   ) {
-    seriesService.get().subscribe(series => {
-      generatorService.getSelectedSeries().subscribe(selectedSeries => {
+    this.seriesService.get().subscribe(series => {
+      this.generatorService.getSelectedSeries().subscribe(selectedSeries => {
         if (series[selectedSeries]) {
           this.series = series[selectedSeries].tomy;
 
-          baseService.get(series[selectedSeries].tomy).subscribe(elements => {
-            this.elements = elements;
+          this.baseService.get(series[selectedSeries].tomy).subscribe(elements => {
+            this.volumesElements = elements;
+          });
+          this.baseService.get(series[selectedSeries].zeszyty).subscribe(elements => {
+            this.issuesElements = elements;
           });
         }
       });
@@ -59,6 +65,57 @@ export class GeneratorVolumesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(newElement => {
       this.generatorService.tryReplaceElement(newElement, index, element, 'tomy', this.series);
     });
+  }
+
+  unpack(element: MarvelElement) {
+    this.unpackElement = element;
+    this.baseService.get(element.children).subscribe(elements => {
+      this.childElements = elements;
+    });
+  }
+
+  pack() {
+    this.childElements = [];
+    this.unpackElement = undefined;
+  }
+
+  setSeriesInUnpackElement(element?: MarvelElement) {
+    this.unpackElement.series = this.childElements.concat(element || []).reduce(
+      (total, current) => !total.find( c => c === current.series[0]) ?
+      total.concat(current.series[0]) : total
+     , []);
+  }
+
+  addChild(element: MarvelElement) {
+    if (this.unpackElement.children.find(id => id === element.id)) {
+      alert('Element znajduje się już na liście');
+    } else {
+      this.unpackElement.children.push(element.id);
+      this.setSeriesInUnpackElement(element);
+      this.baseService.update(this.unpackElement.id, this.unpackElement);
+    }
+  }
+
+  removeChild(index: number) {
+    this.unpackElement.children.splice(index, 1);
+    this.setSeriesInUnpackElement();
+    this.baseService.update(this.unpackElement.id, this.unpackElement);
+  }
+
+  moveChildLeft(index: number) {
+    if (index) {
+      const removedElement = this.unpackElement.children.splice(index, 1);
+      this.unpackElement.children.splice(index - 1, 0, ...removedElement);
+      this.baseService.update(this.unpackElement.id, this.unpackElement);
+    }
+  }
+
+  moveChildRight(index: number) {
+    if (index < this.unpackElement.children.length) {
+      const removedElement = this.unpackElement.children.splice(index, 1);
+      this.unpackElement.children.splice(index + 1, 0, ...removedElement);
+      this.baseService.update(this.unpackElement.id, this.unpackElement);
+    }
   }
 
 }
