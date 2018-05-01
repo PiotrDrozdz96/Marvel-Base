@@ -8,6 +8,7 @@ import { BaseService } from '../../services/base.service';
 import { MarvelElement } from '../../models/elements';
 
 import { EditElementDialog } from '../../dialogs/edit-element/edit-element.dialog';
+import { AddElementDialog } from '../../dialogs/add-element/add-element.dialog';
 
 @Component({
   selector: 'app-generator-issues',
@@ -18,6 +19,7 @@ export class GeneratorIssuesComponent implements OnInit {
 
   elements: Array<MarvelElement>;
   series: Array<string>;
+  selectedSeries: string;
 
   constructor(
     private generatorService: GeneratorService,
@@ -41,8 +43,26 @@ export class GeneratorIssuesComponent implements OnInit {
   ngOnInit() {
   }
 
-  add() {
-    console.log('add');
+  add(index: number) {
+    const dialogRef = this.dialog.open(AddElementDialog, { width: '360px' });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'singleElement') {
+        const singleElementDialogRef = this.dialog.open(EditElementDialog, { data: {
+            title: 'title',
+            subTitle: 'subTtitle',
+            publishedDate: 'publishedDate',
+            id: '',
+            volume: '',
+            number: '',
+            cover: '',
+            series: [this.selectedSeries]
+          }
+        });
+        singleElementDialogRef.afterClosed().subscribe(newElement => {
+          this.generatorService.tryAddElement(newElement, index, 'zeszyty', this.series);
+        });
+      }
+    });
   }
 
   trash(element: MarvelElement, index: number) {

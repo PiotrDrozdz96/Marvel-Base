@@ -20,13 +20,12 @@ import { ChildElementsComponent } from './elements/child-elements.component';
 import { LoadBaseDialog } from './dialogs/load-base/load-base.dialog';
 import { EditElementDialog } from './dialogs/edit-element/edit-element.dialog';
 import { ConflictElementsDialog } from './dialogs/conflict-elements/conflict-elements.dialog';
+import { AddElementDialog } from './dialogs/add-element/add-element.dialog';
 import { GeneratorComponent } from './generator/generator.component';
 import { GeneratorToolbarComponent } from './generator/generator-toolbar/generator-toolbar.component';
 import { GeneratorIssuesComponent } from './generator/generator-issues/generator-issues.component';
 import { GeneratorVolumesComponent } from './generator/generator-volumes/generator-volumes.component';
 import { GeneratorChronologyComponent } from './generator/generator-chronology/generator-chronology.component';
-
-
 
 @NgModule({
   declarations: [
@@ -43,6 +42,7 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
     LoadBaseDialog,
     EditElementDialog,
     ConflictElementsDialog,
+    AddElementDialog,
     GeneratorComponent,
     GeneratorToolbarComponent,
     GeneratorIssuesComponent,
@@ -52,7 +52,8 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
   entryComponents: [
      LoadBaseDialog,
      EditElementDialog,
-     ConflictElementsDialog
+     ConflictElementsDialog,
+     AddElementDialog
   ],
   imports: [
     BrowserModule,

@@ -57,22 +57,38 @@ export class GeneratorService {
     type: string,
     arr: Array<string>
   ) {
-    if (newElement) {
-      const conflictElement = this.baseService.update(element.id, newElement);
-      if (conflictElement === undefined) {
-        arr[index] = newElement.id;
-        this.seriesService.update(this.selectedSeries, type, arr);
-      } else {
-        const dialogRef = this.dialog.open(ConflictElementsDialog, {
-          data: {
-            element: conflictElement,
-            newElement: newElement
-          }
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          this.tryReplaceElement(result, index, element, type, arr);
-        });
-      }
+    const conflictElement = this.baseService.update(element.id, newElement);
+    if (conflictElement === undefined) {
+      arr[index] = newElement.id;
+      this.seriesService.update(this.selectedSeries, type, arr);
+    } else {
+      const dialogRef = this.dialog.open(ConflictElementsDialog, {
+        data: {
+          element: conflictElement,
+          newElement: newElement
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.tryReplaceElement(result, index, element, type, arr);
+      });
+    }
+  }
+
+  tryAddElement(newElement: MarvelElement, index: number, type: string, arr: Array<string>) {
+    const conflictElement = this.baseService.add(newElement);
+    if (conflictElement === undefined) {
+      arr.splice(index + 1, 0, newElement.id);
+      this.seriesService.update(this.selectedSeries, type, arr);
+    } else {
+      const dialogRef = this.dialog.open(ConflictElementsDialog, {
+        data: {
+          element: conflictElement,
+          newElement: newElement
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.tryAddElement(result, index, type, arr);
+      });
     }
   }
 }

@@ -90,4 +90,12 @@ export class BaseService {
       }
     }
   }
+
+  add(element: MarvelElement) {
+    if (this.elements[element.id] ) {
+      return this.elements[element.id];
+    } else {
+      this.elements[element.id] = element;
+    }
+  }
 }
