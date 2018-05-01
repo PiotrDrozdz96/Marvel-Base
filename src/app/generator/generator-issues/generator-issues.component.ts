@@ -47,7 +47,8 @@ export class GeneratorIssuesComponent implements OnInit {
     const dialogRef = this.dialog.open(AddElementDialog, { width: '360px' });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'singleElement') {
-        const singleElementDialogRef = this.dialog.open(EditElementDialog, { data: {
+        const singleElementDialogRef = this.dialog.open(EditElementDialog, {
+          data: {
             title: 'title',
             subTitle: 'subTtitle',
             publishedDate: 'publishedDate',

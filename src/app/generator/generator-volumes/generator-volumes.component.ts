@@ -15,9 +15,11 @@ export class GeneratorVolumesComponent implements OnInit {
 
   volumesElements: Array<MarvelElement>;
   issuesElements: Array<MarvelElement>;
-  childElements: Array<MarvelElement> = [];
+  childElements: Array<MarvelElement> = undefined;
   unpackElement: MarvelElement;
   series: Array<string>;
+  selectedSeries: string;
+  unpackSubscriber;
 
   constructor(
     private generatorService: GeneratorService,
@@ -27,6 +29,7 @@ export class GeneratorVolumesComponent implements OnInit {
   ) {
     this.seriesService.get().subscribe(series => {
       this.generatorService.getSelectedSeries().subscribe(selectedSeries => {
+        this.selectedSeries = selectedSeries;
         if (series[selectedSeries]) {
           this.series = series[selectedSeries].tomy;
 
@@ -44,8 +47,23 @@ export class GeneratorVolumesComponent implements OnInit {
   ngOnInit() {
   }
 
-  add() {
-    console.log('add');
+  add(index: number) {
+    const singleElementDialogRef = this.dialog.open(EditElementDialog, {
+      data: {
+        title: 'title',
+        subTitle: 'subTtitle',
+        publishedDate: 'publishedDate',
+        id: '',
+        volume: '',
+        number: '',
+        cover: '',
+        series: [this.selectedSeries],
+        children: []
+      }
+    });
+    singleElementDialogRef.afterClosed().subscribe(newElement => {
+      this.generatorService.tryAddElement(newElement, index, 'tomy', this.series);
+    });
   }
 
   trash(element: MarvelElement, index: number) {
@@ -65,14 +83,15 @@ export class GeneratorVolumesComponent implements OnInit {
 
   unpack(element: MarvelElement) {
     this.unpackElement = element;
-    this.baseService.get(element.children).subscribe(elements => {
+    this.unpackSubscriber =  this.baseService.get(element.children).subscribe(elements => {
       this.childElements = elements;
     });
   }
 
   pack() {
-    this.childElements = [];
+    this.childElements = undefined;
     this.unpackElement = undefined;
+    this.unpackSubscriber.unsubscribe();
   }
 
   setSeriesInUnpackElement(element?: MarvelElement) {
