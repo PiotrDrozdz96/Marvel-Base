@@ -34,7 +34,7 @@
   </div>
   <div class="base b2">
     <div class="elements">
-      <div *ngFor="let element of issuesElements let index = index" class="element-container">
+      <div *ngFor="let element of issuesElements" class="element-container">
         <app-element [element]="element" (click)="addChild(element)"></app-element>
       </div>
     </div>

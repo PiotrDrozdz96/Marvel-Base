@@ -12,6 +12,8 @@ export class GeneratorService {
 
   private selectedSeries = '';
   private selectedSeriesObS = new BehaviorSubject<string>(this.selectedSeries);
+  private selectedType = 'tomy';
+  private selectedTypeObS = new BehaviorSubject<string>(this.selectedType);
 
 
   constructor(
@@ -26,6 +28,13 @@ export class GeneratorService {
   }
 
   getSelectedSeries(): Observable<string> { return this.selectedSeriesObS.asObservable(); }
+
+  changeType(type: string) {
+    this.selectedType = type;
+    this.selectedTypeObS.next(type);
+  }
+
+  getSelectedType(): Observable<string> { return this.selectedTypeObS.asObservable(); }
 
   trash(id: string, index: number, type: string, arr: Array<string>) {
     arr.splice(index, 1);

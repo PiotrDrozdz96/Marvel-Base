@@ -21,4 +21,8 @@
       </option>
     </select>
   </div>
+  <select [(ngModel)]="selectedType" (change)="generatorService.changeType(selectedType)">
+    <option>tomy</option>
+    <option>zeszyty</option>
+  </select>
 </div>

@@ -1,3 +1,21 @@
-<p>
-  generator-chronology works!
-</p>
+<div class="base b2">
+  <div class="elements">
+    <div *ngFor="let element of chronologyElements let index = index" class="element-container">
+      <app-element [element]="element"></app-element>
+      <div class="element-options-container">
+        <div class="element-options">
+          <i class="fa fa-arrow-circle-left" (click)="moveChild(index,-1)"></i>
+          <i class="fa fa-arrow-circle-right" (click)="moveChild(index,1)"></i>
+          <i class="fa fa-trash" (click)="moveChild(index,0)"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="base b1">
+  <div class="elements">
+    <div *ngFor="let element of elements" class="element-container">
+      <app-element [element]="element" (click)="addChild(element)"></app-element>
+    </div>
+  </div>
+</div>

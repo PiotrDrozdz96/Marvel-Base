@@ -15,7 +15,8 @@
 }
 
 .base.b2{
-    height: calc( calc( calc( 100vh - 58px) / 3) *2);
+    height: calc( calc( calc( 100vh - 61px) / 3) *2);
+    border-bottom: 2px solid firebrick;
 }
 
 span {

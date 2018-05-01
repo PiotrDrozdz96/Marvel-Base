@@ -16,8 +16,8 @@ export class GeneratorToolbarComponent implements OnInit {
   waves: Array<Category>;
   selectedWave: string;
   selectedSeries: string;
+  selectedType = 'tomy';
   title: string;
-  page: string;
 
   constructor(
     private generatorService: GeneratorService,
