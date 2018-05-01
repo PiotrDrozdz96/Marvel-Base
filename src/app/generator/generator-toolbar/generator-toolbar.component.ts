@@ -3,6 +3,8 @@ import { ToolbarItem } from '../../models/toolbarItem';
 import { CategoriesService } from '../../services/categories.service';
 import { Category, Categories } from '../../models/categories';
 import { GeneratorService } from '../../services/generator.service';
+import { SeriesService } from '../../services/series.service';
+import { BaseService } from '../../services/base.service';
 
 @Component({
   selector: 'app-generator-toolbar',
@@ -18,10 +20,14 @@ export class GeneratorToolbarComponent implements OnInit {
   selectedSeries: string;
   selectedType = 'tomy';
   title: string;
+  newSeries = '';
+  newWave = '';
 
   constructor(
     private generatorService: GeneratorService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private seriesService: SeriesService,
+    private baseService: BaseService
   ) { }
 
   ngOnInit() {
@@ -44,6 +50,64 @@ export class GeneratorToolbarComponent implements OnInit {
   changeWave() {
     this.selectedSeries = this.categories[this.selectedWave].series[0].title;
     this.generatorService.changeSeries(this.selectedSeries);
+  }
+
+  deleteSeries(seriesTitle: string) {
+    let series;
+    this.seriesService.get().subscribe(result => {
+      series = result;
+    }).unsubscribe();
+    series[seriesTitle].zeszyty.forEach(id => this.baseService.trash(id));
+    series[seriesTitle].tomy.forEach(id => this.baseService.trash(id));
+    delete series[seriesTitle];
+    this.seriesService.set(series);
+    this.categories[this.selectedWave].series.splice(
+      this.categories[this.selectedWave].series.findIndex(obj => obj.title === seriesTitle)
+      , 1
+    );
+    this.categoriesService.set(this.categories);
+  }
+
+  deleteWave(waveTitle: string) {
+    this.categories[waveTitle].series.map(obj => obj.title)
+      .forEach(seriesTitle => this.deleteSeries(seriesTitle));
+    delete this.categories[waveTitle];
+    this.categoriesService.set(this.categories);
+  }
+
+  addSeries(waveTitle: string, newSeries: string) {
+    if (newSeries !== '') {
+      let series;
+      this.seriesService.get().subscribe(result => {
+        series = result;
+      }).unsubscribe();
+      if (series[newSeries]) {
+        alert('Istnieje taka seria');
+      } else {
+        series[newSeries] = { zeszyty: [], tomy: [] };
+        this.seriesService.set(series);
+        this.categories[waveTitle].series.push({ title: newSeries, checked: false });
+        this.categories[waveTitle].series.sort((a, b) => a.title > b.title ? 1 : -1);
+        this.categoriesService.set(this.categories);
+        this.newSeries = '';
+      }
+    }
+  }
+
+  addWave(newWave: string) {
+    if (newWave !== '') {
+      if (this.categories[newWave]) {
+        alert('Istnieje taki nurt');
+      } else {
+        this.categories[newWave] = { title: newWave, checked: false, series: [] };
+        const newCategories = {};
+        newCategories[this.title] = this.categories[this.title];
+        Object.keys(this.categories).slice(1).sort()
+          .forEach(key => newCategories[key] = this.categories[key]);
+        this.categoriesService.set(newCategories);
+        this.newWave = '';
+      }
+    }
   }
 
 }

@@ -10,6 +10,11 @@
     <select [(ngModel)]="selectedWave" (change)="changeWave()">
       <option *ngFor="let wave of waves">{{wave.title}}</option>
     </select>
+    <div class="form-mini">
+      <textarea [(ngModel)]="newWave"></textarea>
+      <button (click)="addWave(newWave)">+</button>
+      <button (click)="deleteWave(selectedWave)">-</button>
+    </div>
   </div>
   <div class="secondary on">
     Seria
@@ -20,6 +25,11 @@
         {{series.title}}
       </option>
     </select>
+    <div class="form-mini">
+      <textarea [(ngModel)]="newSeries"></textarea>
+      <button (click)="addSeries(selectedWave,newSeries)">+</button>
+      <button (click)="deleteSeries(selectedSeries)">-</button>
+    </div>
   </div>
   <select [(ngModel)]="selectedType" (change)="generatorService.changeType(selectedType)">
     <option>tomy</option>
