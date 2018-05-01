@@ -49,12 +49,8 @@ export class GeneratorIssuesComponent implements OnInit {
     this.generatorService.trash(element.id, index, 'zeszyty', this.series);
   }
 
-  moveLeft(index: number) {
-    this.generatorService.moveLeft(index, 'zeszyty', this.series);
-  }
-
-  moveRight(index: number) {
-    this.generatorService.moveRight(index, 'zeszyty', this.series);
+  move(index: number, way: number) {
+    this.generatorService.move(index, 'zeszyty', this.series, way);
   }
 
   edit(element: MarvelElement, index: number) {

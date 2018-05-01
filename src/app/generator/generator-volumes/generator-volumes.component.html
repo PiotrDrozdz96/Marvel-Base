@@ -6,8 +6,8 @@
         <div class="element-options">
           <i class="fa fa-plus-square" (click)="add()"></i>
           <i class="fa fa-trash" (click)="trash(element,index)"></i>
-          <i class="fa fa-arrow-circle-left" (click)="moveLeft(index)"></i>
-          <i class="fa fa-arrow-circle-right" (click)="moveRight(index)"></i>
+          <i class="fa fa-arrow-circle-left" (click)="move(index,-1)"></i>
+          <i class="fa fa-arrow-circle-right" (click)="move(index,1)"></i>
           <i class="fa fa-edit" (click)="edit(element,index)"></i>
           <i class="fa fa-file-archive-o" (click)="unpack(element)"></i>
         </div>
@@ -24,9 +24,9 @@
         <app-element [element]="element"></app-element>
         <div class="element-options-container">
           <div class="element-options">
-            <i class="fa fa-arrow-circle-left" (click)="moveChildLeft(index)"></i>
-            <i class="fa fa-arrow-circle-right" (click)="moveChildRight(index)"></i>
-            <i class="fa fa-trash" (click)="removeChild(index)"></i>
+            <i class="fa fa-arrow-circle-left" (click)="moveChild(index,-1)"></i>
+            <i class="fa fa-arrow-circle-right" (click)="moveChild(index,1)"></i>
+            <i class="fa fa-trash" (click)="moveChild(index,0)"></i>
           </div>
         </div>
       </div>

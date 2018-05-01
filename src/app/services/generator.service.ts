@@ -33,18 +33,10 @@ export class GeneratorService {
     this.baseService.trash(id);
   }
 
-  moveLeft(index: number, type: string, arr: Array<string>) {
-    if (index) {
+  move(index: number, type: string, arr: Array<string>, way: number) {
+    if ((way < 0 && index) || (way > 0 && index < arr.length)) {
       const removedElement = arr.splice(index, 1);
-      arr.splice(index - 1, 0, ...removedElement);
-      this.seriesService.update(this.selectedSeries, type, arr);
-    }
-  }
-
-  moveRight(index: number, type: string, arr: Array<string>) {
-    if (index < arr.length) {
-      const removedElement = arr.splice(index, 1);
-      arr.splice(index + 1, 0, ...removedElement);
+      arr.splice(index + way, 0, ...removedElement);
       this.seriesService.update(this.selectedSeries, type, arr);
     }
   }
@@ -59,7 +51,7 @@ export class GeneratorService {
     if (newElement) {
       const conflictElement = this.baseService.update(element.id, newElement);
       if (conflictElement === undefined) {
-       arr[index] = newElement.id;
+        arr[index] = newElement.id;
         this.seriesService.update(this.selectedSeries, type, arr);
       } else {
         const dialogRef = this.dialog.open(ConflictElementsDialog, {

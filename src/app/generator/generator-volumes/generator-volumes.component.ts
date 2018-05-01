@@ -52,12 +52,8 @@ export class GeneratorVolumesComponent implements OnInit {
     this.generatorService.trash(element.id, index, 'tomy', this.series);
   }
 
-  moveLeft(index: number) {
-    this.generatorService.moveLeft(index, 'tomy', this.series);
-  }
-
-  moveRight(index: number) {
-    this.generatorService.moveRight(index, 'tomy', this.series);
+  move(index: number, way: number) {
+    this.generatorService.move(index, 'tomy', this.series, way);
   }
 
   edit(element: MarvelElement, index: number) {
@@ -81,9 +77,9 @@ export class GeneratorVolumesComponent implements OnInit {
 
   setSeriesInUnpackElement(element?: MarvelElement) {
     this.unpackElement.series = this.childElements.concat(element || []).reduce(
-      (total, current) => !total.find( c => c === current.series[0]) ?
-      total.concat(current.series[0]) : total
-     , []);
+      (total, current) => !total.find(c => c === current.series[0]) ?
+        total.concat(current.series[0]) : total
+      , []);
   }
 
   addChild(element: MarvelElement) {
@@ -96,24 +92,12 @@ export class GeneratorVolumesComponent implements OnInit {
     }
   }
 
-  removeChild(index: number) {
-    this.unpackElement.children.splice(index, 1);
-    this.setSeriesInUnpackElement();
-    this.baseService.update(this.unpackElement.id, this.unpackElement);
-  }
-
-  moveChildLeft(index: number) {
-    if (index) {
+  moveChild(index: number, way: number) {
+    if (!way || (way < 0 && index) || (way > 0 && index < this.unpackElement.children.length)) {
       const removedElement = this.unpackElement.children.splice(index, 1);
-      this.unpackElement.children.splice(index - 1, 0, ...removedElement);
-      this.baseService.update(this.unpackElement.id, this.unpackElement);
-    }
-  }
-
-  moveChildRight(index: number) {
-    if (index < this.unpackElement.children.length) {
-      const removedElement = this.unpackElement.children.splice(index, 1);
-      this.unpackElement.children.splice(index + 1, 0, ...removedElement);
+      if (!way) { this.setSeriesInUnpackElement(); } else {
+        this.unpackElement.children.splice(index + way, 0, ...removedElement);
+      }
       this.baseService.update(this.unpackElement.id, this.unpackElement);
     }
   }
