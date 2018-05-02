@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { LoadBaseDialog } from '../dialogs/load-base/load-base.dialog';
@@ -13,7 +13,8 @@ import { SeriesService } from '../services/series.service';
   selector: 'app-generator',
   templateUrl: './generator.component.html',
   styleUrls: ['./generator.component.css'],
-  providers: [GeneratorService, BaseService, CategoriesService, ChronologyService, SeriesService]
+  providers: [GeneratorService, BaseService, CategoriesService, ChronologyService, SeriesService],
+  encapsulation: ViewEncapsulation.None
 })
 export class GeneratorComponent implements OnInit {
 

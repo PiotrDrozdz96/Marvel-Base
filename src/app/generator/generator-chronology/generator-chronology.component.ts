@@ -7,8 +7,7 @@ import { GeneratorService } from '../../services/generator.service';
 
 @Component({
   selector: 'app-generator-chronology',
-  templateUrl: './generator-chronology.component.html',
-  styleUrls: ['./generator-chronology.component.css']
+  templateUrl: './generator-chronology.component.html'
 })
 export class GeneratorChronologyComponent implements OnInit {
 

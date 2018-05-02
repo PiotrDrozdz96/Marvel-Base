@@ -12,8 +12,7 @@ import { AddElementDialog } from '../../dialogs/add-element/add-element.dialog';
 
 @Component({
   selector: 'app-generator-issues',
-  templateUrl: './generator-issues.component.html',
-  styleUrls: ['./generator-issues.component.css']
+  templateUrl: './generator-issues.component.html'
 })
 export class GeneratorIssuesComponent implements OnInit {
 

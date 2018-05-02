@@ -48,7 +48,16 @@ export class BaseService {
       return returnedObs.asObservable();
     } else {
       this.elementsObs.asObservable().subscribe(elements => {
-        returnedObs.next(ids.map(id => elements[id]));
+        returnedObs.next(ids.map(id => elements[id] || {
+          title: 'title',
+          subTitle: 'subTtitle',
+          publishedDate: 'publishedDate',
+          id: id,
+          volume: '',
+          number: '',
+          cover: '',
+          series: []
+        }));
       });
       return returnedObs.asObservable();
     }

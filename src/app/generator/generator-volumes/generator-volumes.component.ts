@@ -8,8 +8,7 @@ import { EditElementDialog } from '../../dialogs/edit-element/edit-element.dialo
 
 @Component({
   selector: 'app-generator-volumes',
-  templateUrl: './generator-volumes.component.html',
-  styleUrls: ['./generator-volumes.component.css']
+  templateUrl: './generator-volumes.component.html'
 })
 export class GeneratorVolumesComponent implements OnInit {
 

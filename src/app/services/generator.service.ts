@@ -80,7 +80,7 @@ export class GeneratorService {
     if (newElement) {
       const conflictElement = this.baseService.add(newElement);
       if (conflictElement === undefined) {
-        arr.splice(index + 1, 0, newElement.id);
+        arr.splice(index, 0, newElement.id);
         this.seriesService.update(this.selectedSeries, type, arr);
       } else {
         const dialogRef = this.dialog.open(ConflictElementsDialog, {
