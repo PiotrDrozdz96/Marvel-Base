@@ -21,6 +21,8 @@ import { LoadBaseDialog } from './dialogs/load-base/load-base.dialog';
 import { EditElementDialog } from './dialogs/edit-element/edit-element.dialog';
 import { ConflictElementsDialog } from './dialogs/conflict-elements/conflict-elements.dialog';
 import { AddElementDialog } from './dialogs/add-element/add-element.dialog';
+import { GrabElementsDialog } from './dialogs/grab-elements/grab-elements.dialog';
+import { ConflictGrabElementsDialog } from './dialogs/conflict-grab-elements/conflict-grab-elements.dialog';
 import { GeneratorComponent } from './generator/generator.component';
 import { GeneratorToolbarComponent } from './generator/generator-toolbar/generator-toolbar.component';
 import { GeneratorIssuesComponent } from './generator/generator-issues/generator-issues.component';
@@ -43,6 +45,8 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
     EditElementDialog,
     ConflictElementsDialog,
     AddElementDialog,
+    GrabElementsDialog,
+    ConflictGrabElementsDialog,
     GeneratorComponent,
     GeneratorToolbarComponent,
     GeneratorIssuesComponent,
@@ -53,7 +57,9 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
      LoadBaseDialog,
      EditElementDialog,
      ConflictElementsDialog,
-     AddElementDialog
+     AddElementDialog,
+     GrabElementsDialog,
+     ConflictGrabElementsDialog
   ],
   imports: [
     BrowserModule,

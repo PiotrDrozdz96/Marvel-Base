@@ -1,0 +1,14 @@
+<style>
+  textarea{
+    background-color: inherit;
+    height: 250px;
+    resize: none;
+    color: inherit;
+  }
+</style>
+<div mat-dialog-content>
+  <textarea [(ngModel)]="pageString"></textarea>
+</div>
+<div mat-dialog-actions>
+  <button (click)="grab()">Ok</button>
+</div>

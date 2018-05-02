@@ -9,6 +9,7 @@ import { MarvelElement } from '../../models/elements';
 
 import { EditElementDialog } from '../../dialogs/edit-element/edit-element.dialog';
 import { AddElementDialog } from '../../dialogs/add-element/add-element.dialog';
+import { GrabElementsDialog } from '../../dialogs/grab-elements/grab-elements.dialog';
 
 @Component({
   selector: 'app-generator-issues',
@@ -60,6 +61,13 @@ export class GeneratorIssuesComponent implements OnInit {
         });
         singleElementDialogRef.afterClosed().subscribe(newElement => {
           this.generatorService.tryAddElement(newElement, index, 'zeszyty', this.series);
+        });
+      } else if (result === 'grabElements') {
+        const grabElementsDialogRef = this.dialog.open(GrabElementsDialog);
+        grabElementsDialogRef.afterClosed().subscribe(newElements => {
+          this.generatorService.tryAddElements(
+            newElements.map(element => Object.assign(element, { series: [this.selectedSeries] })),
+            index, this.series);
         });
       }
     });

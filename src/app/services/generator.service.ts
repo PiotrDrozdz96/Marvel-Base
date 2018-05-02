@@ -6,6 +6,7 @@ import { BaseService } from './base.service';
 import { MarvelElement } from '../models/elements';
 import { MatDialog } from '@angular/material';
 import { ConflictElementsDialog } from '../dialogs/conflict-elements/conflict-elements.dialog';
+import { ConflictGrabElementsDialog } from '../dialogs/conflict-grab-elements/conflict-grab-elements.dialog';
 
 @Injectable()
 export class GeneratorService {
@@ -95,4 +96,32 @@ export class GeneratorService {
       }
     }
   }
+
+  tryAddElements(newElements: Array<MarvelElement>, index: number, arr: Array<string>) {
+    let newElement = newElements.shift();
+    let conflictElement = this.baseService.add(newElement);
+    while (newElement !== undefined && conflictElement === undefined) {
+      arr.splice(index, 0, newElement.id);
+      this.seriesService.update(this.selectedSeries, 'zeszyty', arr);
+      index++;
+      newElement = newElements.shift();
+      if (newElement !== undefined) { conflictElement = this.baseService.add(newElement); }
+    }
+    if (newElement !== undefined && conflictElement !== undefined) {
+      const dialogRef = this.dialog.open(ConflictGrabElementsDialog, {
+        data: {
+          element: conflictElement,
+          newElement: newElement
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.tryAddElements([result, ...newElements], index, arr);
+        } else if (result === false) {
+          this.tryAddElements(newElements, index, arr);
+        }
+      });
+    }
+  }
+
 }
