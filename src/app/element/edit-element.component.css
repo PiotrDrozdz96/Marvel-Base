@@ -8,3 +8,19 @@ textarea{
     width: 0px;
     background: transparent;
 }
+
+@media screen and (max-width: 878px) {
+    .element{
+        height: 260px;
+    }
+}
+
+@media screen and (max-width: 592px) {
+    textarea{
+        font-size: x-small;
+    }
+
+    .element{
+        height: 200px;
+    }
+}

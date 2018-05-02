@@ -8,6 +8,7 @@
     border-radius: 10px; /* not working */
     background: black;
     color: dimgray;
+    height: 200px;
 }
 
 .mat-dialog-actions button{
