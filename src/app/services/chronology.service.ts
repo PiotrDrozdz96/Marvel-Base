@@ -32,4 +32,14 @@ export class ChronologyService {
     this.chronologyObs.next(data);
   }
 
+  download() {
+    const blob = new Blob([JSON.stringify(this.chronology)], { type: 'text/csv' });
+    const a = window.document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'chronology.JSON';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
 }

@@ -91,7 +91,7 @@ export class BaseService {
       this.elements[id] = element;
       this.elementsObs.next(this.elements);
     } else {
-      if (this.elements[element.id] ) {
+      if (this.elements[element.id]) {
         return this.elements[element.id];
       } else {
         this.elements[element.id] = element;
@@ -101,10 +101,24 @@ export class BaseService {
   }
 
   add(element: MarvelElement) {
-    if (this.elements[element.id] ) {
+    if (this.elements[element.id]) {
       return this.elements[element.id];
     } else {
       this.elements[element.id] = element;
     }
+  }
+
+  download() {
+    const sortedBase = {};
+    Object.keys(this.elements).sort().forEach(key => {
+      sortedBase[key] = this.elements[key];
+    });
+    const blob = new Blob([JSON.stringify(sortedBase)], { type: 'text/csv' });
+    const a = window.document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'base.JSON';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 }

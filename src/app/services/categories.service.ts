@@ -64,4 +64,14 @@ export class CategoriesService {
     this.categoriesObs.next(data);
   }
 
+  download() {
+    const blob = new Blob([JSON.stringify(this.categories)], { type: 'text/csv' });
+    const a = window.document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'categories.JSON';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
 }

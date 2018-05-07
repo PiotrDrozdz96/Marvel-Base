@@ -4,6 +4,7 @@
   </div>
   <div class="main">
     <button *ngFor="let btn of toolbar" [routerLink]="btn.id">{{btn.value}}</button>
+    <button (click)="download()">Pobierz bazę</button>
   </div>
   <div class="main">
     Nurt

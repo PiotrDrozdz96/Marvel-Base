@@ -5,6 +5,7 @@ import { Category, Categories } from '../../models/categories';
 import { GeneratorService } from '../../services/generator.service';
 import { SeriesService } from '../../services/series.service';
 import { BaseService } from '../../services/base.service';
+import { ChronologyService } from '../../services/chronology.service';
 
 @Component({
   selector: 'app-generator-toolbar',
@@ -27,6 +28,7 @@ export class GeneratorToolbarComponent implements OnInit {
     private generatorService: GeneratorService,
     private categoriesService: CategoriesService,
     private seriesService: SeriesService,
+    private chronologyService: ChronologyService,
     private baseService: BaseService
   ) { }
 
@@ -108,6 +110,13 @@ export class GeneratorToolbarComponent implements OnInit {
         this.newWave = '';
       }
     }
+  }
+
+  download() {
+    this.chronologyService.download();
+    this.seriesService.download();
+    this.categoriesService.download();
+    this.baseService.download();
   }
 
 }

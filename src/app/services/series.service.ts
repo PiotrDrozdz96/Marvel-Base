@@ -39,4 +39,18 @@ export class SeriesService {
     this.seriesObs.next(this.series);
   }
 
+  download() {
+    const sortedSeries = {};
+    Object.keys(this.series).sort().forEach( key => {
+      sortedSeries[key] = this.series[key];
+    });
+    const blob = new Blob([JSON.stringify(sortedSeries)], { type: 'text/csv' });
+    const a = window.document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'series.JSON';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
 }
