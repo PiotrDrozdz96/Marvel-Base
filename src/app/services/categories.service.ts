@@ -40,11 +40,11 @@ export class CategoriesService {
   }
 
   change(wave: Category, series?: Category) {
-    const array = Object.keys(this.categories).map(id => this.categories[id]);
+    const array = Object.values(this.categories);
     if (series) {
       this.checkAll(wave.series, series.checked, wave);
       this.checkAll(array.slice(1), wave.checked, array[0]);
-    } else if (wave.title === Object.keys(this.categories)[0]) {
+    } else if (wave.title === this.categories.baseTitle.title) {
       this.changeAll(
         array.slice(1).concat(
           array.slice(1).reduce((arr, category) => arr.concat(category.series), [])),
@@ -62,6 +62,11 @@ export class CategoriesService {
   set(data) {
     this.categories = data;
     this.categoriesObs.next(data);
+  }
+
+  changeBaseTitle(title: string) {
+    this.categories.baseTitle.title = title;
+    this.categoriesObs.next(this.categories);
   }
 
   download() {

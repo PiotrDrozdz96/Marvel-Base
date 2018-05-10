@@ -19,7 +19,7 @@
     flex-wrap: wrap;
 }
 
-.elements span {
+.base span {
     float: right;
     font-size: 40px;
     margin-right: 5px;

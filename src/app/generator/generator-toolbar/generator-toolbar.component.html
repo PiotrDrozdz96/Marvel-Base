@@ -1,6 +1,6 @@
 <div class="toolbar">
   <div class="main">
-    <textarea class="baseTitle" [(ngModel)]="title"></textarea>
+    <textarea class="baseTitle" [(ngModel)]="baseTitle" (change)="categoriesService.changeBaseTitle(baseTitle)"></textarea>
   </div>
   <div class="main">
     <button *ngFor="let btn of toolbar" [routerLink]="btn.id">{{btn.value}}</button>
@@ -19,9 +19,7 @@
   </div>
   <div class="secondary on">
     Seria
-    <select [(ngModel)]="selectedSeries" 
-    *ngIf="categories[selectedWave]"
-    (change)="generatorService.changeSeries(selectedSeries)">
+    <select [(ngModel)]="selectedSeries" *ngIf="categories[selectedWave]" (change)="generatorService.changeSeries(selectedSeries)">
       <option *ngFor="let series of categories[selectedWave].series">
         {{series.title}}
       </option>

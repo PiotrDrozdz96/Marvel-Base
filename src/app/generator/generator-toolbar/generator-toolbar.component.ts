@@ -20,7 +20,7 @@ export class GeneratorToolbarComponent implements OnInit {
   selectedWave: string;
   selectedSeries: string;
   selectedType = 'tomy';
-  title: string;
+  baseTitle: string;
   newSeries = '';
   newWave = '';
 
@@ -39,7 +39,7 @@ export class GeneratorToolbarComponent implements OnInit {
 
     this.categoriesService.get().subscribe(categories => {
       this.categories = categories;
-      this.title = Object.keys(categories)[0];
+      this.baseTitle = categories.baseTitle ? categories.baseTitle.title : 'baseTitle';
       this.waves = Object.values(categories).slice(1);
       if (this.waves[0]) {
         this.selectedWave = this.waves[0].title;
@@ -103,7 +103,7 @@ export class GeneratorToolbarComponent implements OnInit {
       } else {
         this.categories[newWave] = { title: newWave, checked: false, series: [] };
         const newCategories = {};
-        newCategories[this.title] = this.categories[this.title];
+        newCategories['baseTitle'] = this.categories.baseTitle;
         Object.keys(this.categories).slice(1).sort()
           .forEach(key => newCategories[key] = this.categories[key]);
         this.categoriesService.set(newCategories);

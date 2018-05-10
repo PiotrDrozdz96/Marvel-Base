@@ -16,7 +16,8 @@ export class EditElementDialog {
   ) { }
 
   closeDialog() {
-    this.element.id = this.element.title + '_' + this.element.volume + '_' + this.element.number;
+    this.element.id = (this.element.title + '_' + this.element.volume + '_' + this.element.number)
+      .replace(' ', '_');
     this.dialogRef.close(this.element);
   }
 
