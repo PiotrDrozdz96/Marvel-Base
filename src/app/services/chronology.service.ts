@@ -12,8 +12,9 @@ export class ChronologyService {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
-      if (params.get('base') !== 'User') {
-        this.getJSON(params.get('base')).subscribe(data => {
+      const baseLink = params.get('base');
+      if (baseLink !== 'User' && baseLink !== 'New') {
+        this.getJSON(baseLink).subscribe(data => {
           this.chronology = data;
           this.chronologyObs.next(data);
         });

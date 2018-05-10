@@ -28,6 +28,7 @@ import { GeneratorToolbarComponent } from './generator/generator-toolbar/generat
 import { GeneratorIssuesComponent } from './generator/generator-issues/generator-issues.component';
 import { GeneratorVolumesComponent } from './generator/generator-volumes/generator-volumes.component';
 import { GeneratorChronologyComponent } from './generator/generator-chronology/generator-chronology.component';
+import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
     AddElementDialog,
     GrabElementsDialog,
     ConflictGrabElementsDialog,
+    AddWaveDialog,
     GeneratorComponent,
     GeneratorToolbarComponent,
     GeneratorIssuesComponent,
@@ -59,7 +61,8 @@ import { GeneratorChronologyComponent } from './generator/generator-chronology/g
      ConflictElementsDialog,
      AddElementDialog,
      GrabElementsDialog,
-     ConflictGrabElementsDialog
+     ConflictGrabElementsDialog,
+     AddWaveDialog
   ],
   imports: [
     BrowserModule,

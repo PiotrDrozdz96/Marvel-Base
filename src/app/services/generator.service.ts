@@ -7,6 +7,9 @@ import { MarvelElement } from '../models/elements';
 import { MatDialog } from '@angular/material';
 import { ConflictElementsDialog } from '../dialogs/conflict-elements/conflict-elements.dialog';
 import { ConflictGrabElementsDialog } from '../dialogs/conflict-grab-elements/conflict-grab-elements.dialog';
+import { AddWaveDialog } from '../dialogs/add-wave/add-wave.dialog';
+import { CategoriesService } from './categories.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GeneratorService {
@@ -18,8 +21,10 @@ export class GeneratorService {
 
 
   constructor(
+    private router: Router,
     private seriesService: SeriesService,
     private baseService: BaseService,
+    private categoriesService: CategoriesService,
     private dialog: MatDialog
   ) { }
 
@@ -122,6 +127,25 @@ export class GeneratorService {
         }
       });
     }
+  }
+
+  addWave(wave: string, series: string) {
+    const dialogRef = this.dialog.open(AddWaveDialog, { width: '360px', data: [wave, series] });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.wave !== '' && result.series !== '') {
+        if (this.categoriesService.exist(result.wave) || this.seriesService.exist(result.series)) {
+          this.addWave(
+            result.wave + (this.categoriesService.exist(result.wave) ? ' <- Istnieje taki nurt' : ''),
+            result.series + (this.seriesService.exist(result.series) ? ' <- Istnieje taka seria' : '')
+          );
+        } else {
+          this.seriesService.add(result.series);
+          this.categoriesService.add(result.wave, result.series);
+        }
+      } else {
+        this.router.navigate(['/Generator/Marvel_Now']);
+      }
+    });
   }
 
 }

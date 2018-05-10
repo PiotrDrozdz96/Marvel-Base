@@ -50,8 +50,10 @@ export class GeneratorToolbarComponent implements OnInit {
   }
 
   changeWave() {
-    this.selectedSeries = this.categories[this.selectedWave].series[0].title;
-    this.generatorService.changeSeries(this.selectedSeries);
+    if (this.categories[this.selectedWave].series[0]) {
+      this.selectedSeries = this.categories[this.selectedWave].series[0].title;
+      this.generatorService.changeSeries(this.selectedSeries);
+    }
   }
 
   deleteSeries(seriesTitle: string) {
@@ -92,6 +94,9 @@ export class GeneratorToolbarComponent implements OnInit {
         this.categories[waveTitle].series.sort((a, b) => a.title > b.title ? 1 : -1);
         this.categoriesService.set(this.categories);
         this.newSeries = '';
+        this.selectedWave = waveTitle;
+        this.generatorService.changeSeries(newSeries);
+        this.selectedSeries = newSeries;
       }
     }
   }
@@ -101,12 +106,7 @@ export class GeneratorToolbarComponent implements OnInit {
       if (this.categories[newWave]) {
         alert('Istnieje taki nurt');
       } else {
-        this.categories[newWave] = { title: newWave, checked: false, series: [] };
-        const newCategories = {};
-        newCategories['baseTitle'] = this.categories.baseTitle;
-        Object.keys(this.categories).slice(1).sort()
-          .forEach(key => newCategories[key] = this.categories[key]);
-        this.categoriesService.set(newCategories);
+        this.generatorService.addWave(newWave, '');
         this.newWave = '';
       }
     }

@@ -5,5 +5,6 @@ export interface Category {
 }
 
 export interface Categories {
+    baseTitle: Category;
     [index: string]: Category;
 }

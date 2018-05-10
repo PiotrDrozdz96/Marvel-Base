@@ -14,8 +14,9 @@ export class SeriesService {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
-      if (params.get('base') !== 'User') {
-        this.getJSON(params.get('base')).subscribe(data => {
+      const baseLink = params.get('base');
+      if (baseLink !== 'User' && baseLink !== 'New') {
+        this.getJSON(baseLink).subscribe(data => {
           this.series = data;
           this.seriesObs.next(data);
         });
@@ -27,11 +28,20 @@ export class SeriesService {
     return this.http.get('assets/data/' + baseLink + '/series.JSON');
   }
 
+  exist(series: string) {
+    return this.series[series] ? true : false;
+  }
+
   get(): Observable<Series> { return this.seriesObs.asObservable(); }
 
   set(data) {
     this.series = data;
     this.seriesObs.next(data);
+  }
+
+  add(seriesName) {
+    this.series[seriesName] = {zeszyty: [], tomy: []};
+    this.seriesObs.next(this.series);
   }
 
   update(seriesName: string, type: string, series: Array<string>) {

@@ -31,7 +31,7 @@ export class GeneratorIssuesComponent implements OnInit {
       generatorService.getSelectedSeries().subscribe(selectedSeries => {
         if (series[selectedSeries]) {
           this.series = series[selectedSeries].zeszyty;
-
+          this.selectedSeries = selectedSeries;
           baseService.get(series[selectedSeries].zeszyty).subscribe(elements => {
             this.elements = elements;
           });

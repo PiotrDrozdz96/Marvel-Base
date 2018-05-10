@@ -9,13 +9,16 @@ import { Categories, Category } from '../models/categories';
 @Injectable()
 export class CategoriesService {
 
-  private categories: Categories = {};
+  private categories: Categories = {
+    baseTitle: { title: 'Nowa Baza', checked: false }
+  };
   private categoriesObs = new BehaviorSubject<Categories>(this.categories);
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
-      if (params.get('base') !== 'User') {
-        this.getJSON(params.get('base')).subscribe(data => {
+      const baseLink = params.get('base');
+      if (baseLink !== 'User' && baseLink !== 'New') {
+        this.getJSON(baseLink).subscribe(data => {
           this.categories = data;
           this.categoriesObs.next(data);
         });
@@ -37,6 +40,10 @@ export class CategoriesService {
     } else {
       primary.checked = false;
     }
+  }
+
+  exist(wave: string) {
+    return this.categories[wave] ? true : false;
   }
 
   change(wave: Category, series?: Category) {
@@ -62,6 +69,29 @@ export class CategoriesService {
   set(data) {
     this.categories = data;
     this.categoriesObs.next(data);
+  }
+
+  add(newWave: string, newSeries?: string) {
+    if (!this.categories[newWave]) {
+      if (!newSeries) {
+        this.categories[newWave] = { title: newWave, checked: false, series: [] };
+      } else {
+        this.categories[newWave] = { title: newWave, checked: false, series: [{
+          title: newSeries, checked: false
+        }] };
+      }
+      const newCategories = {};
+      newCategories['baseTitle'] = this.categories.baseTitle;
+      Object.keys(this.categories).slice(1).sort()
+        .forEach(key => newCategories[key] = this.categories[key]);
+      this.set(newCategories);
+    } else {
+      this.categories[newWave].series.push({
+        title: newSeries, checked: false
+      });
+      this.categoriesObs.next(this.categories);
+    }
+
   }
 
   changeBaseTitle(title: string) {

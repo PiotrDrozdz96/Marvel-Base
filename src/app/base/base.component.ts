@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { CategoriesService } from '../services/categories.service';
 import { ChronologyService } from '../services/chronology.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { LoadBaseDialog } from '../dialogs/load-base/load-base.dialog';
 
@@ -15,6 +15,7 @@ import { LoadBaseDialog } from '../dialogs/load-base/load-base.dialog';
 export class BaseComponent implements OnInit {
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private baseService: BaseService,
@@ -37,6 +38,8 @@ export class BaseComponent implements OnInit {
         this.chronologyService.set(result['chronology.JSON']);
       } else if (result !== undefined) {
         this.loadBase();
+      } else {
+        this.router.navigate(['/Base/Marvel_Now']);
       }
 
     });

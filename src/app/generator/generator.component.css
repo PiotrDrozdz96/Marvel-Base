@@ -25,6 +25,10 @@
     margin-right: 5px;
 }
 
+.mark {
+    border-left: 2px solid firebrick;
+}
+
 .element-options-container {
     display: none;
     background: black;
