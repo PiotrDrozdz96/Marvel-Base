@@ -41,19 +41,20 @@ export class GeneratorToolbarComponent implements OnInit {
       this.categories = categories;
       this.baseTitle = categories.baseTitle ? categories.baseTitle.title : 'baseTitle';
       this.waves = Object.values(categories).slice(1);
-      if (this.waves[0]) {
-        this.selectedWave = this.waves[0].title;
-        this.selectedSeries = this.waves[0].series[0].title;
-        this.generatorService.changeSeries(this.selectedSeries);
-      }
+    });
+
+    this.categoriesService.getSelectedWave().subscribe(selectedWave => {
+      this.selectedWave = selectedWave;
+    });
+
+    this.categoriesService.getSelectedSeries().subscribe(selectedSeries => {
+      this.selectedSeries = selectedSeries;
     });
   }
 
   changeWave() {
-    if (this.categories[this.selectedWave].series[0]) {
-      this.selectedSeries = this.categories[this.selectedWave].series[0].title;
-      this.generatorService.changeSeries(this.selectedSeries);
-    }
+    this.categoriesService.changeWave(this.selectedWave);
+    this.categoriesService.changeSeries(this.categories[this.selectedWave].series[0].title);
   }
 
   deleteSeries(seriesTitle: string) {
@@ -94,9 +95,7 @@ export class GeneratorToolbarComponent implements OnInit {
         this.categories[waveTitle].series.sort((a, b) => a.title > b.title ? 1 : -1);
         this.categoriesService.set(this.categories);
         this.newSeries = '';
-        this.selectedWave = waveTitle;
-        this.generatorService.changeSeries(newSeries);
-        this.selectedSeries = newSeries;
+        this.categoriesService.changeSeries(newSeries);
       }
     }
   }

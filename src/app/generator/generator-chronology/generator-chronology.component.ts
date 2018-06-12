@@ -4,6 +4,7 @@ import { ChronologyService } from '../../services/chronology.service';
 import { MarvelElement } from '../../models/elements';
 import { SeriesService } from '../../services/series.service';
 import { GeneratorService } from '../../services/generator.service';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
   selector: 'app-generator-chronology',
@@ -20,6 +21,7 @@ export class GeneratorChronologyComponent implements OnInit {
     private baseService: BaseService,
     private chronologyService: ChronologyService,
     private seriesService: SeriesService,
+    private categoriesService: CategoriesService,
     private generatorService: GeneratorService
   ) {
     chronologyService.get().subscribe(chronology => {
@@ -30,7 +32,7 @@ export class GeneratorChronologyComponent implements OnInit {
       });
     });
     seriesService.get().subscribe(series => {
-      generatorService.getSelectedSeries().subscribe(selectedSeries => {
+      categoriesService.getSelectedSeries().subscribe(selectedSeries => {
         generatorService.getSelectedType().subscribe(selectedType => {
           if (series[selectedSeries] && series[selectedSeries][selectedType]) {
             baseService.get(series[selectedSeries][selectedType]).subscribe(elements => {

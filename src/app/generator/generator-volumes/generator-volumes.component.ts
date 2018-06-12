@@ -5,6 +5,7 @@ import { SeriesService } from '../../services/series.service';
 import { BaseService } from '../../services/base.service';
 import { MatDialog } from '@angular/material';
 import { EditElementDialog } from '../../dialogs/edit-element/edit-element.dialog';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
   selector: 'app-generator-volumes',
@@ -24,10 +25,11 @@ export class GeneratorVolumesComponent implements OnInit {
     private generatorService: GeneratorService,
     private seriesService: SeriesService,
     private baseService: BaseService,
+    private categoriesService: CategoriesService,
     private dialog: MatDialog
   ) {
     this.seriesService.get().subscribe(series => {
-      this.generatorService.getSelectedSeries().subscribe(selectedSeries => {
+      this.categoriesService.getSelectedSeries().subscribe(selectedSeries => {
         this.selectedSeries = selectedSeries;
         if (series[selectedSeries]) {
           this.series = series[selectedSeries].tomy;

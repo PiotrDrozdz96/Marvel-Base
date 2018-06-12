@@ -19,7 +19,7 @@
   </div>
   <div class="secondary on">
     Seria
-    <select [(ngModel)]="selectedSeries" *ngIf="categories[selectedWave]" (change)="generatorService.changeSeries(selectedSeries)">
+    <select [(ngModel)]="selectedSeries" *ngIf="categories[selectedWave]" (change)="categoriesService.changeSeries(selectedSeries)">
       <option *ngFor="let series of categories[selectedWave].series">
         {{series.title}}
       </option>

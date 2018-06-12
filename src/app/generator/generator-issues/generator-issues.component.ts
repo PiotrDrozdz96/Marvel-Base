@@ -10,6 +10,7 @@ import { MarvelElement } from '../../models/elements';
 import { EditElementDialog } from '../../dialogs/edit-element/edit-element.dialog';
 import { AddElementDialog } from '../../dialogs/add-element/add-element.dialog';
 import { GrabElementsDialog } from '../../dialogs/grab-elements/grab-elements.dialog';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
   selector: 'app-generator-issues',
@@ -24,11 +25,12 @@ export class GeneratorIssuesComponent implements OnInit {
   constructor(
     private generatorService: GeneratorService,
     private seriesService: SeriesService,
+    private categoriesService: CategoriesService,
     private baseService: BaseService,
     private dialog: MatDialog
   ) {
     seriesService.get().subscribe(series => {
-      generatorService.getSelectedSeries().subscribe(selectedSeries => {
+      categoriesService.getSelectedSeries().subscribe(selectedSeries => {
         if (series[selectedSeries]) {
           this.series = series[selectedSeries].zeszyty;
           this.selectedSeries = selectedSeries;

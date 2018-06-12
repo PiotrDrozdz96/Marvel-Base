@@ -27,13 +27,6 @@ export class GeneratorService {
     private dialog: MatDialog
   ) { }
 
-  changeSeries(series: string) {
-    this.selectedSeries = series;
-    this.selectedSeriesObS.next(series);
-  }
-
-  getSelectedSeries(): Observable<string> { return this.selectedSeriesObS.asObservable(); }
-
   changeType(type: string) {
     this.selectedType = type;
     this.selectedTypeObS.next(type);
@@ -140,9 +133,9 @@ export class GeneratorService {
         } else {
           this.seriesService.add(result.series);
           this.categoriesService.add(result.wave, result.series);
+          this.categoriesService.changeWave(result.wave);
+          this.categoriesService.changeSeries(result.series);
         }
-      } else {
-        this.router.navigate(['/Generator/Marvel_Now']);
       }
     });
   }

@@ -13,6 +13,12 @@ export class CategoriesService {
   };
   private categoriesObs = new BehaviorSubject<Categories>(this.categories);
 
+  private selectedWave = '';
+  private selectedWaveObs = new BehaviorSubject<string>(this.selectedWave);
+
+  private selectedSeries = '';
+  private selectedSeriesObs = new BehaviorSubject<string>(this.selectedSeries);
+
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
       const baseLink = params.get('base');
@@ -20,6 +26,15 @@ export class CategoriesService {
         this.getJSON(baseLink).subscribe(data => {
           this.categories = data;
           this.categoriesObs.next(data);
+
+          const waves = Object.values(data).slice(1);
+          if (waves[0]) {
+            this.selectedWave = waves[0]['title'];
+            this.selectedWaveObs.next(this.selectedWave);
+            this.selectedSeries = waves[0]['series'][0].title;
+            this.selectedSeriesObs.next(this.selectedSeries);
+          }
+
         });
       }
     });
@@ -64,10 +79,20 @@ export class CategoriesService {
   }
 
   get(): Observable<Categories> { return this.categoriesObs.asObservable(); }
+  getSelectedWave(): Observable<string> { return this.selectedWaveObs.asObservable(); }
+  getSelectedSeries(): Observable<string> { return this.selectedSeriesObs.asObservable(); }
 
   set(data) {
     this.categories = data;
     this.categoriesObs.next(data);
+  }
+  changeWave(wave: string) {
+    this.selectedWave = wave;
+    this.selectedWaveObs.next(wave);
+  }
+  changeSeries(series: string) {
+    this.selectedSeries = series;
+    this.selectedSeriesObs.next(series);
   }
 
   add(newWave: string, newSeries?: string) {
@@ -75,9 +100,11 @@ export class CategoriesService {
       if (!newSeries) {
         this.categories[newWave] = { title: newWave, checked: false, series: [] };
       } else {
-        this.categories[newWave] = { title: newWave, checked: false, series: [{
-          title: newSeries, checked: false
-        }] };
+        this.categories[newWave] = {
+          title: newWave, checked: false, series: [{
+            title: newSeries, checked: false
+          }]
+        };
       }
       const newCategories = {};
       newCategories['baseTitle'] = this.categories.baseTitle;
