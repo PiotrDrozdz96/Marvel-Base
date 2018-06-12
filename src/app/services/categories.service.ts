@@ -12,12 +12,8 @@ export class CategoriesService {
     baseTitle: { title: 'Nowa Baza', checked: false }
   };
   private categoriesObs = new BehaviorSubject<Categories>(this.categories);
-
-  private selectedWave = '';
-  private selectedWaveObs = new BehaviorSubject<string>(this.selectedWave);
-
-  private selectedSeries = '';
-  private selectedSeriesObs = new BehaviorSubject<string>(this.selectedSeries);
+  private selectedWaveObs = new BehaviorSubject<string>('');
+  private selectedSeriesObs = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
@@ -29,10 +25,8 @@ export class CategoriesService {
 
           const waves = Object.values(data).slice(1);
           if (waves[0]) {
-            this.selectedWave = waves[0]['title'];
-            this.selectedWaveObs.next(this.selectedWave);
-            this.selectedSeries = waves[0]['series'][0].title;
-            this.selectedSeriesObs.next(this.selectedSeries);
+            this.selectedWaveObs.next(waves[0]['title']);
+            this.selectedSeriesObs.next(waves[0]['series'][0].title);
           }
 
         });
@@ -82,16 +76,22 @@ export class CategoriesService {
   getSelectedWave(): Observable<string> { return this.selectedWaveObs.asObservable(); }
   getSelectedSeries(): Observable<string> { return this.selectedSeriesObs.asObservable(); }
 
-  set(data) {
+  set(data, wave?: string) {
     this.categories = data;
     this.categoriesObs.next(data);
+    const waves = Object.values(data).slice(1);
+    if (wave) {
+      this.selectedWaveObs.next(wave);
+    } else {
+      this.selectedWaveObs.next(waves[0]['title']);
+    }
+    if (waves[0]['series'][0]) { this.selectedSeriesObs.next(waves[0]['series'][0]['title']); }
   }
   changeWave(wave: string) {
-    this.selectedWave = wave;
     this.selectedWaveObs.next(wave);
+    this.selectedSeriesObs.next(this.categories[wave].series[0].title);
   }
   changeSeries(series: string) {
-    this.selectedSeries = series;
     this.selectedSeriesObs.next(series);
   }
 

@@ -52,11 +52,6 @@ export class GeneratorToolbarComponent implements OnInit {
     });
   }
 
-  changeWave() {
-    this.categoriesService.changeWave(this.selectedWave);
-    this.categoriesService.changeSeries(this.categories[this.selectedWave].series[0].title);
-  }
-
   deleteSeries(seriesTitle: string) {
     let series;
     this.seriesService.get().subscribe(result => {
@@ -70,7 +65,7 @@ export class GeneratorToolbarComponent implements OnInit {
       this.categories[this.selectedWave].series.findIndex(obj => obj.title === seriesTitle)
       , 1
     );
-    this.categoriesService.set(this.categories);
+    this.categoriesService.set(this.categories, this.selectedWave);
   }
 
   deleteWave(waveTitle: string) {

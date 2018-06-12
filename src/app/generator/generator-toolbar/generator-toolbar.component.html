@@ -8,7 +8,7 @@
   </div>
   <div class="main">
     Nurt
-    <select [(ngModel)]="selectedWave" (change)="changeWave()">
+    <select [(ngModel)]="selectedWave" (change)="categoriesService.changeWave(selectedWave)">
       <option *ngFor="let wave of waves">{{wave.title}}</option>
     </select>
     <div class="form-mini">
