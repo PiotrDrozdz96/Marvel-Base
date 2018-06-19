@@ -1,7 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 
 import { NavbarItem } from '../models/navbarItem';
-import { DropdownService } from '../services/dropdown.service';
 
 @Component({
   selector: 'app-nav',
@@ -14,8 +13,7 @@ export class NavComponent implements OnInit {
   list: Array<NavbarItem>;
 
   constructor(
-    private renderer: Renderer2,
-    private dropdownService: DropdownService
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
@@ -41,14 +39,6 @@ export class NavComponent implements OnInit {
         ]
       }
     ];
-  }
-
-  dropdown(event: any) {
-    this.onItem = this.dropdownService.dropdown(
-      this.renderer,
-      this.onItem,
-      event.path.find(e => e.className === 'navbar-item' || e.className === 'navbar-item on')
-    );
   }
 
   toolbar() {

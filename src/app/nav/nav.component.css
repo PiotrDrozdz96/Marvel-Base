@@ -18,11 +18,6 @@
     display: inline-block;
 }
 
-.navbar-item.on {
-    background-color: white;
-    color: firebrick;
-}
-
 .navbar-item a {
     display: flex;
     text-decoration: none;
@@ -43,28 +38,6 @@
     font-size: 20px;
 }
 
-.dropdown {
-    display: none;
-    position: absolute;
-    background-color: white;
-    color: firebrick;
-    max-width: 200px;
-    box-shadow: 5px 5px 5px 0 dimgray;
-}
-
-.dropdown a {
-    min-width: 100px;
-}
-
-.dropdown a:hover {
-    background-color: firebrick;
-    color: white;
-}
-
-.navbar-item.on .dropdown {
-    display: block;
-}
-
 @media screen and (max-width: 570px) {
     .navbar-list {
         padding: 0 10px;
@@ -72,7 +45,7 @@
     .navbar-item a {
         display: block;
     }
-    .navbar-item a span, .dropdown a {
+    .navbar-item a span {
         font-size: 13px;
     }
 }

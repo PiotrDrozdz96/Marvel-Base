@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatMenuModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -69,6 +69,8 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
     FormsModule,
     HttpClientModule,
     MatDialogModule,
+    MatMenuModule,
+    MatButtonModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },

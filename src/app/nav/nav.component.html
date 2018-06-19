@@ -12,14 +12,14 @@
                     <span>{{item.title}}</span>
                 </a>
             </li>
-            <li *ngIf="item.dropdown" class="navbar-item" (click)="dropdown($event)">
+            <li *ngIf="item.dropdown" class="navbar-item" mat-button [matMenuTriggerFor]="menu">
                 <a>
                     <i [ngClass]="item.icon"></i>
                     <span>{{item.title}}</span>
                 </a>
-                <div class="dropdown">
-                    <a *ngFor="let dropItem of item.dropdown" [routerLink]="dropItem.href">{{dropItem.title}}</a>
-                </div>
+                <mat-menu #menu="matMenu" [overlapTrigger]="false" yPosition="above">
+                    <button *ngFor="let dropItem of item.dropdown" mat-menu-item [routerLink]="dropItem.href">{{dropItem.title}}</button>
+                </mat-menu>
             </li>
         </div>
     </ul>
