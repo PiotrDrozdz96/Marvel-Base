@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { DropdownService } from './services/dropdown.service';
 import { ElementsComponent } from './elements/elements.component';
 import { ElementComponent } from './element/element.component';
 import { EditElementComponent } from './element/edit-element.component';
@@ -88,7 +87,6 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
       { path: '**', component: NotFoundComponent}
     ])
   ],
-  providers: [DropdownService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
