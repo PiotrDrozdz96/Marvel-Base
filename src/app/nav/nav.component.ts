@@ -53,7 +53,7 @@ export class NavComponent implements OnInit {
     }
   }
 
-  testClick() {
+  secondClick() {
     let on = false;
     const observable = fromEvent(window, 'click').subscribe((event: MouseEvent) => {
       if (on) {

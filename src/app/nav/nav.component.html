@@ -12,7 +12,7 @@
                     <span>{{item.title}}</span>
                 </a>
             </li>
-            <li *ngIf="item.dropdown" class="navbar-item" mat-button [matMenuTriggerFor]="menu" (click)="testClick()">
+            <li *ngIf="item.dropdown" class="navbar-item" mat-button [matMenuTriggerFor]="menu" (click)="secondClick()">
                 <a>
                     <i [ngClass]="item.icon"></i>
                     <span>{{item.title}}</span>
