@@ -59,7 +59,7 @@ export class NavComponent implements OnInit {
       if (on) {
         observable.unsubscribe();
         if (event.pageY < 55) {
-          const htmlElement = document.elementFromPoint(event['pageX'], event['pageY']) as HTMLElement;
+          const htmlElement = document.elementFromPoint(event.pageX, event.pageY) as HTMLElement;
           htmlElement.click();
         }
       } else { on = true; }
