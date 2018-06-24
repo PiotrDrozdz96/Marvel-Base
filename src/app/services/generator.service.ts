@@ -13,8 +13,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class GeneratorService {
 
-  private selectedSeries = '';
-  private selectedSeriesObS = new BehaviorSubject<string>(this.selectedSeries);
+  private selectedSeries: string;
   private selectedType = 'tomy';
   private selectedTypeObS = new BehaviorSubject<string>(this.selectedType);
 
@@ -25,7 +24,10 @@ export class GeneratorService {
     private baseService: BaseService,
     private categoriesService: CategoriesService,
     private dialog: MatDialog
-  ) { }
+  ) {
+    this.categoriesService.getSelectedSeries().subscribe(selectedSeries =>
+      this.selectedSeries = selectedSeries);
+  }
 
   changeType(type: string) {
     this.selectedType = type;
