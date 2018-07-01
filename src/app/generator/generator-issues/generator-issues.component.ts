@@ -37,6 +37,8 @@ export class GeneratorIssuesComponent implements OnInit {
           baseService.get(series[selectedSeries].zeszyty).subscribe(elements => {
             this.elements = elements;
           });
+        } else {
+          this.elements = [];
         }
       });
     });

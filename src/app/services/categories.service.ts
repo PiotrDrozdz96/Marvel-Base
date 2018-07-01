@@ -82,10 +82,10 @@ export class CategoriesService {
     const waves = Object.values(data).slice(1);
     if (wave) {
       this.selectedWaveObs.next(wave);
-    } else {
+    } else if (waves[0]) {
       this.selectedWaveObs.next(waves[0]['title']);
     }
-    if (waves[0]['series'][0]) { this.selectedSeriesObs.next(waves[0]['series'][0]['title']); }
+    if (waves[0] && waves[0]['series'][0]) { this.selectedSeriesObs.next(waves[0]['series'][0]['title']); }
   }
   changeWave(wave: string) {
     this.selectedWaveObs.next(wave);

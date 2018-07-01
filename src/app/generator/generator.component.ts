@@ -39,7 +39,7 @@ export class GeneratorComponent implements OnInit {
         this.categoriesService.set({
           baseTitle: { title: 'Nowa Baza', checked: false }
         });
-        this.addWave('', '');
+        this.addWave('Nurt', 'Seria');
       }
     });
   }
