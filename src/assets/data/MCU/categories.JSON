@@ -41,12 +41,12 @@
       }
     ]
   },
-  "Hulu Runaways": {
-    "title": "Hulu Runaways",
+  "Inne": {
+    "title": "Inne",
     "checked": false,
     "series": [
       {
-        "title": "Runaways",
+        "title": "Inne",
         "checked": false
       }
     ]

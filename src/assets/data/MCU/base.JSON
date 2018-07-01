@@ -340,7 +340,7 @@
   },
   "Runaways": {
     "series": [
-      "Runaways"
+      "Inne"
     ],
     "cover": "assets/data/MCU/covers/MCU_Series/Runaways.jpg",
     "title": "Runaways",
@@ -382,5 +382,23 @@
     "title": "Avengers",
     "subTitle": "Wojna bez granic",
     "publishedDate": "26 April 2018"
+  },
+  "LukeCage2": {
+    "series": [
+      "Netflix"
+    ],
+    "cover": "assets/data/MCU/covers/netflix/LukeCage2.png",
+    "title": "Luke Cage",
+    "subTitle": "Sezon 2",
+    "publishedDate": "22 June 2018"
+  },
+  "Cloak&Dagger": {
+    "series": [
+      "Inne"
+    ],
+    "cover": "assets/data/MCU/covers/MCU_Series/Cloak&Dagger.png",
+    "title": "Cloak & Dagger",
+    "subTitle": "Sezon 1",
+    "publishedDate": "2 August 2018"
   }
 }
