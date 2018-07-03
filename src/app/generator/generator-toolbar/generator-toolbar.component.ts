@@ -35,7 +35,8 @@ export class GeneratorToolbarComponent implements OnInit {
   ngOnInit() {
     this.toolbar = [{ id: 'issues', value: 'Zeszyty' },
     { id: 'volumes', value: 'Tomy' },
-    { id: 'chronology', value: 'Chronologia' }];
+    { id: 'chronology', value: 'Chronologia' },
+    { id: 'categories', value: 'Kategorie'}];
 
     this.categoriesService.get().subscribe(categories => {
       this.categories = categories;
@@ -50,60 +51,6 @@ export class GeneratorToolbarComponent implements OnInit {
     this.categoriesService.getSelectedSeries().subscribe(selectedSeries => {
       this.selectedSeries = selectedSeries;
     });
-  }
-
-  deleteSeries(seriesTitle: string) {
-    let series;
-    this.seriesService.get().subscribe(result => {
-      series = result;
-    }).unsubscribe();
-    series[seriesTitle].zeszyty.forEach(id => this.baseService.trash(id));
-    series[seriesTitle].tomy.forEach(id => this.baseService.trash(id));
-    delete series[seriesTitle];
-    this.seriesService.set(series);
-    this.categories[this.selectedWave].series.splice(
-      this.categories[this.selectedWave].series.findIndex(obj => obj.title === seriesTitle)
-      , 1
-    );
-    this.categoriesService.set(this.categories, this.selectedWave);
-  }
-
-  deleteWave(waveTitle: string) {
-    this.categories[waveTitle].series.map(obj => obj.title)
-      .forEach(seriesTitle => this.deleteSeries(seriesTitle));
-    delete this.categories[waveTitle];
-    this.categoriesService.set(this.categories);
-  }
-
-  addSeries(waveTitle: string, newSeries: string) {
-    if (newSeries !== '') {
-      let series;
-      this.seriesService.get().subscribe(result => {
-        series = result;
-      }).unsubscribe();
-      if (series[newSeries]) {
-        alert('Istnieje taka seria');
-      } else {
-        series[newSeries] = { zeszyty: [], tomy: [] };
-        this.seriesService.set(series);
-        this.categories[waveTitle].series.push({ title: newSeries, checked: false });
-        this.categories[waveTitle].series.sort((a, b) => a.title > b.title ? 1 : -1);
-        this.categoriesService.set(this.categories);
-        this.newSeries = '';
-        this.categoriesService.changeSeries(newSeries);
-      }
-    }
-  }
-
-  addWave(newWave: string) {
-    if (newWave !== '') {
-      if (this.categories[newWave]) {
-        alert('Istnieje taki nurt');
-      } else {
-        this.generatorService.addWave(newWave, '');
-        this.newWave = '';
-      }
-    }
   }
 
   download() {

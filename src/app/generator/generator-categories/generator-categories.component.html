@@ -1,0 +1,26 @@
+<div class="page">
+  <div class="categories">
+    <div class="wave" *ngFor="let wave of categoriesArray let first = first">
+      <div [ngClass]="{'all': first, 'main': !first}">
+        <mat-checkbox [(ngModel)]="wave.checked" (change)="categoriesService.change(wave)" color="warn"> {{wave.title}}</mat-checkbox>
+        <button *ngIf="first" mat-icon-button (click)="generatorService.addWave('Nowy nurt','Nowa seria')">
+          <mat-icon fontSet="fa" fontIcon="fa-plus"></mat-icon>
+        </button>
+        <button *ngIf="!first" mat-icon-button (click)="generatorService.addWave(wave.title,'Nowa seria')">
+            <mat-icon fontSet="fa" fontIcon="fa-plus"></mat-icon>
+          </button>
+        <button mat-icon-button *ngIf="!first" (click)="deleteWave(wave.title)">
+          <mat-icon fontSet="fa" fontIcon="fa-minus"></mat-icon>
+        </button>
+        <div *ngIf="!first">
+          <div *ngFor="let series of wave.series" class='secondary'>
+            <mat-checkbox [(ngModel)]="series.checked" (change)="categoriesService.change(wave,series)" color="warn"> {{series.title}}</mat-checkbox>
+            <button mat-icon-button (click)="deleteSeries(wave.title, series.title)">
+              <mat-icon fontSet="fa" fontIcon="fa-minus"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

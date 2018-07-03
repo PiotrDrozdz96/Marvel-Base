@@ -76,16 +76,9 @@ export class CategoriesService {
   getSelectedWave(): Observable<string> { return this.selectedWaveObs.asObservable(); }
   getSelectedSeries(): Observable<string> { return this.selectedSeriesObs.asObservable(); }
 
-  set(data, wave?: string) {
+  set(data) {
     this.categories = data;
     this.categoriesObs.next(data);
-    const waves = Object.values(data).slice(1);
-    if (wave) {
-      this.selectedWaveObs.next(wave);
-    } else if (waves[0]) {
-      this.selectedWaveObs.next(waves[0]['title']);
-    }
-    if (waves[0] && waves[0]['series'][0]) { this.selectedSeriesObs.next(waves[0]['series'][0]['title']); }
   }
   changeWave(wave: string) {
     this.selectedWaveObs.next(wave);
@@ -95,22 +88,22 @@ export class CategoriesService {
     this.selectedSeriesObs.next(series);
   }
 
-  add(newWave: string, newSeries?: string) {
+  add(newWave: string, newSeries: string) {
     if (!this.categories[newWave]) {
-      if (!newSeries) {
-        this.categories[newWave] = { title: newWave, checked: false, series: [] };
-      } else {
-        this.categories[newWave] = {
-          title: newWave, checked: false, series: [{
-            title: newSeries, checked: false
-          }]
-        };
-      }
+      this.categories[newWave] = {
+        title: newWave, checked: false, series: [{
+          title: newSeries, checked: false
+        }]
+      };
       const newCategories = {};
       newCategories['baseTitle'] = this.categories.baseTitle;
-      Object.keys(this.categories).slice(1).sort()
-        .forEach(key => newCategories[key] = this.categories[key]);
+      const keys = Object.keys(this.categories).slice(1).sort();
+      keys.forEach(key => newCategories[key] = this.categories[key]);
       this.set(newCategories);
+      if (keys.length === 1) {
+        this.selectedWaveObs.next(keys[0]);
+        this.selectedSeriesObs.next(newCategories[keys[0]].series[0].title);
+      }
     } else {
       this.categories[newWave].series.push({
         title: newSeries, checked: false

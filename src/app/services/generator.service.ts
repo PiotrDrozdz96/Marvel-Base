@@ -127,16 +127,14 @@ export class GeneratorService {
     const dialogRef = this.dialog.open(AddWaveDialog, { width: '360px', data: [wave, series] });
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.wave !== '' && result.series !== '') {
-        if (this.categoriesService.exist(result.wave) || this.seriesService.exist(result.series)) {
+        if (this.seriesService.exist(result.series)) {
           this.addWave(
-            result.wave + (this.categoriesService.exist(result.wave) ? ' <- Istnieje taki nurt' : ''),
+            result.wave,
             result.series + (this.seriesService.exist(result.series) ? ' <- Istnieje taka seria' : '')
           );
         } else {
           this.seriesService.add(result.series);
           this.categoriesService.add(result.wave, result.series);
-          this.categoriesService.changeWave(result.wave);
-          this.categoriesService.changeSeries(result.series);
         }
       }
     });

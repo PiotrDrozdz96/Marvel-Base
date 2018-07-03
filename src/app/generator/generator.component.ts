@@ -39,12 +39,10 @@ export class GeneratorComponent implements OnInit {
         this.categoriesService.set({
           baseTitle: { title: 'Nowa Baza', checked: false }
         });
-        this.addWave('Nurt', 'Seria');
+        this.generatorService.addWave('Nowy nurt', 'Nowa seria');
       }
     });
   }
-
-  addWave(wave: string, series: string) {this.generatorService.addWave(wave, series); }
 
   loadBase() {
     const dialogRef = this.dialog.open(LoadBaseDialog, { width: '360px' });

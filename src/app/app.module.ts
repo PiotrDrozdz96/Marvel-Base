@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatDialogModule, MatMenuModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatMenuModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatIconRegistry } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import { GeneratorToolbarComponent } from './generator/generator-toolbar/generat
 import { GeneratorIssuesComponent } from './generator/generator-issues/generator-issues.component';
 import { GeneratorVolumesComponent } from './generator/generator-volumes/generator-volumes.component';
 import { GeneratorChronologyComponent } from './generator/generator-chronology/generator-chronology.component';
+import { GeneratorCategoriesComponent } from './generator/generator-categories/generator-categories.component';
 import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
 
 @NgModule({
@@ -52,7 +53,8 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
     GeneratorToolbarComponent,
     GeneratorIssuesComponent,
     GeneratorVolumesComponent,
-    GeneratorChronologyComponent
+    GeneratorChronologyComponent,
+    GeneratorCategoriesComponent
   ],
   entryComponents: [
      LoadBaseDialog,
@@ -70,6 +72,8 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
     MatDialogModule,
     MatMenuModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -79,14 +83,20 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
         { path: ':id', component: ChildElementsComponent}
       ]},
       { path: 'Generator/:base', component: GeneratorComponent, children: [
-        {path: '', redirectTo: 'issues', pathMatch: 'full'},
+        {path: '', redirectTo: 'categories', pathMatch: 'full'},
         {path: 'issues', component: GeneratorIssuesComponent},
         {path: 'volumes', component: GeneratorVolumesComponent},
         {path: 'chronology', component: GeneratorChronologyComponent},
+        {path: 'categories', component: GeneratorCategoriesComponent}
       ]},
       { path: '**', component: NotFoundComponent}
     ])
   ],
+  providers: [MatIconRegistry],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor( public matIconRegistry: MatIconRegistry) {
+    matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+  }
+}
