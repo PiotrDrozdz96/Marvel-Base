@@ -17,6 +17,8 @@ export class CategoriesService {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
+      this.selectedWaveObs.next('');
+      this.selectedSeriesObs.next('');
       const baseLink = params.get('base');
       if (baseLink !== 'User' && baseLink !== 'New') {
         this.getJSON(baseLink).subscribe(data => {
@@ -76,9 +78,16 @@ export class CategoriesService {
   getSelectedWave(): Observable<string> { return this.selectedWaveObs.asObservable(); }
   getSelectedSeries(): Observable<string> { return this.selectedSeriesObs.asObservable(); }
 
-  set(data) {
+  set(data, first?: boolean) {
     this.categories = data;
     this.categoriesObs.next(data);
+    if (first) {
+      const waves = Object.values(data).slice(1);
+      if (waves[0]) {
+        this.selectedWaveObs.next(waves[0]['title']);
+        this.selectedSeriesObs.next(waves[0]['series'][0].title);
+      }
+    }
   }
   changeWave(wave: string) {
     this.selectedWaveObs.next(wave);

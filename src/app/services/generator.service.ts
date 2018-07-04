@@ -125,6 +125,10 @@ export class GeneratorService {
 
   addWave(wave: string, series: string) {
     const dialogRef = this.dialog.open(AddWaveDialog, { width: '360px', data: [wave, series] });
+    let categoriesCount: number;
+    this.categoriesService.get().subscribe(categories => {
+      categoriesCount = Object.keys(categories).length - 1;
+    }).unsubscribe();
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.wave !== '' && result.series !== '') {
         if (this.seriesService.exist(result.series)) {
@@ -136,6 +140,8 @@ export class GeneratorService {
           this.seriesService.add(result.series);
           this.categoriesService.add(result.wave, result.series);
         }
+      } else if (result === undefined && categoriesCount === 0) {
+        this.router.navigate(['/Generator/Marvel_Now']);
       }
     });
   }
