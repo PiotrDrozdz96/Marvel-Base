@@ -50,7 +50,7 @@
     }
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 455px) {
     .navbar-item a, .navbar-item a i:not(:only-child), .navbar-item a span:not(:only-child) {
         line-height: 25px;
     }
