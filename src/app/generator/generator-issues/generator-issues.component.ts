@@ -11,6 +11,7 @@ import { EditElementDialog } from '../../dialogs/edit-element/edit-element.dialo
 import { AddElementDialog } from '../../dialogs/add-element/add-element.dialog';
 import { GrabElementsDialog } from '../../dialogs/grab-elements/grab-elements.dialog';
 import { CategoriesService } from '../../services/categories.service';
+import { InstructionDialog } from '../../dialogs/instruction/instruction.dialog';
 
 @Component({
   selector: 'app-generator-issues',
@@ -72,6 +73,10 @@ export class GeneratorIssuesComponent implements OnInit {
           this.generatorService.tryAddElements(
             newElements.map(element => Object.assign(element, { series: [this.selectedSeries] })),
             index, this.series);
+        });
+      } else if (result === 'instruction') {
+        this.dialog.open(InstructionDialog, { width: '360px' }).afterClosed().subscribe(result2 => {
+          this.add(index);
         });
       }
     });

@@ -21,6 +21,7 @@ import { EditElementDialog } from './dialogs/edit-element/edit-element.dialog';
 import { ConflictElementsDialog } from './dialogs/conflict-elements/conflict-elements.dialog';
 import { AddElementDialog } from './dialogs/add-element/add-element.dialog';
 import { GrabElementsDialog } from './dialogs/grab-elements/grab-elements.dialog';
+import { InstructionDialog } from './dialogs/instruction/instruction.dialog';
 import { ConflictGrabElementsDialog } from './dialogs/conflict-grab-elements/conflict-grab-elements.dialog';
 import { GeneratorComponent } from './generator/generator.component';
 import { GeneratorToolbarComponent } from './generator/generator-toolbar/generator-toolbar.component';
@@ -49,6 +50,7 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
     GrabElementsDialog,
     ConflictGrabElementsDialog,
     AddWaveDialog,
+    InstructionDialog,
     GeneratorComponent,
     GeneratorToolbarComponent,
     GeneratorIssuesComponent,
@@ -63,7 +65,8 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
      AddElementDialog,
      GrabElementsDialog,
      ConflictGrabElementsDialog,
-     AddWaveDialog
+     AddWaveDialog,
+     InstructionDialog
   ],
   imports: [
     BrowserModule,
