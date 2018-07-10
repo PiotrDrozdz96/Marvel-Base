@@ -25,8 +25,8 @@ export class GeneratorToolbarComponent implements OnInit {
   newWave = '';
 
   constructor(
-    private generatorService: GeneratorService,
-    private categoriesService: CategoriesService,
+    public generatorService: GeneratorService,
+    public categoriesService: CategoriesService,
     private seriesService: SeriesService,
     private chronologyService: ChronologyService,
     private baseService: BaseService

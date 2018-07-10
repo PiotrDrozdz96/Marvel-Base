@@ -10,8 +10,8 @@ import { MarvelElement } from '../models/elements';
 })
 export class ChildElementsComponent implements OnInit {
 
-  private parent: MarvelElement;
-  private child: Array<MarvelElement>;
+  public parent: MarvelElement;
+  public child: Array<MarvelElement>;
 
   constructor(private route: ActivatedRoute, private baseSerivce: BaseService) {
     this.route.paramMap.subscribe(params => {

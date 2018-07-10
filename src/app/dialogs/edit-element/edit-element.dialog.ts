@@ -12,7 +12,7 @@ export class EditElementDialog {
 
   constructor(
     private dialogRef: MatDialogRef<EditElementDialog>,
-    @Inject(MAT_DIALOG_DATA) private element: MarvelElement
+    @Inject(MAT_DIALOG_DATA) public element: MarvelElement
   ) { }
 
   closeDialog() {

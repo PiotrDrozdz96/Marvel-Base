@@ -10,7 +10,7 @@ export class LoadBaseDialog {
 
   constructor(
     private dialogRef: MatDialogRef<LoadBaseDialog>,
-    @Inject(MAT_DIALOG_DATA) private data: any
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { this.data = {}; }
 
   openFile(event) {

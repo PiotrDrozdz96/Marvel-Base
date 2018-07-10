@@ -8,8 +8,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 // tslint:disable-next-line:component-class-suffix
 export class AddWaveDialog {
 
-  private wave: string;
-  private series: string;
+  public wave: string;
+  public series: string;
 
   constructor(
     private dialogRef: MatDialogRef<AddWaveDialog>,
