@@ -1,0 +1,12 @@
+<div class="element" *ngIf="element">
+  <div class='cover'><img src={{element.cover}} (click)="changeCover()"></div>
+  <div class='description'>
+    <textarea class='title' rows="1" cols="12" [(ngModel)]="element.title"></textarea>
+    <textarea class='volume' rows="1" cols="3" [(ngModel)]="element.volume"></textarea>
+    <textarea class="number" rows="1" cols="4"  [(ngModel)]="element.number"></textarea>
+    <textarea class='subTitle'  [(ngModel)]="element.subTitle"></textarea>
+    <textarea class='publishedDate'  [(ngModel)]="element.publishedDate"></textarea>
+  </div>
+</div>
+
+  

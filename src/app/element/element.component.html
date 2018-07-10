@@ -1,0 +1,12 @@
+<div class="element" *ngIf="element">
+  <div class='cover'><img src={{element.cover}}></div>
+  <div class='description'>
+    <div class='title'><b><i>{{element.title}}</i></b></div>
+    <div class="number" *ngIf="!element.children && element.volume">
+      Vol {{element.volume}} # {{element.number}}
+    </div>
+    <div class='subTitle'><i>{{element.subTitle}}</i></div>
+    <div class='publishedDate'>{{element.publishedDate}}</div>
+  </div>
+</div>
+  

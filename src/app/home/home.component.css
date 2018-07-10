@@ -1,0 +1,16 @@
+#home{
+    width: 100%;
+    height: calc( 100vh - 55px);
+    /* background-image: url(https://images.alphacoders.com/885/thumb-1920-885339.jpg); */
+    background-image: url(https://www.hdwallpapers.in/walls/avengers_infinity_war-HD.jpg);
+    /* background-position: center; */
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+@media screen and (max-width: 724px) {
+    #home{
+        background-image: url(https://i.pinimg.com/originals/db/46/1e/db461edc47d6b0b73b50dfaa90307e0e.jpg);
+        background-position: center;
+    }
+}

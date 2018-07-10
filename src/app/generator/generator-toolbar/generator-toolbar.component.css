@@ -1,0 +1,41 @@
+@import 'toolbar.css';
+.toolbar select {
+    width: 100%;
+}
+
+.toolbar button {
+    width: 100%;
+    border-radius: 10px;
+    color: inherit;
+}
+
+.toolbar button:hover, .toolbar button.on{
+    background-color: firebrick;
+    color: white;
+}
+
+.baseTitle {
+    background-color: FireBrick;
+    color: white;
+    font-style: inherit;
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+    font-size: 20px;
+    resize: none;
+}
+
+.form-mini textarea {
+    background-color: white;
+    color: black;
+    width: 45%;
+    height: 15px;
+    margin-top: 5px;
+    resize: none;
+}
+
+.form-mini button {
+    margin: 0;
+    width: 22px;
+    height: 22px;
+}

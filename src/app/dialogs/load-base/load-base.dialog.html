@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Zaznacz wszystkie pliki swojej bazy</h1>
+<div mat-dialog-content>
+  <input type="file" multiple (change)="openFile($event)">
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

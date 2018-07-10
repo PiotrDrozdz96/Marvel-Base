@@ -1,0 +1,17 @@
+<style>
+    textarea{
+      background-color: inherit;
+      resize: none;
+      color: inherit;
+      width: 90%;
+      font-size: large;
+    }
+  </style>
+<h1 mat-dialog-title>Stwórz Nurt i Serie</h1>
+<div mat-dialog-content>
+  <textarea [(ngModel)]="wave"></textarea>
+  <textarea [(ngModel)]="series"></textarea>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="exit()">Ok</button>
+</div>

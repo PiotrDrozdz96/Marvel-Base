@@ -1,0 +1,27 @@
+<div class="toolbar">
+  <div class="main">
+    <textarea class="baseTitle" [(ngModel)]="baseTitle" (change)="categoriesService.changeBaseTitle(baseTitle)"></textarea>
+  </div>
+  <div class="main">
+    <button *ngFor="let btn of toolbar" [routerLink]="btn.id">{{btn.value}}</button>
+    <button (click)="download()">Pobierz bazę</button>
+  </div>
+  <div class="main">
+    Nurt
+    <select [(ngModel)]="selectedWave" (change)="categoriesService.changeWave(selectedWave)">
+      <option *ngFor="let wave of waves">{{wave.title}}</option>
+    </select>
+  </div>
+  <div class="secondary on">
+    Seria
+    <select [(ngModel)]="selectedSeries" *ngIf="categories[selectedWave]" (change)="categoriesService.changeSeries(selectedSeries)">
+      <option *ngFor="let series of categories[selectedWave].series">
+        {{series.title}}
+      </option>
+    </select>
+  </div>
+  <select [(ngModel)]="selectedType" (change)="generatorService.changeType(selectedType)">
+    <option>tomy</option>
+    <option>zeszyty</option>
+  </select>
+</div>

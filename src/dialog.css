@@ -1,0 +1,17 @@
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+.mat-dialog-title{
+    text-align: center;
+}
+
+.mat-dialog-container{
+    border: 10px solid FireBrick;
+    border-radius: 10px; /* not working */
+    background: black;
+    color: dimgray;
+    height: 200px;
+}
+
+.mat-dialog-actions button{
+    border-radius: 10px;
+    width: 100%;
+}
