@@ -50,7 +50,7 @@ export class GeneratorComponent implements OnInit {
       if (result && result['base.JSON'] &&
         result['categories.JSON'] && result['chronology.JSON'] && result['series.JSON']) {
         this.baseService.set(result['base.JSON']);
-        this.categoriesService.set(result['categories.JSON'], true);
+        this.categoriesService.set(result['categories.JSON']);
         this.chronologyService.set(result['chronology.JSON']);
         this.seriesService.set(result['series.JSON']);
       } else if (result !== undefined) {

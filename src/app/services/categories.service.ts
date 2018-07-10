@@ -21,17 +21,7 @@ export class CategoriesService {
       this.selectedSeriesObs.next('');
       const baseLink = params.get('base');
       if (baseLink !== 'User' && baseLink !== 'New') {
-        this.getJSON(baseLink).subscribe(data => {
-          this.categories = data;
-          this.categoriesObs.next(data);
-
-          const waves = Object.values(data).slice(1);
-          if (waves[0]) {
-            this.selectedWaveObs.next(waves[0]['title']);
-            this.selectedSeriesObs.next(waves[0]['series'][0].title);
-          }
-
-        });
+        this.getJSON(baseLink).subscribe(data => { this.set(data); });
       }
     });
   }
@@ -78,15 +68,13 @@ export class CategoriesService {
   getSelectedWave(): Observable<string> { return this.selectedWaveObs.asObservable(); }
   getSelectedSeries(): Observable<string> { return this.selectedSeriesObs.asObservable(); }
 
-  set(data, first?: boolean) {
+  set(data) {
     this.categories = data;
     this.categoriesObs.next(data);
-    if (first) {
-      const waves = Object.values(data).slice(1);
-      if (waves[0]) {
-        this.selectedWaveObs.next(waves[0]['title']);
-        this.selectedSeriesObs.next(waves[0]['series'][0].title);
-      }
+    const waves = Object.values(this.categories).slice(1);
+    if (waves[0]) {
+      this.selectedWaveObs.next(waves[0]['title']);
+      this.selectedSeriesObs.next(waves[0]['series'][0].title);
     }
   }
   changeWave(wave: string) {
