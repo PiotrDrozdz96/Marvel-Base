@@ -93,7 +93,7 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
         {path: 'categories', component: GeneratorCategoriesComponent}
       ]},
       { path: '**', component: NotFoundComponent}
-    ])
+    ], { useHash: true })
   ],
   providers: [MatIconRegistry],
   bootstrap: [AppComponent]
