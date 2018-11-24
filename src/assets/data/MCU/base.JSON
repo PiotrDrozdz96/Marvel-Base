@@ -400,5 +400,32 @@
     "title": "Cloak & Dagger",
     "subTitle": "Sezon 1",
     "publishedDate": "2 August 2018"
+  },
+  "IronFist2": {
+    "series": [
+      "Netflix"
+    ],
+    "cover": "assets/data/MCU/covers/netflix/IronFist2.png",
+    "title": "Iron Fist",
+    "subTitle": "Sezon 2",
+    "publishedDate": "7 September 2018"
+  },
+  "Daredevil3": {
+    "series": [
+      "Netflix"
+    ],
+    "cover": "assets/data/MCU/covers/netflix/Daredevil3.png",
+    "title": "Daredevil",
+    "subTitle": "Sezon 3",
+    "publishedDate": "19 October 2018"
+  },
+  "Ant-Man2": {
+    "series": [
+      "Filmy"
+    ],
+    "cover": "assets/data/MCU/covers/movies/Ant-Man2.png",
+    "title": "Ant-Man",
+    "subTitle": "i Osa",
+    "publishedDate": "4 July 2018"
   }
 }

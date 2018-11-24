@@ -20,17 +20,14 @@ export class GrabElementsDialog {
     const images = Array.from(page.querySelectorAll('.wikia-gallery-item img.thumbimage'))
       .map(e => e.getAttribute('src'));
     const array = Array.from(page.querySelectorAll('.wikia-gallery-item')).map((e, i) => {
-      const haveSubtitle = /(.+)Vol (\d+)  #(.+)(".*")\((.+)\)/.test(e.textContent);
-      const description = haveSubtitle ?
-        e.textContent.match(/(.+)Vol (\d+)  #(.+)(".*")\((.+)\)/) :
-        e.textContent.match(/(.+)Vol (\d+)  #(.+)\((.+)\)/);
+      const description = e.textContent.match(/(.+[^ V\d])( Vol )?(\d+)?( )?( )#([^"]+)(".*")?\((.+)\)/);
       return {
         title: description[1].trim(),
-        volume: description[2],
-        number: description[3],
-        id: description[1].trim() + '_' + description[2] + '_' + description[3],
-        subTitle: haveSubtitle ? description[4] : '',
-        publishedDate: haveSubtitle ? description[5] : description[4],
+        volume: description[3] || '1',
+        number: description[6],
+        id: (description[1].trim() + '_' + (description[3] || '1') + '_' + description[6]).replace(/ /g, '_'),
+        subTitle: (description[7] || '').trim(),
+        publishedDate: description[8],
         cover: images[i * 2]
       };
     });
