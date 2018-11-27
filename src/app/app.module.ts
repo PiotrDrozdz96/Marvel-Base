@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatDialogModule, MatMenuModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatIconRegistry } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -78,6 +79,7 @@ import { AddWaveDialog } from './dialogs/add-wave/add-wave.dialog';
     MatCheckboxModule,
     MatIconModule,
     BrowserAnimationsModule,
+    DragDropModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'Base', component: NotFoundComponent },
