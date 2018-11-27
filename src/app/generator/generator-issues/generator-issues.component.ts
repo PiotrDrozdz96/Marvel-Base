@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { CdkDragDrop, CdkDragExit, CdkDragEnter,
-         moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop, CdkDragExit, CdkDragEnter,
+  moveItemInArray, transferArrayItem
+} from '@angular/cdk/drag-drop';
 
 import { listToMatrix } from '../../functions/listToMatrix';
 
 import { GeneratorService } from '../../services/generator.service';
 import { SeriesService } from '../../services/series.service';
 import { BaseService } from '../../services/base.service';
+import { WindowService } from '../../services/window.service';
 
 import { MarvelElement } from '../../models/elements';
 
@@ -25,29 +28,38 @@ import { InstructionDialog } from '../../dialogs/instruction/instruction.dialog'
 })
 export class GeneratorIssuesComponent implements OnInit {
 
-  elements: Array<Array<MarvelElement>>;
+  matrixElements: Array<Array<MarvelElement>>;
+  elements: Array<MarvelElement>;
   series: Array<string>;
   selectedSeries: string;
   previousIndex: number;
-  numberIssuesOnRow = 7;
+  currentIndex: number;
+  numberIssuesOnRow = 1;
 
   constructor(
     private generatorService: GeneratorService,
     private seriesService: SeriesService,
     private categoriesService: CategoriesService,
     private baseService: BaseService,
+    private windowService: WindowService,
     private dialog: MatDialog
   ) {
+
     seriesService.get().subscribe(series => {
       categoriesService.getSelectedSeries().subscribe(selectedSeries => {
         if (series[selectedSeries]) {
           this.series = series[selectedSeries].zeszyty;
           this.selectedSeries = selectedSeries;
           baseService.get(series[selectedSeries].zeszyty).subscribe(elements => {
-            this.elements = listToMatrix(elements, this.numberIssuesOnRow);
+            windowService.getCountElements().subscribe(numberIssuesOnRow => {
+              this.numberIssuesOnRow = numberIssuesOnRow;
+              if (numberIssuesOnRow > 2) {
+                this.matrixElements = listToMatrix(elements, numberIssuesOnRow);
+              } else { this.elements = elements; }
+            });
           });
         } else {
-          this.elements = [];
+          this.matrixElements = [];
         }
       });
     });
@@ -101,18 +113,23 @@ export class GeneratorIssuesComponent implements OnInit {
     });
   }
 
-  grab() {}
+  grab() { }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(event.container.data, event.previousIndex,
+        event.currentIndex - (this.currentIndex > this.previousIndex ? 1 : 0));
     } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+      transferArrayItem(event.previousContainer.data, event.container.data,
+        event.previousIndex, event.currentIndex - (this.currentIndex > this.previousIndex ? 1 : 0));
     }
-    this.seriesService.update(this.selectedSeries, 'zeszyty', [].concat(...this.elements).map(e => e.id));
+    this.seriesService.update(this.selectedSeries, 'zeszyty', [].concat(...this.matrixElements).map(e => e.id));
+    this.previousIndex = this.currentIndex = 0;
+  }
+
+  singleDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.elements, event.previousIndex, event.currentIndex);
+    this.seriesService.update(this.selectedSeries, 'zeszyty', this.elements.map(e => e.id));
   }
 
   exit(event: CdkDragExit<string[]>, index: number) {
@@ -120,14 +137,14 @@ export class GeneratorIssuesComponent implements OnInit {
   }
 
   enter(event: CdkDragEnter<string[]>, index: number) {
-    if (this.previousIndex > index) {
-      transferArrayItem(this.elements[index],
-        this.elements[this.previousIndex],
+    if (this.previousIndex > (this.currentIndex = index)) {
+      transferArrayItem(this.matrixElements[index],
+        this.matrixElements[this.previousIndex],
         this.numberIssuesOnRow + 1,
         0);
     } else {
-      transferArrayItem(this.elements[index],
-        this.elements[this.previousIndex],
+      transferArrayItem(this.matrixElements[index],
+        this.matrixElements[this.previousIndex],
         0,
         this.numberIssuesOnRow + 1);
     }

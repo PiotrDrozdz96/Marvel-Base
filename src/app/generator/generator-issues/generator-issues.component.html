@@ -1,8 +1,8 @@
 <div class="base">
-    <div class="elements" cdkDropListGroup>
-        <div cdkDropList cdkDropListOrientation="horizontal" 
-        *ngFor="let arr of elements let index = index"
-        class="example-list"
+    <div class="elements" cdkDropListGroup *ngIf="numberIssuesOnRow > 2">
+        <div cdkDropList cdkDropListOrientation="horizontal"
+        *ngFor="let arr of matrixElements let index = index"
+        class="multi-list"
         [cdkDropListData]="arr"
         (cdkDropListDropped)="drop($event)" 
         (cdkDropListEntered)="enter($event, index)" 
@@ -13,6 +13,13 @@
         </div>
         <div class="element-icon">
             <i class="fa fa-plus-square" (click)="add(elements.length)"></i>
+        </div>
+    </div>
+    <div class="elements" *ngIf="numberIssuesOnRow <= 2" >
+        <div class="single-list" (cdkDropListDropped)="singleDrop($event)" cdkDropList>
+            <div class="element-container" *ngFor="let item of elements" cdkDrag (cdkDragStarted)="grab()">
+                <app-element [element]="item"></app-element>
+            </div>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 
 import { NavbarItem } from '../models/navbarItem';
 import { Observable, fromEvent } from 'rxjs';
+import { WindowService } from '../services/window.service';
 
 @Component({
   selector: 'app-nav',
@@ -14,7 +15,8 @@ export class NavComponent implements OnInit {
   list: Array<NavbarItem>;
 
   constructor(
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private window: WindowService
   ) { }
 
   ngOnInit() {
@@ -47,8 +49,10 @@ export class NavComponent implements OnInit {
     if (toolbar) {
       if (toolbar.getAttribute('hidden') === null) {
         this.renderer.setAttribute(toolbar, 'hidden', 'true');
+        this.window.setWindow(false);
       } else {
         this.renderer.removeAttribute(toolbar, 'hidden');
+        this.window.setWindow(true);
       }
     }
   }

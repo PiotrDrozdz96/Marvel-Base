@@ -29,6 +29,17 @@
     border-left: 2px solid firebrick;
 }
 
+.element-container {
+    cursor: grab;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.element-container:active {
+    cursor: grabbing;
+}
+
 .element-options-container {
     display: none;
     background: black;
@@ -72,11 +83,9 @@
         padding: 3px 33px 76px 32px;
         margin-top: 3px;
     }
-
     .element-options {
         top: -200px;
     }
-
     .element-options i {
         font-size: 1.5em;
         color: firebrick;
@@ -91,11 +100,9 @@
         padding: 2px 25px 47px 24px;
         margin-top: 4px;
     }
-
     .element-options {
         top: -150px;
     }
-
     .element-options i {
         font-size: 1.2em;
         color: firebrick;
@@ -104,32 +111,33 @@
 }
 
 /* angular7 */
-.example-list {
+
+.multi-list {
     display: flex;
     flex-direction: row;
     overflow: hidden;
-  }
+}
 
-  .cdk-drag-preview {
+.single-list {
+    display: block;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.cdk-drag-preview {
     box-sizing: border-box;
     border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  }
-  
-  .cdk-drag-placeholder {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
     opacity: 0;
-  }
-  
-  .cdk-drag-animating {
+}
+
+.cdk-drag-animating {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  
-  .example-box:last-child {
-    border: none;
-  }
-  
-  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+}
+
+.multi-list.cdk-drop-list-dragging, .single-list.cdk-drop-list-dragging {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+}
