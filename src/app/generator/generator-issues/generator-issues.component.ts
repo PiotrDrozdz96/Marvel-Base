@@ -35,6 +35,7 @@ export class GeneratorIssuesComponent implements OnInit {
   previousIndex: number;
   currentIndex: number;
   numberIssuesOnRow = 1;
+  handle = false;
 
   constructor(
     private generatorService: GeneratorService,
@@ -44,6 +45,8 @@ export class GeneratorIssuesComponent implements OnInit {
     private windowService: WindowService,
     private dialog: MatDialog
   ) {
+
+    windowService.getHandle().subscribe(handle => this.handle = handle);
 
     seriesService.get().subscribe(series => {
       categoriesService.getSelectedSeries().subscribe(selectedSeries => {
