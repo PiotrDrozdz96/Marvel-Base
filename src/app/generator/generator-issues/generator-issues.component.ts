@@ -19,6 +19,8 @@ import { AddElementDialog } from '../../dialogs/add-element/add-element.dialog';
 import { GrabElementsDialog } from '../../dialogs/grab-elements/grab-elements.dialog';
 import { CategoriesService } from '../../services/categories.service';
 import { InstructionDialog } from '../../dialogs/instruction/instruction.dialog';
+import { ViewChild } from '@angular/core';
+import { ElementRef } from '@angular/core';
 
 
 
@@ -28,14 +30,16 @@ import { InstructionDialog } from '../../dialogs/instruction/instruction.dialog'
 })
 export class GeneratorIssuesComponent implements OnInit {
 
+  @ViewChild('base') baseRef: ElementRef;
+
   matrixElements: Array<Array<MarvelElement>>;
   elements: Array<MarvelElement>;
   series: Array<string>;
   selectedSeries: string;
   previousIndex: number;
   currentIndex: number;
+  handle: boolean;
   numberIssuesOnRow = 1;
-  handle = false;
 
   constructor(
     private generatorService: GeneratorService,
@@ -45,9 +49,6 @@ export class GeneratorIssuesComponent implements OnInit {
     private windowService: WindowService,
     private dialog: MatDialog
   ) {
-
-    windowService.getHandle().subscribe(handle => this.handle = handle);
-
     seriesService.get().subscribe(series => {
       categoriesService.getSelectedSeries().subscribe(selectedSeries => {
         if (series[selectedSeries]) {
@@ -69,6 +70,12 @@ export class GeneratorIssuesComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewInit() {
+    if (this.baseRef.nativeElement.offsetWidth === this.baseRef.nativeElement.children[0].offsetWidth) {
+      this.handle = true;
+    } else { this.handle = false; }
   }
 
   add(index: number) {
