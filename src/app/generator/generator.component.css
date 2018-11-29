@@ -31,9 +31,6 @@
 
 .element-container {
     cursor: grab;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 
 .element-container:active {
@@ -57,7 +54,6 @@
 .element-options {
     display: block;
     justify-content: center;
-    /* flex-wrap: wrap; */
     position: relative;
     top: -300px;
     width: 100%;
@@ -119,8 +115,8 @@
 }
 
 .single-list {
-    display: block;
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
 }
 
@@ -152,8 +148,7 @@
     height: 24px;
 }
 
-
-@media screen and (max-width: 878px){
+@media screen and (max-width: 878px) {
     .handle {
         position: relative;
         top: -10px;
@@ -164,3 +159,35 @@
         height: 12px;
     }
 }
+
+.functions {
+    width: 50px;
+    height: 186px;
+    margin-top: 10px;
+}
+
+.function {
+    display: block;
+    justify-content: center;
+    position: relative;
+    top: -300px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.function i {
+    font-size: 2em;
+    color: firebrick;
+    margin: 0.4em;
+    cursor: pointer;
+}
+
+.blur {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+

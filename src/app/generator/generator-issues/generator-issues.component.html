@@ -1,37 +1,33 @@
-<div class="base" #base>
-    <div class="elements" cdkDropListGroup *ngIf="numberIssuesOnRow > 2">
+<div class="base" #base  cdkDropListGroup>
+    <div class="elements" *ngIf="numberIssuesOnRow > 2">
         <div cdkDropList cdkDropListOrientation="horizontal"
-        *ngFor="let arr of matrixElements let index = index"
+        *ngFor="let arr of matrixElements let row = index"
         class="multi-list"
         [cdkDropListData]="arr"
         (cdkDropListDropped)="drop($event)" 
-        (cdkDropListEntered)="enter($event, index)" 
-        (cdkDropListExited)="exit($event, index)">
-            <div class="element-container" *ngFor="let item of arr" cdkDrag (cdkDragStarted)="grab()">
-                <app-element [element]="item"></app-element>
-                <div class="handle" *ngIf="handle" cdkDragHandle >
-                    <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                    </svg>
-                </div>
+        (cdkDropListEntered)="enter($event, row)" 
+        (cdkDropListExited)="exit($event, row)">
+            <div class="element-container" *ngFor="let element of arr let index = index" cdkDrag>
+                <app-element [element]="element"></app-element>
+                <div class="functions" hidden>
+                    <div class="function">
+                      <i class="fa fa-plus-square" (click)="add(row*numberIssuesOnRow+index)"></i>
+                      <i class="fa fa-trash" (click)="trash(element,row*numberIssuesOnRow+index)"></i>
+                      <i class="fa fa-edit" (click)="edit(element,row*numberIssuesOnRow+index)"></i>
+                    </div>
+                  </div>
             </div>
         </div>
         <div class="element-icon">
-            <i class="fa fa-plus-square" (click)="add(elements.length)"></i>
+            <i class="fa fa-plus-square" (click)="add(matrixElements.length*(numberIssuesOnRow-1)+matrixElements[matrixElements.length-1].length)"></i>
         </div>
     </div>
     <div class="elements" *ngIf="numberIssuesOnRow <= 2" >
         <div class="single-list" (cdkDropListDropped)="singleDrop($event)" cdkDropList>
-            <div class="element-container" *ngFor="let item of elements" cdkDrag (cdkDragStarted)="grab()">
-                <app-element [element]="item"></app-element>
-                <div class="handle" *ngIf="handle" cdkDragHandle >
-                    <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                    </svg>
-                </div>
+            <div class="element-container" *ngFor="let element of matrixElements[0]" cdkDrag>
+                <app-element [element]="element"></app-element>
             </div>
         </div>
     </div>
 </div>
+<div class="blur" id="blur" hidden (click)="blurOff()"></div>
