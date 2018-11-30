@@ -1,4 +1,5 @@
 import { Component, Renderer2 } from '@angular/core';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material';
 
 import { listToMatrix } from '../../functions/listToMatrix';
@@ -34,9 +35,9 @@ export class GeneratorIssuesComponent extends GeneratorElements {
         if (series[selectedSeries]) {
           this.series = series[selectedSeries].zeszyty;
           this.selectedSeries = selectedSeries;
-          baseService.get(series[selectedSeries].zeszyty).subscribe(elements => {
-            windowService.getCountElements().subscribe(numberIssuesOnRow => {
-              this.numberIssuesOnRow = numberIssuesOnRow;
+          windowService.getCountElements().subscribe(numberIssuesOnRow => {
+            this.numberIssuesOnRow = numberIssuesOnRow;
+            baseService.get(series[selectedSeries].zeszyty).subscribe(elements => {
               if (numberIssuesOnRow > 2) {
                 this.matrixElements = listToMatrix(elements, numberIssuesOnRow);
               } else { this.matrixElements = [elements]; }
@@ -48,4 +49,23 @@ export class GeneratorIssuesComponent extends GeneratorElements {
       });
     });
   }
+
+  dropAndUpdate(event: CdkDragDrop<string[]>) {
+    this.drop(event);
+    if (event.previousContainer === event.container &&
+      event.previousIndex === event.currentIndex) {
+      this.activeElement = document.getElementById(event.container.id).children[event.currentIndex].children[1];
+      this.renderer.removeAttribute(this.activeElement, 'hidden');
+      this.renderer.removeAttribute(document.getElementById('blur'), 'hidden');
+      } else {
+      this.seriesService.update(this.selectedSeries, this.type, [].concat(...this.matrixElements).map(e => e.id));
+      this.previousRowIndex = this.currentRowIndex = 0;
+    }
+  }
+
+  singleDropAndUpdate(event: CdkDragDrop<string[]>) {
+    this.singleDrop(event, this.matrixElements[0]);
+    this.seriesService.update(this.selectedSeries, this.type, [].concat(...this.matrixElements).map(e => e.id));
+  }
+
 }
