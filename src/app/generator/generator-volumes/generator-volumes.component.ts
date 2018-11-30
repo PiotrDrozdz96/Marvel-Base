@@ -99,7 +99,6 @@ export class GeneratorVolumesComponent extends GeneratorIssuesComponent {
       this.unpackElement.children.push(element.id);
       this.baseService.update(this.unpackElement.id, this.unpackElement);
     }
-    // console.log(this.unpackElement);
   }
 
   removeChild(index: number) {
