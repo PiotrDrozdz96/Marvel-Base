@@ -105,7 +105,6 @@ export class GeneratorVolumesComponent extends GeneratorIssuesComponent {
     this.unpackElement.children.splice(index, 1);
     this.baseService.update(this.unpackElement.id, this.unpackElement);
     this.blurOff();
-    console.log(this.unpackElement);
   }
 
 }
