@@ -65,7 +65,7 @@ export class GeneratorVolumesComponent extends GeneratorIssuesComponent {
 
   unpack(element: MarvelElement) {
     this.unpackElement = element;
-    this.unpackSubscriber =  this.baseService.get(element.children).subscribe(elements => {
+    this.unpackSubscriber = this.baseService.get(element.children).subscribe(elements => {
       this.childElements = listToMatrix(elements, this.numberIssuesOnRow);
     });
     this.blurOff();
@@ -84,7 +84,7 @@ export class GeneratorVolumesComponent extends GeneratorIssuesComponent {
       this.activeElement = document.getElementById(event.container.id).children[event.currentIndex].children[1];
       this.renderer.removeAttribute(this.activeElement, 'hidden');
       this.renderer.removeAttribute(document.getElementById('blur'), 'hidden');
-      } else {
+    } else {
       this.unpackElement.children = [].concat(...this.childElements).map(e => e.id);
       this.baseService.update(this.unpackElement.id, this.unpackElement);
       this.unpack(this.unpackElement);
@@ -97,22 +97,16 @@ export class GeneratorVolumesComponent extends GeneratorIssuesComponent {
       alert('Element znajduje się już na liście');
     } else {
       this.unpackElement.children.push(element.id);
-      // this.setSeriesInUnpackElement(element);
       this.baseService.update(this.unpackElement.id, this.unpackElement);
     }
+    // console.log(this.unpackElement);
   }
 
   removeChild(index: number) {
     this.unpackElement.children.splice(index, 1);
     this.baseService.update(this.unpackElement.id, this.unpackElement);
     this.blurOff();
+    console.log(this.unpackElement);
   }
-
-  // setSeriesInUnpackElement(element?: MarvelElement) {
-  //   this.unpackElement.series = this.childElements.concat(element || []).reduce(
-  //     (total, current) => !total.find(c => c === current.series[0]) ?
-  //       total.concat(current.series[0]) : total
-  //     , []);
-  // }
 
 }
