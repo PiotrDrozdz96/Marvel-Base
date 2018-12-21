@@ -14,9 +14,6 @@ import { Router } from '@angular/router';
 export class GeneratorService {
 
   private selectedSeries: string;
-  private selectedType = 'tomy';
-  private selectedTypeObS = new BehaviorSubject<string>(this.selectedType);
-
 
   constructor(
     private router: Router,
@@ -28,13 +25,6 @@ export class GeneratorService {
     this.categoriesService.getSelectedSeries().subscribe(selectedSeries =>
       this.selectedSeries = selectedSeries);
   }
-
-  changeType(type: string) {
-    this.selectedType = type;
-    this.selectedTypeObS.next(type);
-  }
-
-  getSelectedType(): Observable<string> { return this.selectedTypeObS.asObservable(); }
 
   trash(id: string, index: number, type: string, arr: Array<string>) {
     arr.splice(index, 1);
