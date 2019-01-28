@@ -71,6 +71,15 @@
     "subTitle": "",
     "publishedDate": "21 January 2016"
   },
+  "Deadpool2": {
+    "series": [
+      "Deadpool"
+    ],
+    "cover": "assets/data/Fox/covers/Deadpool2.png",
+    "title": "Deadpool 2",
+    "subTitle": "",
+    "publishedDate": "18 May 2018"
+  },
   "Apocalypse": {
     "series": [
       "Nowi X-Men"

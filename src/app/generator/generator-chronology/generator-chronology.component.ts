@@ -41,7 +41,9 @@ export class GeneratorChronologyComponent extends GeneratorDragDrop {
         this.chronology = chronology;
         this.markerIndex = chronology.length;
         baseService.get(chronology).subscribe(elements => {
-          this.matrixElements = listToMatrix(elements, numberIssuesOnRow);
+          if (numberIssuesOnRow > 2) {
+            this.matrixElements = listToMatrix(elements, numberIssuesOnRow);
+          } else { this.matrixElements = [elements]; }
         });
       });
     });
@@ -66,6 +68,21 @@ export class GeneratorChronologyComponent extends GeneratorDragDrop {
     } else {
       this.chronologyService.set([].concat(...this.matrixElements).map(e => e.id));
       this.previousRowIndex = this.currentRowIndex = 0;
+    }
+  }
+
+  singleDropAndUpdate(event: CdkDragDrop<string[]>) {
+    this.singleDrop(event, this.matrixElements[0]);
+    this.chronologyService.set([].concat(...this.matrixElements).map(e => e.id));
+    this.previousRowIndex = this.currentRowIndex = 0;
+  }
+
+  blurOn(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container &&
+      event.previousIndex === event.currentIndex) {
+      this.activeElement = document.getElementById(event.container.id).children[event.currentIndex].children[1];
+      this.renderer.removeAttribute(this.activeElement, 'hidden');
+      this.renderer.removeAttribute(document.getElementById('blur'), 'hidden');
     }
   }
 

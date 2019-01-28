@@ -39,7 +39,7 @@ export abstract class GeneratorElements extends GeneratorDragDrop {
     add(index: number) {
         const dialogRef = this.dialog.open(AddElementDialog, { width: '360px' });
         dialogRef.afterClosed().subscribe(result => {
-            this[result](index);
+            if (result) { this[result](index); }
         });
         this.blurOff();
     }

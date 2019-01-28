@@ -30,6 +30,7 @@ export abstract class GeneratorDragDrop implements OnInit {
     }
 
     singleDrop(event: CdkDragDrop<string[]>, array: Array<MarvelElement>) {
+        this.blurOn(event);
         moveItemInArray(array, event.previousIndex, event.currentIndex);
     }
 

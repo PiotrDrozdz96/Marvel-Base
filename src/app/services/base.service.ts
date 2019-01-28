@@ -102,7 +102,7 @@ export class BaseService {
 
   private setVolumesSeries(element: MarvelElement): MarvelElement {
     const volumesSeries: string = element.series.shift();
-    const restSeries = element.children.map(id => this.elements[id])
+    const restSeries = (element.children || []).map(id => this.elements[id])
       .filter(e => e.series[0] !== volumesSeries)
       .reduce((total, current) => !total.find(c => c === current.series[0]) ?
         total.concat(current.series[0]) : total, []);
@@ -111,7 +111,7 @@ export class BaseService {
   }
 
   private setVolumesDate(element: MarvelElement): MarvelElement {
-    if (element.children.length > 0) {
+    if ((element.children || []).length > 0) {
       element.publishedDate = this.elements[element.children[element.children.length - 1]].publishedDate;
     }
     return element;

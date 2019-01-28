@@ -7,13 +7,24 @@
     (cdkDropListDropped)="dropAndUpdate($event)" 
     (cdkDropListEntered)="enter($event, row, matrixElements)" 
     (cdkDropListExited)="exit($event, row)">
-        <div *ngFor="let element of arr let index = index" [ngClass]="{'element-container': true, 'mark': markerIndex==row*numberIssuesOnRow+index}"cdkDrag>
+        <div *ngFor="let element of arr let index = index" [ngClass]="{'element-container': true, 'mark': markerIndex==row*numberIssuesOnRow+index}" cdkDrag>
             <app-element [element]="element"></app-element>
             <div class="functions" hidden>
                 <i class="fa fa-plus-square" (click)="mark(row*numberIssuesOnRow+index)"></i>
                 <i class="fa fa-trash" (click)="trash(row*numberIssuesOnRow+index)"></i>
               </div>
         </div>
+    </div>
+  </div>
+  <div class="elements" *ngIf="numberIssuesOnRow <= 2">
+    <div class="single-list" (cdkDropListDropped)="singleDropAndUpdate($event)" cdkDropList>
+      <div *ngFor="let element of matrixElements[0] let index = index" [ngClass]="{'element-container': true, 'mark': markerIndex==index}" cdkDrag>
+        <app-element [element]="element"></app-element>
+        <div class="functions" hidden>
+          <i class="fa fa-plus-square" (click)="mark(index)"></i>
+          <i class="fa fa-trash" (click)="trash(index)"></i>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -13,7 +13,7 @@
                     <i class="fa fa-plus-square" (click)="add(row*numberIssuesOnRow+index)"></i>
                     <i class="fa fa-edit" (click)="edit(element,row*numberIssuesOnRow+index)"></i>
                     <i class="fa fa-trash" (click)="trash(element,row*numberIssuesOnRow+index)"></i>
-                  </div>
+                </div>
             </div>
         </div>
         <div class="element-icon">
@@ -22,8 +22,16 @@
     </div>
     <div class="elements" *ngIf="numberIssuesOnRow <= 2" >
         <div class="single-list" (cdkDropListDropped)="singleDropAndUpdate($event)" cdkDropList>
-            <div class="element-container" *ngFor="let element of matrixElements[0]" cdkDrag>
+            <div class="element-container" *ngFor="let element of matrixElements[0] let index = index" cdkDrag>
                 <app-element [element]="element"></app-element>
+                <div class="functions" hidden>
+                    <i class="fa fa-plus-square" (click)="add(index)"></i>
+                    <i class="fa fa-edit" (click)="edit(element, index)"></i>
+                    <i class="fa fa-trash" (click)="trash(element, index)"></i>
+                </div>
+            </div>
+            <div class="element-icon">
+                <i class="fa fa-plus-square" (click)="add((matrixElements[0] || []).length)"></i>
             </div>
         </div>
     </div>
