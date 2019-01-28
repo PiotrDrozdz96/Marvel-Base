@@ -1,100 +1,71 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material';
+
+import { listToMatrix } from '../../functions/listToMatrix';
 
 import { GeneratorService } from '../../services/generator.service';
 import { SeriesService } from '../../services/series.service';
-import { BaseService } from '../../services/base.service';
-
-import { MarvelElement } from '../../models/elements';
-
-import { EditElementDialog } from '../../dialogs/edit-element/edit-element.dialog';
-import { AddElementDialog } from '../../dialogs/add-element/add-element.dialog';
-import { GrabElementsDialog } from '../../dialogs/grab-elements/grab-elements.dialog';
 import { CategoriesService } from '../../services/categories.service';
-import { InstructionDialog } from '../../dialogs/instruction/instruction.dialog';
+import { BaseService } from '../../services/base.service';
+import { WindowService } from '../../services/window.service';
+
+import { GeneratorElements } from '../generator-elements';
 
 @Component({
   selector: 'app-generator-issues',
   templateUrl: './generator-issues.component.html'
 })
-export class GeneratorIssuesComponent implements OnInit {
+export class GeneratorIssuesComponent extends GeneratorElements {
 
-  elements: Array<MarvelElement>;
-  series: Array<string>;
-  selectedSeries: string;
+  type = 'zeszyty';
 
   constructor(
-    private generatorService: GeneratorService,
-    private seriesService: SeriesService,
-    private categoriesService: CategoriesService,
-    private baseService: BaseService,
-    private dialog: MatDialog
+    public renderer: Renderer2,
+    public generatorService: GeneratorService,
+    public seriesService: SeriesService,
+    public categoriesService: CategoriesService,
+    public baseService: BaseService,
+    public windowService: WindowService,
+    public dialog: MatDialog
   ) {
+    super(renderer, generatorService, seriesService, categoriesService, baseService, windowService, dialog);
     seriesService.get().subscribe(series => {
       categoriesService.getSelectedSeries().subscribe(selectedSeries => {
         if (series[selectedSeries]) {
           this.series = series[selectedSeries].zeszyty;
           this.selectedSeries = selectedSeries;
-          baseService.get(series[selectedSeries].zeszyty).subscribe(elements => {
-            this.elements = elements;
+          windowService.getCountElements().subscribe(numberIssuesOnRow => {
+            this.numberIssuesOnRow = numberIssuesOnRow;
+            baseService.get(series[selectedSeries].zeszyty).subscribe(elements => {
+              if (numberIssuesOnRow > 2) {
+                this.matrixElements = listToMatrix(elements, numberIssuesOnRow);
+              } else { this.matrixElements = [elements]; }
+            });
           });
         } else {
-          this.elements = [];
+          this.matrixElements = [];
         }
       });
     });
   }
 
-  ngOnInit() {
+  dropAndUpdate(event: CdkDragDrop<string[]>) {
+    this.drop(event);
+    if (event.previousContainer === event.container &&
+      event.previousIndex === event.currentIndex) {
+      this.activeElement = document.getElementById(event.container.id).children[event.currentIndex].children[1];
+      this.renderer.removeAttribute(this.activeElement, 'hidden');
+      this.renderer.removeAttribute(document.getElementById('blur'), 'hidden');
+      } else {
+      this.seriesService.update(this.selectedSeries, this.type, [].concat(...this.matrixElements).map(e => e.id));
+      this.previousRowIndex = this.currentRowIndex = 0;
+    }
   }
 
-  add(index: number) {
-    const dialogRef = this.dialog.open(AddElementDialog, { width: '360px' });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'singleElement') {
-        const singleElementDialogRef = this.dialog.open(EditElementDialog, {
-          data: {
-            title: 'title',
-            subTitle: 'subTtitle',
-            publishedDate: 'publishedDate',
-            id: '',
-            volume: '',
-            number: '',
-            cover: '',
-            series: [this.selectedSeries]
-          }
-        });
-        singleElementDialogRef.afterClosed().subscribe(newElement => {
-          this.generatorService.tryAddElement(newElement, index, 'zeszyty', this.series);
-        });
-      } else if (result === 'grabElements') {
-        const grabElementsDialogRef = this.dialog.open(GrabElementsDialog);
-        grabElementsDialogRef.afterClosed().subscribe(newElements => {
-          this.generatorService.tryAddElements(
-            newElements.map(element => Object.assign(element, { series: [this.selectedSeries] })),
-            index, this.series);
-        });
-      } else if (result === 'instruction') {
-        this.dialog.open(InstructionDialog, { width: '360px' }).afterClosed().subscribe(result2 => {
-          this.add(index);
-        });
-      }
-    });
-  }
-
-  trash(element: MarvelElement, index: number) {
-    this.generatorService.trash(element.id, index, 'zeszyty', this.series);
-  }
-
-  move(index: number, way: number) {
-    this.generatorService.move(index, 'zeszyty', this.series, way);
-  }
-
-  edit(element: MarvelElement, index: number) {
-    const dialogRef = this.dialog.open(EditElementDialog, { data: Object.assign({}, element) });
-    dialogRef.afterClosed().subscribe(newElement => {
-      this.generatorService.tryReplaceElement(newElement, index, element, 'zeszyty', this.series);
-    });
+  singleDropAndUpdate(event: CdkDragDrop<string[]>) {
+    this.singleDrop(event, this.matrixElements[0]);
+    this.seriesService.update(this.selectedSeries, this.type, [].concat(...this.matrixElements).map(e => e.id));
   }
 
 }

@@ -88,7 +88,7 @@ export class BaseService {
 
   update(id: string, element: MarvelElement) {
     if (id === element.id) {
-      this.elements[id] = element;
+      this.elements[id] = this.setVolumesDate(this.setVolumesSeries(element));
       this.elementsObs.next(this.elements);
     } else {
       if (this.elements[element.id]) {
@@ -98,6 +98,23 @@ export class BaseService {
         this.trash(id);
       }
     }
+  }
+
+  private setVolumesSeries(element: MarvelElement): MarvelElement {
+    const volumesSeries: string = element.series.shift();
+    const restSeries = (element.children || []).map(id => this.elements[id])
+      .filter(e => e.series[0] !== volumesSeries)
+      .reduce((total, current) => !total.find(c => c === current.series[0]) ?
+        total.concat(current.series[0]) : total, []);
+    element.series = [volumesSeries, ...restSeries];
+    return element;
+  }
+
+  private setVolumesDate(element: MarvelElement): MarvelElement {
+    if ((element.children || []).length > 0) {
+      element.publishedDate = this.elements[element.children[element.children.length - 1]].publishedDate;
+    }
+    return element;
   }
 
   add(element: MarvelElement) {

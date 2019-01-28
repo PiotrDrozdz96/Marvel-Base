@@ -338,6 +338,15 @@
     "subTitle": "Sezon 1",
     "publishedDate": "17 November 2017"
   },
+  "Punisher2": {
+    "series": [
+      "Netflix"
+    ],
+    "cover": "assets/data/MCU/covers/netflix/Punisher2.jpeg",
+    "title": "Punisher",
+    "subTitle": "Sezon 2",
+    "publishedDate": "21 January 2019"
+  },
   "Runaways": {
     "series": [
       "Inne"
@@ -346,6 +355,15 @@
     "title": "Runaways",
     "subTitle": "Sezon 1",
     "publishedDate": "9 January 2018"
+  },
+  "Runaways2": {
+    "series": [
+      "Inne"
+    ],
+    "cover": "assets/data/MCU/covers/MCU_Series/Runaways2.jpg",
+    "title": "Runaways",
+    "subTitle": "Sezon 2",
+    "publishedDate": "21 December 2018"
   },
   "Panther": {
     "series": [
