@@ -105,6 +105,7 @@ export class CategoriesService {
       this.categories[newWave].series.push({
         title: newSeries, checked: false
       });
+      this.categories[newWave].series.sort( (a, b) => a.title < b.title ? -1 : 1);
       this.categoriesObs.next(this.categories);
     }
 

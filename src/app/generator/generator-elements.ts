@@ -58,6 +58,9 @@ export abstract class GeneratorElements extends GeneratorDragDrop {
             }
         });
         singleElementDialogRef.afterClosed().subscribe(newElement => {
+            if (this.type === 'tomy') {
+                newElement.children = [];
+            }
             this.generatorService.tryAddElement(newElement, index, this.type, this.series);
         });
         this.blurOff();
