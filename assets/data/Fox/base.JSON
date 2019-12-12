@@ -123,6 +123,33 @@
     "cover": "assets/data/Fox/covers/Legion2.png",
     "title": "Legion",
     "subTitle": "Sezon 2",
-    "publishedDate": "5 June 2018"
+    "publishedDate": "12 June 2018"
+  },
+  "Gifted2": {
+    "series": [
+      "Seriale"
+    ],
+    "cover": "assets/data/Fox/covers/Gifted2.png",
+    "title": "Gifted: Naznaczeni",
+    "subTitle": "Sezon 2",
+    "publishedDate": "26 February 2019"
+  },
+  "DarkPhoenix": {
+    "series": [
+      "Nowi X-Men"
+    ],
+    "cover": "assets/data/Fox/covers/X-men_DarkPhoenix.png",
+    "title": "X-men",
+    "subTitle": "Mroczna Phoenix",
+    "publishedDate": "5 June 2019"
+  },
+  "Legion3": {
+    "series": [
+      "Seriale"
+    ],
+    "cover": "assets/data/Fox/covers/Legion3.png",
+    "title": "Legion",
+    "subTitle": "Sezon 3",
+    "publishedDate": "12 August 2019"
   }
 }

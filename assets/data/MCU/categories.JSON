@@ -13,8 +13,8 @@
       }
     ]
   },
-  "Seriale ABC": {
-    "title": "Seriale ABC",
+  "ABC": {
+    "title": "ABC",
     "checked": false,
     "series": [
       {
@@ -41,12 +41,12 @@
       }
     ]
   },
-  "Inne": {
-    "title": "Inne",
+  "Hulu": {
+    "title": "Hulu",
     "checked": false,
     "series": [
       {
-        "title": "Inne",
+        "title": "Hulu",
         "checked": false
       }
     ]
