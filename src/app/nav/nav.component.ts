@@ -30,13 +30,17 @@ export class NavComponent implements OnInit {
       },
       {
         title: 'Komiksy', icon: 'fa fa-book', dropdown: [
+          { title: 'Marvel Classic', icon: 'fa fa-angle-right', href: '/Base/Marvel_Classic' },
           { title: 'Marvel Now', icon: 'fa fa-angle-right', href: '/Base/Marvel_Now' },
+          { title: 'Marvel Now 2.0', icon: 'fa fa-angle-right', href: '/Base/Marvel_Now2' },
           { title: 'Moje Komiksy', icon: 'fa fa-angle-right', href: '/Base/User' }
         ]
       },
       {
         title: 'Generator', icon: 'fa fa-building', dropdown: [
+          { title: 'Marvel Classic', icon: 'fa fa-angle-right', href: '/Generator/Marvel_Classic' },
           { title: 'Marvel Now', icon: 'fa fa-angle-right', href: '/Generator/Marvel_Now' },
+          { title: 'Marvel Now 2.0', icon: 'fa fa-angle-right', href: '/Generator/Marvel_Now2' },
           { title: 'Nowa Kolekcja', icon: 'fa fa-angle-right', href: '/Generator/New' },
           { title: 'Moje Komiksy', icon: 'fa fa-angle-right', href: '/Generator/User' }
         ]

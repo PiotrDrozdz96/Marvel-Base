@@ -126,7 +126,7 @@
     ],
     "cover": "assets/data/MCU/covers/ABC_Series/Season1_2.png",
     "title": "Agenci T.A.R.C.Z.Y.",
-    "subTitle": "S01e07-S01e22",
+    "subTitle": "S01e17-S01e22",
     "publishedDate": "13 May 2014"
   },
   "Guardians": {
@@ -349,16 +349,16 @@
   },
   "Runaways": {
     "series": [
-      "Inne"
+      "Hulu"
     ],
     "cover": "assets/data/MCU/covers/MCU_Series/Runaways.jpg",
     "title": "Runaways",
     "subTitle": "Sezon 1",
-    "publishedDate": "9 January 2018"
+    "publishedDate": "21 November 2017"
   },
   "Runaways2": {
     "series": [
-      "Inne"
+      "Hulu"
     ],
     "cover": "assets/data/MCU/covers/MCU_Series/Runaways2.jpg",
     "title": "Runaways",
@@ -394,7 +394,8 @@
   },
   "Avengers3": {
     "series": [
-      "Filmy"
+      "Filmy",
+      "Agenci T.A.R.C.Z.Y."
     ],
     "cover": "assets/data/MCU/covers/movies/Avengers3.png",
     "title": "Avengers",
@@ -412,7 +413,7 @@
   },
   "Cloak&Dagger": {
     "series": [
-      "Inne"
+      "Hulu"
     ],
     "cover": "assets/data/MCU/covers/MCU_Series/Cloak&Dagger.png",
     "title": "Cloak & Dagger",
@@ -445,5 +446,59 @@
     "title": "Ant-Man",
     "subTitle": "i Osa",
     "publishedDate": "4 July 2018"
+  },
+  "CaptainMarvel": {
+    "series": [
+      "Filmy"
+    ],
+    "cover": "assets/data/MCU/covers/movies/CaptainMarvel.png",
+    "title": "Kapitan Marvel",
+    "subTitle": "",
+    "publishedDate": "4 March 2019"
+  },
+  "Avengers4": {
+    "series": [
+      "Filmy"
+    ],
+    "cover": "assets/data/MCU/covers/movies/Avengers4.png",
+    "title": "Avengers",
+    "subTitle": "Koniec Gry",
+    "publishedDate": "24 April 2019"
+  },
+  "Spider-Man2": {
+    "series": [
+      "Filmy"
+    ],
+    "cover": "assets/data/MCU/covers/movies/SpiderMan2.png",
+    "title": "Spider-Man",
+    "subTitle": "Daleko od domu",
+    "publishedDate": "26 June 2019"
+  },
+  "Cloak&Dagger2": {
+    "series": [
+      "Hulu"
+    ],
+    "cover": "assets/data/MCU/covers/MCU_Series/Cloak&Dagger2.png",
+    "title": "Cloak & Dagger",
+    "subTitle": "Sezon 2",
+    "publishedDate": "30 May 2019"
+  },
+  "JessicaJones3": {
+    "series": [
+      "Netflix"
+    ],
+    "cover": "assets/data/MCU/covers/netflix/Jessica3.png",
+    "title": "Jessica Jones",
+    "subTitle": "Sezon 3",
+    "publishedDate": "14 June 2019"
+  },
+  "Shield6": {
+    "series": [
+      "Agenci T.A.R.C.Z.Y."
+    ],
+    "cover": "assets/data/MCU/covers/ABC_Series/Season6.png",
+    "title": "Agenci T.A.R.C.Z.Y.",
+    "subTitle": "Sezon 6",
+    "publishedDate": "2 August 2019"
   }
 }
